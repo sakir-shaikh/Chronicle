@@ -58,7 +58,7 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
   const totalLive = events.filter((e) => e.status === 'live').length;
   const totalUpcoming = events.filter((e) => e.status === 'upcoming').length;
   const totalCompleted = events.filter((e) => e.status === 'completed').length;
-  const totalAttendees = events.reduce((sum, e) => sum + e.stats.attendees, 0);
+  const totalAttendees = events.reduce((sum, e) => sum + (e.stats?.attendees || 0), 0);
 
   // Collect recent live attendee feed
   const liveFeed = events.flatMap((e) => e.attendeeFeed || []).slice(0, 4);
@@ -235,7 +235,7 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
                       </h2>
                       <div className="flex items-center gap-3 text-sm text-[#68766F]">
                         <span className="truncate">{event.location}</span>
-                        {event.stats.attendees > 0 && (
+                        {event.stats?.attendees > 0 && (
                           <>
                             <span className="text-[#E3E9E4]">•</span>
                             <span>{event.stats.attendees} attendees</span>

@@ -39,11 +39,11 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
   const handleExportCSV = () => {
     const csvLines = [
       ['Metric', 'Value', 'Context'].map(sanitizeCSVField).join(','),
-      ['Total Attendees', event.stats.attendees, 'In-person checked in'].map(sanitizeCSVField).join(','),
-      ['Posts Generated', event.stats.postsGenerated, 'High engagement LinkedIn posts'].map(sanitizeCSVField).join(','),
-      ['Photos Uploaded', event.stats.photosUploaded, 'Media stream'].map(sanitizeCSVField).join(','),
-      ['LinkedIn Opens', event.stats.linkedinOpens, 'Attributed shares'].map(sanitizeCSVField).join(','),
-      ['Generation Rate', `${event.stats.conversionRate}%`, 'Top tier social velocity'].map(sanitizeCSVField).join(',')
+      ['Total Attendees', event.stats?.attendees || 0, 'In-person checked in'].map(sanitizeCSVField).join(','),
+      ['Posts Generated', event.stats?.postsGenerated || 0, 'High engagement LinkedIn posts'].map(sanitizeCSVField).join(','),
+      ['Photos Uploaded', event.stats?.photosUploaded || 0, 'Media stream'].map(sanitizeCSVField).join(','),
+      ['LinkedIn Opens', event.stats?.linkedinOpens || 0, 'Attributed shares'].map(sanitizeCSVField).join(','),
+      ['Generation Rate', `${event.stats?.conversionRate || 0}%`, 'Top tier social velocity'].map(sanitizeCSVField).join(',')
     ];
 
     const csvContent = csvLines.join('\n');
@@ -168,7 +168,7 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Total Attendees</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
-              {event.stats.attendees}
+              {event.stats?.attendees || 0}
             </span>
             <span className="text-xs text-[#7BAE8A] font-medium mb-1 flex items-center">
               <span className="material-symbols-outlined text-[14px]">north_east</span> 18
@@ -181,7 +181,7 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Posts Generated</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
-              {event.stats.postsGenerated}
+              {event.stats?.postsGenerated || 0}
             </span>
             <span className="text-xs text-[#7BAE8A] font-medium mb-1 flex items-center">
               <span className="material-symbols-outlined text-[14px]">north_east</span> 34
@@ -194,7 +194,7 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Photos</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
-              {event.stats.photosUploaded}
+              {event.stats?.photosUploaded || 0}
             </span>
             <span className="text-xs text-[#9AA69F] mb-1">~2.4/user</span>
           </div>
@@ -205,7 +205,7 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">LinkedIn Opens</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
-              {event.stats.linkedinOpens}
+              {event.stats?.linkedinOpens || 0}
             </span>
           </div>
         </div>
@@ -216,13 +216,13 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <div className="flex flex-col gap-2 mt-1">
             <div className="flex items-baseline justify-between">
               <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
-                {event.stats.conversionRate}%
+                {event.stats?.conversionRate || 0}%
               </span>
             </div>
             <div className="w-full bg-[#E3E9E4] h-1 rounded-full overflow-hidden">
               <div
                 className="bg-[#315C49] h-full rounded-full"
-                style={{ width: `${event.stats.conversionRate}%` }}
+                style={{ width: `${event.stats?.conversionRate || 0}%` }}
               ></div>
             </div>
           </div>
@@ -334,7 +334,7 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
                   Live Event Photography Stream
                 </h3>
               </div>
-              <span className="text-xs text-[#315C49] font-medium">View All {event.stats.photosUploaded} Media</span>
+              <span className="text-xs text-[#315C49] font-medium">View All {event.stats?.photosUploaded || 0} Media</span>
             </div>
 
             <div className="grid grid-cols-3 gap-3">

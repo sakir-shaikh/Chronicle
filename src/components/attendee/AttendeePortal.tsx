@@ -480,12 +480,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={() =>
-                    setTakeaways(
-                      (prev) =>
-                        prev +
-                        (prev.length > 0 ? '\n' : '') +
-                        "The biggest thing I learned was how model optimization is pivoting from parameter count to orchestration latency."
-                    )
+                    setTakeaways((prev) => {
+                      const newText = prev + (prev.length > 0 ? '\n' : '') + "The biggest thing I learned was how model optimization is pivoting from parameter count to orchestration latency.";
+                      return newText.substring(0, 500);
+                    })
                   }
                   className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
                 >
@@ -494,12 +492,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={() =>
-                    setTakeaways(
-                      (prev) =>
-                        prev +
-                        (prev.length > 0 ? '\n' : '') +
-                        "One idea I'm taking back is implementing deterministic guardrails across our customer-facing agents."
-                    )
+                    setTakeaways((prev) => {
+                      const newText = prev + (prev.length > 0 ? '\n' : '') + "One idea I'm taking back is implementing deterministic guardrails across our customer-facing agents.";
+                      return newText.substring(0, 500);
+                    })
                   }
                   className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
                 >
@@ -508,12 +504,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={() =>
-                    setTakeaways(
-                      (prev) =>
-                        prev +
-                        (prev.length > 0 ? '\n' : '') +
-                        "A speaker insight that stayed with me: Solving unglamorous backend bottlenecks yields 10x the adoption of flashy UI tricks."
-                    )
+                    setTakeaways((prev) => {
+                      const newText = prev + (prev.length > 0 ? '\n' : '') + "A speaker insight that stayed with me: Solving unglamorous backend bottlenecks yields 10x the adoption of flashy UI tricks.";
+                      return newText.substring(0, 500);
+                    })
                   }
                   className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
                 >
@@ -1043,8 +1037,9 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
               <button
                 onClick={() => handleGeneratePost('professional')}
+                disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1"
+                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">refresh</span>
                 <span>Regenerate (Different Tone)</span>
@@ -1052,8 +1047,9 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
               <button
                 onClick={() => handleGeneratePost(undefined, 'concise')}
+                disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1"
+                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">compress</span>
                 <span>Make Shorter</span>
@@ -1061,8 +1057,9 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
               <button
                 onClick={() => handleGeneratePost('grateful')}
+                disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1"
+                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">favorite</span>
                 <span>Make More Personal</span>
@@ -1070,8 +1067,9 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
               <button
                 onClick={() => handleGeneratePost('takeaways')}
+                disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1"
+                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">format_list_numbered</span>
                 <span>Focus on Takeaways</span>

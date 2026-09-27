@@ -15,6 +15,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
   onOpenAttendeePortal,
   initialEvent,
 }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(initialEvent ? 2 : 1);
 
   // Form State
@@ -87,7 +88,14 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
   const handleAddTag = () => {
     if (newTagInput.trim()) {
+      if (hashtags.length >= 15) {
+        alert("Maximum of 15 hashtags allowed.");
+        return;
+      }
       let tag = newTagInput.trim();
+      if (tag.length > 30) {
+        tag = tag.substring(0, 30);
+      }
       if (!tag.startsWith('#')) tag = '#' + tag;
       if (!hashtags.includes(tag)) {
         setHashtags([...hashtags, tag]);
@@ -112,8 +120,12 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
   };
 
   const handleSaveOrPublish = (status: 'draft' | 'live') => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    
     if (!title.trim() || !organizer.trim()) {
       alert('Event Title and Organizer are required.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -126,6 +138,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
     if (!isValidUrl(linkedinUrl) || !isValidUrl(websiteUrl)) {
       alert('Please enter valid HTTP/HTTPS URLs for social channels.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -179,8 +192,10 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
     setPublishedEvent(newEvent);
     if (status === 'live') {
       setStep(5); // Success screen
+      setIsSubmitting(false); // Reset in case they navigate back
     } else {
       onPublishSuccess(newEvent);
+      setIsSubmitting(false);
     }
   };
 
@@ -429,6 +444,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       value={summary}
                       onChange={(e) => setSummary(e.target.value)}
                       rows={3}
+                      maxLength={500}
                       className="w-full p-3.5 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] resize-none transition-all"
                     />
                   </div>
