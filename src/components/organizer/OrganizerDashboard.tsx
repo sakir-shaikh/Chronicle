@@ -63,6 +63,7 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
   // Collect recent live attendee feed
   const liveFeed = events.flatMap((e) => e.attendeeFeed || []).slice(0, 4);
 
+  return (
     <div className="w-full max-w-6xl mx-auto flex flex-col gap-12 pb-16">
       {/* Header & KPI Overview */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -315,4 +316,5 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
         </section>
       )}
     </div>
+  );
 };
