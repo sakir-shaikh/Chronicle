@@ -28,23 +28,35 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
     setTimeout(() => setCopiedLink(false), 2500);
   };
 
-  const handleExportCSV = () => {
-    const csvContent =
-      'data:text/csv;charset=utf-8,' +
-      'Metric,Value,Context\n' +
-      `Total Attendees,${event.stats.attendees},In-person checked in\n` +
-      `Posts Generated,${event.stats.postsGenerated},High engagement LinkedIn posts\n` +
-      `Photos Uploaded,${event.stats.photosUploaded},Media stream\n` +
-      `LinkedIn Opens,${event.stats.linkedinOpens},Attributed shares\n` +
-      `Generation Rate,${event.stats.conversionRate}%,Top tier social velocity\n`;
+  const sanitizeCSVField = (field: string | number): string => {
+    const str = String(field);
+    // Prevent formula injection
+    const sanitized = /^[=+\-@\t\r]/.test(str) ? `'${str}` : str;
+    // Escape double quotes and wrap in quotes
+    return `"${sanitized.replace(/"/g, '""')}"`;
+  };
 
-    const encodedUri = encodeURI(csvContent);
+  const handleExportCSV = () => {
+    const csvLines = [
+      ['Metric', 'Value', 'Context'].map(sanitizeCSVField).join(','),
+      ['Total Attendees', event.stats.attendees, 'In-person checked in'].map(sanitizeCSVField).join(','),
+      ['Posts Generated', event.stats.postsGenerated, 'High engagement LinkedIn posts'].map(sanitizeCSVField).join(','),
+      ['Photos Uploaded', event.stats.photosUploaded, 'Media stream'].map(sanitizeCSVField).join(','),
+      ['LinkedIn Opens', event.stats.linkedinOpens, 'Attributed shares'].map(sanitizeCSVField).join(','),
+      ['Generation Rate', `${event.stats.conversionRate}%`, 'Top tier social velocity'].map(sanitizeCSVField).join(',')
+    ];
+
+    const csvContent = csvLines.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    
     const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
+    link.setAttribute('href', url);
     link.setAttribute('download', `${event.slug}-chronicle-report.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (

@@ -1,6 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { EventItem, PostTone, PostLength, EmojiStyle, GeneratedPostVersion } from '../../types';
 import { SAMPLE_ATTENDEE_PHOTOS, generateSmartLinkedInPost } from '../../data/mockData';
+
+const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); return true; } catch { return false; }
+    finally { document.body.removeChild(textarea); }
+  }
+};
 
 interface AttendeePortalProps {
   event: EventItem;
@@ -59,6 +76,16 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
   const [likeCount, setLikeCount] = useState(48);
   const [isLiked, setIsLiked] = useState(false);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showSuccessModal) {
+        setShowSuccessModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showSuccessModal]);
+
   // Initial post generation on mount
   useEffect(() => {
     const initialText = generateSmartLinkedInPost({
@@ -85,10 +112,22 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
     setPostVersions([initialVersion]);
     setPostContent(initialText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event.id]);
 
+  // Timer refs for cleanup
+  const stepIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const generateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+      if (generateTimeoutRef.current) clearTimeout(generateTimeoutRef.current);
+    };
+  }, []);
+
   // Handle generation flow
-  const handleGeneratePost = (overrideTone?: PostTone, overrideLength?: PostLength) => {
+  const handleGeneratePost = useCallback((overrideTone?: PostTone, overrideLength?: PostLength) => {
     const targetTone = overrideTone || selectedTone;
     const targetLength = overrideLength || postLength;
 
@@ -103,57 +142,71 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
     let currentStep = 0;
     setGenerationStepText(steps[currentStep]);
 
-    const stepInterval = setInterval(() => {
+    if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+    if (generateTimeoutRef.current) clearTimeout(generateTimeoutRef.current);
+
+    stepIntervalRef.current = setInterval(() => {
       currentStep++;
       if (currentStep < steps.length) {
         setGenerationStepText(steps[currentStep]);
       }
     }, 320);
 
-    setTimeout(() => {
-      clearInterval(stepInterval);
-      const generatedText = generateSmartLinkedInPost({
-        eventTitle: event.title,
-        organizer: event.organizer,
-        location: event.cityCountry,
-        takeaway: takeaways,
-        tone: targetTone,
-        mentions: mentions,
-        personalNote: personalNote,
-        postLength: targetLength,
-        emojiStyle: emojiStyle,
-        hashtags: event.hashtags,
-      });
+    generateTimeoutRef.current = setTimeout(() => {
+      if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+      
+      try {
+        const generatedText = generateSmartLinkedInPost({
+          eventTitle: event.title,
+          organizer: event.organizer,
+          location: event.cityCountry,
+          takeaway: takeaways,
+          tone: targetTone,
+          mentions: mentions,
+          personalNote: personalNote,
+          postLength: targetLength,
+          emojiStyle: emojiStyle,
+          hashtags: event.hashtags,
+        });
 
-      const newVersion: GeneratedPostVersion = {
-        id: `v-${postVersions.length + 1}`,
-        versionNumber: postVersions.length + 1,
-        tone: targetTone,
-        toneLabel:
-          targetTone === 'professional'
-            ? 'Professional'
-            : targetTone === 'grateful'
-            ? 'Grateful Attendee'
-            : targetTone === 'takeaways'
-            ? 'Key Takeaways'
-            : 'Thought Leader',
-        content: generatedText,
-        createdAt: 'Just now',
-      };
+        const newVersion: GeneratedPostVersion = {
+          id: `v-${postVersions.length + 1}`,
+          versionNumber: postVersions.length + 1,
+          tone: targetTone,
+          toneLabel:
+            targetTone === 'professional'
+              ? 'Professional'
+              : targetTone === 'grateful'
+              ? 'Grateful Attendee'
+              : targetTone === 'takeaways'
+              ? 'Key Takeaways'
+              : 'Thought Leader',
+          content: generatedText,
+          createdAt: 'Just now',
+        };
 
-      setPostVersions((prev) => [...prev, newVersion]);
-      setCurrentVersionIndex(postVersions.length);
-      setPostContent(generatedText);
-      setIsGenerating(false);
-      setIsEditingPost(false);
+        setPostVersions((prev) => [...prev, newVersion]);
+        setCurrentVersionIndex(postVersions.length);
+        setPostContent(generatedText);
+      } catch (error) {
+        console.error("Failed to generate post", error);
+      } finally {
+        setIsGenerating(false);
+        setIsEditingPost(false);
+      }
     }, 1300);
-  };
+  }, [
+    selectedTone, postLength, event, takeaways, mentions, personalNote,
+    emojiStyle, postVersions.length
+  ]);
 
-  const handleCopyPost = () => {
-    navigator.clipboard?.writeText(postContent);
-    onCopyText('Post copied to clipboard');
-    setShowCopyAlert(true);
-    setTimeout(() => setShowCopyAlert(false), 4000);
+  const handleCopyPost = async () => {
+    const success = await copyToClipboard(postContent);
+    if (success) {
+      onCopyText('Post copied to clipboard');
+      setShowCopyAlert(true);
+      setTimeout(() => setShowCopyAlert(false), 4000);
+    }
   };
 
   const handleAddSamplePhoto = (url: string) => {
@@ -1030,8 +1083,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
       {/* Post Success Celebration Modal (Section 33) */}
       {showSuccessModal && (
-        <div className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] text-center animate-in fade-in zoom-in-95 duration-200">
+        <div 
+          className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowSuccessModal(false)}
+        >
+          <div 
+            className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] text-center animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="w-14 h-14 rounded-full bg-[#EEF7F1] text-[#315C49] flex items-center justify-center mx-auto mb-3 border border-[#DCEFE4]">
               <span className="material-symbols-outlined text-[32px] text-[#7BAE8A]">task_alt</span>
             </div>

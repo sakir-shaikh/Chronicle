@@ -11,6 +11,7 @@ import { AttendeePortal } from './components/attendee/AttendeePortal';
 import { HelpTourModal } from './components/modals/HelpTourModal';
 import { ViewPostModal } from './components/modals/ViewPostModal';
 import { SettingsModal } from './components/modals/SettingsModal';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const LOCAL_STORAGE_KEY = 'chronicle_events_data_v1';
 
@@ -55,6 +56,34 @@ export default function App() {
     title: '',
     message: '',
   });
+  const toastTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  // Workspace settings state
+  const [workspaceSettings, setWorkspaceSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem('chronicle_workspace_settings');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      // ignore
+    }
+    return {
+      defaultOrganizer: 'Acme AI Global',
+      defaultHashtag: '#FutureOfAI, #Chronicle',
+      brandTone: 'Executive & Visionary'
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem('chronicle_workspace_settings', JSON.stringify(workspaceSettings));
+  }, [workspaceSettings]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Save events to LocalStorage on update
   useEffect(() => {
@@ -66,8 +95,9 @@ export default function App() {
   }, [events]);
 
   const showToastNotification = (title: string, message?: string) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
     setToast({ show: true, title, message });
-    setTimeout(() => {
+    toastTimeoutRef.current = setTimeout(() => {
       setToast((prev) => ({ ...prev, show: false }));
     }, 3800);
   };
@@ -131,7 +161,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFBF8] text-[#20302A] selection:bg-[#DCEFE4] selection:text-[#315C49]">
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col bg-[#FAFBF8] text-[#20302A] selection:bg-[#DCEFE4] selection:text-[#315C49]">
       {/* Global Header */}
       <Header
         currentView={currentView}
@@ -227,6 +258,7 @@ export default function App() {
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
         onSave={(newSettings) => {
+          setWorkspaceSettings(newSettings);
           showToastNotification('Settings Saved', `Organizer updated to ${newSettings.defaultOrganizer}`);
         }}
       />
@@ -239,5 +271,6 @@ export default function App() {
         onClose={() => setToast((prev) => ({ ...prev, show: false }))}
       />
     </div>
+    </ErrorBoundary>
   );
 }

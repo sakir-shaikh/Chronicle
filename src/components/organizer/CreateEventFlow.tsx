@@ -112,8 +112,25 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
   };
 
   const handleSaveOrPublish = (status: 'draft' | 'live') => {
+    if (!title.trim() || !organizer.trim()) {
+      alert('Event Title and Organizer are required.');
+      return;
+    }
+
+    const isValidUrl = (url: string) => {
+      if (!url.trim()) return true;
+      const lower = url.toLowerCase().trim();
+      if (lower.includes('javascript:')) return false;
+      return lower.startsWith('http://') || lower.startsWith('https://');
+    };
+
+    if (!isValidUrl(linkedinUrl) || !isValidUrl(websiteUrl)) {
+      alert('Please enter valid HTTP/HTTPS URLs for social channels.');
+      return;
+    }
+
     const newEvent: EventItem = {
-      id: initialEvent?.id || `EVT-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: initialEvent?.id || `EVT-${crypto.randomUUID().split('-')[0].toUpperCase()}`,
       slug: slug || 'future-event',
       title: title || 'Untitled Chronicle Event',
       organizer: organizer || 'Event Host',

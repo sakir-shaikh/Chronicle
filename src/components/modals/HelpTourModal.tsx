@@ -13,6 +13,14 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
 }) => {
   const [slide, setSlide] = useState(0);
 
+  React.useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+    }
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const slides = [
@@ -54,7 +62,10 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
   const current = slides[slide];
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div 
+      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
       <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] relative animate-in fade-in zoom-in-95 duration-200">
         <button
           onClick={onClose}

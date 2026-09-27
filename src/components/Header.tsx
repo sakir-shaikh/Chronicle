@@ -24,6 +24,34 @@ export const Header: React.FC<HeaderProps> = ({
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const notificationsRef = React.useRef<HTMLDivElement>(null);
+  const userMenuRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
+        setShowNotifications(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowNotifications(false);
+        setShowUserMenu(false);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const notifications = [
     {
       id: 'n-1',
@@ -47,6 +75,8 @@ export const Header: React.FC<HeaderProps> = ({
       unread: false,
     },
   ];
+
+  const actualUnreadCount = notifications.filter(n => n.unread).length;
 
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-[#E3E9E4] z-40 transition-all">
@@ -145,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {/* Notifications Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={notificationsRef}>
             <button
               onClick={() => setShowNotifications(!showNotifications)}
               className="relative w-9 h-9 flex items-center justify-center rounded-lg text-[#68766F] hover:bg-[#F3F4F1] hover:text-[#20302A] transition-colors"
@@ -153,7 +183,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
             >
               <span className="material-symbols-outlined text-[20px]">notifications</span>
-              {unreadCount > 0 && (
+              {actualUnreadCount > 0 && (
                 <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#7BAE8A] ring-2 ring-white"></span>
               )}
             </button>
@@ -163,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <div className="flex items-center justify-between pb-3 border-b border-[#E3E9E4]">
                   <span className="font-semibold text-sm text-[#20302A]">Notifications</span>
                   <span className="text-xs bg-[#EEF7F1] text-[#315C49] px-2 py-0.5 rounded-full font-medium">
-                    {unreadCount} unread
+                    {actualUnreadCount} unread
                   </span>
                 </div>
                 <div className="divide-y divide-[#E3E9E4] max-h-72 overflow-y-auto">
@@ -193,7 +223,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="h-6 w-px bg-[#E3E9E4] hidden sm:block"></div>
 
           {/* User Profile */}
-          <div className="relative">
+          <div className="relative" ref={userMenuRef}>
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 pl-1 cursor-pointer group focus:outline-none"

@@ -11,7 +11,11 @@ export const Toast: React.FC<ToastProps> = ({ show, title, message, onClose }) =
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 transition-all duration-300 transform translate-y-0 opacity-100 max-w-sm w-full">
+    <div 
+      className="fixed bottom-6 right-6 z-50 transition-all duration-300 transform translate-y-0 opacity-100 max-w-sm w-full"
+      role="alert"
+      aria-live="assertive"
+    >
       <div className="bg-[#20302A] text-white px-4 py-3.5 rounded-xl shadow-xl flex items-center justify-between gap-3 border border-[#315C49]/60 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-[#315C49]/80 flex items-center justify-center text-[#7BAE8A] shrink-0 border border-[#7BAE8A]/30">

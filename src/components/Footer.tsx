@@ -10,7 +10,7 @@ export const Footer: React.FC<FooterProps> = () => {
     <footer className="w-full bg-white border-t border-[#E3E9E4] mt-auto">
       <div className="max-w-[1360px] mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#68766F]">
         <div className="flex items-center gap-2">
-          <span>© 2026 Chronicle Intelligence &amp; Storytelling Platform. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Chronicle Intelligence &amp; Storytelling Platform. All rights reserved.</span>
         </div>
         <div className="flex items-center gap-6">
           <a

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { EventItem, FeedPost } from '../../types';
 
 interface OrganizerDashboardProps {
@@ -24,6 +24,19 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'recent' | 'attendees' | 'posts'>('recent');
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setActiveMenuId(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Filter events
   const filteredEvents = events.filter((ev) => {
@@ -232,7 +245,12 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
           <div className="relative">
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === 'recent' || val === 'attendees' || val === 'posts') {
+                  setSortBy(val);
+                }
+              }}
               className="appearance-none inline-flex items-center justify-between w-full sm:w-auto pl-3 pr-8 h-10 bg-white rounded-xl text-xs font-semibold text-[#20302A] hover:bg-[#FAFBF8] border border-[#E3E9E4] shadow-xs cursor-pointer focus:outline-none"
             >
               <option value="recent">Sort: Most Recent</option>
@@ -448,7 +466,7 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
                       <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </button>
 
-                    <div className="flex items-center gap-2 relative">
+                    <div className="flex items-center gap-2 relative" ref={activeMenuId === event.id ? menuRef : null}>
                       <button
                         onClick={() => onCopyLink(`chronicle.app/e/${event.slug}`)}
                         type="button"
