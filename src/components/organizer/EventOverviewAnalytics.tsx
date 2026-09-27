@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { EventItem } from '../../types';
 import { QRCodeModal } from '../modals/QRCodeModal';
+import { motion, AnimatePresence } from 'motion/react';
+import { springs, staggerContainer, staggerItem } from '../../utils/motion';
 
 interface EventOverviewAnalyticsProps {
   event: EventItem;
@@ -162,9 +164,14 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
       </section>
 
       {/* Metric Analytics - Elegant Borderless Layout */}
-      <section className="grid grid-cols-2 md:grid-cols-5 gap-8 py-4">
+      <motion.section 
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="grid grid-cols-2 md:grid-cols-5 gap-8 py-4"
+      >
         {/* Metric 1 */}
-        <div className="flex flex-col gap-2">
+        <motion.div variants={staggerItem} className="flex flex-col gap-2">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Total Attendees</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tracking-tight tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -174,10 +181,10 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
               <span className="material-symbols-outlined text-[14px]">north_east</span> 18
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Metric 2 */}
-        <div className="flex flex-col gap-2">
+        <motion.div variants={staggerItem} className="flex flex-col gap-2">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Posts Generated</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tracking-tight tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -187,10 +194,10 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
               <span className="material-symbols-outlined text-[14px]">north_east</span> 34
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Metric 3 */}
-        <div className="flex flex-col gap-2">
+        <motion.div variants={staggerItem} className="flex flex-col gap-2">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Photos</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tracking-tight tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -198,20 +205,20 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
             </span>
             <span className="text-xs text-[#8D6E63] mb-1">~2.4/user</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Metric 4 */}
-        <div className="flex flex-col gap-2">
+        <motion.div variants={staggerItem} className="flex flex-col gap-2">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">LinkedIn Opens</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tracking-tight tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
               {event.stats?.linkedinOpens || 0}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Metric 5 */}
-        <div className="flex flex-col gap-2">
+        <motion.div variants={staggerItem} className="flex flex-col gap-2">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Generation Rate</span>
           <div className="flex flex-col gap-2 mt-1">
             <div className="flex items-baseline justify-between">
@@ -220,14 +227,16 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
               </span>
             </div>
             <div className="w-full bg-[#D4C4A8] h-1 rounded-full overflow-hidden">
-              <div
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${event.stats?.conversionRate || 0}%` }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                 className="bg-[#8B4513] h-full rounded-full"
-                style={{ width: `${event.stats?.conversionRate || 0}%` }}
-              ></div>
+              ></motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Main Split Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -252,9 +261,10 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
               </span>
             </div>
 
-            <div className="flex flex-col gap-3.5 mt-1">
+            <motion.div variants={staggerContainer} initial="initial" animate="animate" className="flex flex-col gap-3.5 mt-1">
               {(event.contentThemes || []).map((theme) => (
-                <div
+                <motion.div
+                  variants={staggerItem}
                   key={theme.id}
                   className="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-[#F0E6D2]/40 transition-colors border border-transparent hover:border-[#E6D3A8]"
                 >
@@ -278,9 +288,9 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
                       style={{ width: `${theme.progressPercent}%` }}
                     ></div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </section>
 
           {/* Top Performing Takeaway Prompts Card */}
@@ -378,9 +388,9 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
             </div>
 
             {/* Connected Vertical Timeline Rail */}
-            <div className="relative pl-6 flex flex-col gap-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-3 before:w-0.5 before:bg-[#D4C4A8]">
+            <motion.div variants={staggerContainer} initial="initial" animate="animate" className="relative pl-6 flex flex-col gap-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-3 before:w-0.5 before:bg-[#D4C4A8]">
               {(event.timelineItems || []).map((item) => (
-                <div key={item.id} className="relative group">
+                <motion.div variants={staggerItem} key={item.id} className="relative group">
                   <span className="absolute -left-[1.85rem] top-1 w-3 h-3 rounded-full bg-[#C28B46] ring-4 ring-white shadow-xs"></span>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-start justify-between gap-2">
@@ -406,9 +416,9 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </section>
 
           {/* Export & Sponsorship Reporting */}

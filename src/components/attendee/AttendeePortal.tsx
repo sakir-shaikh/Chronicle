@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { EventItem, PostTone, PostLength, EmojiStyle, GeneratedPostVersion } from '../../types';
 import { SAMPLE_ATTENDEE_PHOTOS, generateSmartLinkedInPost } from '../../data/mockData';
+import { motion, AnimatePresence } from 'motion/react';
+import { springs, easings, fadeReveal, staggerContainer, staggerItem } from '../../utils/motion';
 
 const copyToClipboard = async (text: string): Promise<boolean> => {
   try {
@@ -378,65 +380,84 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
             </div>
 
             {/* Photos Grid */}
-            <div className="grid grid-cols-3 gap-2.5">
-              {uploadedPhotos.map((photoUrl, idx) => (
-                <div
-                  key={idx}
-                  className="relative group rounded-xl overflow-hidden h-24 bg-[#E9DCC9] border border-[#D4C4A8] shadow-xs aspect-square"
-                >
-                  <img src={photoUrl} alt="Attendee event moment" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between p-1.5">
-                    <span className="material-symbols-outlined text-white text-[16px]">image</span>
-                    <button
-                      onClick={() => handleRemovePhoto(idx)}
-                      className="w-6 h-6 rounded-full bg-[#FCFBF8]/95 hover:bg-[#FCFBF8] text-[#3E2723] flex items-center justify-center transition-colors shadow-xs"
-                      type="button"
-                      title="Remove Photo"
-                    >
-                      <span className="material-symbols-outlined text-[13px]">close</span>
-                    </button>
-                  </div>
-                </div>
-              ))}
+            <motion.div layout className="grid grid-cols-3 gap-2.5">
+              <AnimatePresence>
+                {uploadedPhotos.map((photoUrl, idx) => (
+                  <motion.div
+                    key={photoUrl}
+                    layout
+                    initial={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 0.5, filter: 'blur(4px)' }}
+                    transition={springs.tactile}
+                    className="relative group rounded-xl overflow-hidden h-24 bg-[#E9DCC9] border border-[#D4C4A8] shadow-xs aspect-square"
+                  >
+                    <img src={photoUrl} alt="Attendee event moment" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between p-1.5">
+                      <span className="material-symbols-outlined text-white text-[16px]">image</span>
+                      <button
+                        onClick={() => handleRemovePhoto(idx)}
+                        className="w-6 h-6 rounded-full bg-[#FCFBF8]/95 hover:bg-[#FCFBF8] text-[#3E2723] flex items-center justify-center transition-colors shadow-xs"
+                        type="button"
+                        title="Remove Photo"
+                      >
+                        <span className="material-symbols-outlined text-[13px]">close</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
 
-              {/* Add Photo Button */}
-              {uploadedPhotos.length < 6 && (
-                <button
-                  onClick={() => setShowPhotoPicker(true)}
-                  className="h-24 rounded-2xl bg-[#FCFBF8] shadow-sm border-2 border-dashed border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] flex flex-col items-center justify-center gap-1 text-[#5D4037] hover:text-[#8B4513] transition-all cursor-pointer"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[22px] text-[#C28B46]">add_a_photo</span>
-                  <span className="text-[11px] font-semibold">+ Add Photo</span>
-                </button>
-              )}
-            </div>
+                {/* Add Photo Button */}
+                {uploadedPhotos.length < 6 && (
+                  <motion.button
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setShowPhotoPicker(true)}
+                    className="h-24 rounded-2xl bg-[#FCFBF8] shadow-sm border-2 border-dashed border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] flex flex-col items-center justify-center gap-1 text-[#5D4037] hover:text-[#8B4513] transition-colors cursor-pointer"
+                    type="button"
+                  >
+                    <span className="material-symbols-outlined text-[22px] text-[#C28B46]">add_a_photo</span>
+                    <span className="text-[11px] font-semibold">+ Add Photo</span>
+                  </motion.button>
+                )}
+              </AnimatePresence>
+            </motion.div>
 
             {/* Quick Sample Photo Library Picker Dropdown */}
-            {showPhotoPicker && (
-              <div className="p-3 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl space-y-2 animate-in fade-in duration-150">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#3E2723]">Select from Event Moments Gallery:</span>
-                  <button
-                    onClick={() => setShowPhotoPicker(false)}
-                    className="text-xs text-[#8D6E63] hover:text-[#3E2723]"
-                  >
-                    Cancel
-                  </button>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {SAMPLE_ATTENDEE_PHOTOS.map((p) => (
+            <AnimatePresence>
+              {showPhotoPicker && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={springs.fluid}
+                  className="p-3 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl space-y-2 overflow-hidden"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#3E2723]">Select from Event Moments Gallery:</span>
                     <button
-                      key={p.id}
-                      onClick={() => handleAddSamplePhoto(p.url)}
-                      className="h-16 rounded-lg overflow-hidden border border-[#D4C4A8] hover:ring-2 hover:ring-[#C28B46] transition-all relative group"
+                      onClick={() => setShowPhotoPicker(false)}
+                      className="text-xs text-[#8D6E63] hover:text-[#3E2723]"
                     >
-                      <img src={p.url} alt={p.caption} className="w-full h-full object-cover" />
+                      Cancel
                     </button>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {SAMPLE_ATTENDEE_PHOTOS.map((p) => (
+                      <button
+                        key={p.id}
+                        onClick={() => handleAddSamplePhoto(p.url)}
+                        className="h-16 rounded-lg overflow-hidden border border-[#D4C4A8] hover:ring-2 hover:ring-[#C28B46] transition-all relative group"
+                      >
+                        <img src={p.url} alt={p.caption} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Key Takeaways Section */}
@@ -625,17 +646,25 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <span className="material-symbols-outlined text-[18px] text-[#8B4513]">settings_suggest</span>
                 <span>Advanced Personalization</span>
               </span>
-              <span
-                className={`material-symbols-outlined text-[18px] text-[#8D6E63] transition-transform duration-200 ${
-                  showAdvanced ? 'rotate-180' : ''
-                }`}
+              <motion.span
+                animate={{ rotate: showAdvanced ? 180 : 0 }}
+                transition={springs.micro}
+                className="material-symbols-outlined text-[18px] text-[#8D6E63]"
               >
                 expand_more
-              </span>
+              </motion.span>
             </button>
 
-            {showAdvanced && (
-              <div className="p-6 pt-0 space-y-4 border-t border-[#D4C4A8]">
+            <AnimatePresence>
+              {showAdvanced && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={springs.fluid}
+                  className="overflow-hidden"
+                >
+                  <div className="p-6 pt-0 space-y-4 border-t border-[#D4C4A8]">
                 <div className="space-y-1.5 pt-3">
                   <label className="text-xs font-medium text-[#5D4037]">Mention People &amp; Brands</label>
                   <input
@@ -698,33 +727,62 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       ))}
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Primary Generation Action */}
           <div className="space-y-2">
-            <button
+            <motion.button
+              whileHover={!isGenerating ? { scale: 1.01 } : {}}
+              whileTap={!isGenerating ? { scale: 0.98 } : {}}
               onClick={() => handleGeneratePost()}
               disabled={isGenerating}
               type="button"
-              className="w-full py-3.5 px-6 rounded-2xl bg-[#C28B46] hover:bg-[#A87739] text-white text-base font-semibold shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 transition-all transform active:scale-98 disabled:opacity-80 cursor-pointer"
+              className="w-full py-3.5 px-6 rounded-2xl bg-[#C28B46] hover:bg-[#A87739] text-white text-base font-semibold shadow-xs flex items-center justify-center gap-2.5 transition-colors disabled:opacity-90 cursor-pointer overflow-hidden relative"
             >
-              {isGenerating ? (
-                <div className="flex items-center gap-3 animate-pulse">
-                  <span className="material-symbols-outlined text-[24px] text-[#E6D3A8] animate-spin">
-                    progress_activity
-                  </span>
-                  <span className="text-white font-medium tracking-wide">{generationStepText}</span>
-                </div>
-              ) : (
-                <>
-                  <span className="material-symbols-outlined text-[22px] text-[#E6D3A8]">auto_awesome</span>
-                  <span>Generate LinkedIn Post</span>
-                </>
-              )}
-            </button>
+              <AnimatePresence mode="wait">
+                {isGenerating ? (
+                  <motion.div
+                    key="generating"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-3"
+                  >
+                    <span className="material-symbols-outlined text-[24px] text-[#E6D3A8] animate-spin">
+                      progress_activity
+                    </span>
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={generationStepText}
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.15 }}
+                        className="text-white font-medium tracking-wide"
+                      >
+                        {generationStepText}
+                      </motion.span>
+                    </AnimatePresence>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="idle"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2.5"
+                  >
+                    <span className="material-symbols-outlined text-[22px] text-[#E6D3A8]">auto_awesome</span>
+                    <span>Generate LinkedIn Post</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
             <p className="text-xs text-[#8D6E63] text-center">
               Chronicle AI will synthesize your highlights into a high-engagement post
             </p>
@@ -835,39 +893,57 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               </div>
 
               {/* Post Body: Normal or Inline Edit */}
-              {isEditingPost ? (
-                <div className="space-y-3">
-                  <textarea
-                    rows={8}
-                    value={editedPostDraft}
-                    onChange={(e) => setEditedPostDraft(e.target.value)}
-                    className="w-full p-4 text-xs sm:text-sm font-sans text-[#3E2723] leading-relaxed bg-[#F4EFE6] border border-[#C28B46] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C28B46]/30"
-                  />
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[11px] font-mono text-[#8D6E63]">
-                      {editedPostDraft.length} / 3,000 characters
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setIsEditingPost(false)}
-                        className="px-3 py-1.5 rounded-lg text-xs text-[#5D4037] hover:bg-[#E9DCC9]"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={handleSaveEditedPost}
-                        className="px-4 py-1.5 bg-[#C28B46] text-white font-semibold text-xs rounded-lg shadow-xs hover:bg-[#A87739]"
-                      >
-                        Save Changes
-                      </button>
+              <AnimatePresence mode="wait">
+                {isEditingPost ? (
+                  <motion.div
+                    key="editor"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="space-y-3 overflow-hidden"
+                  >
+                    <textarea
+                      rows={8}
+                      value={editedPostDraft}
+                      onChange={(e) => setEditedPostDraft(e.target.value)}
+                      className="w-full p-4 text-xs sm:text-sm font-sans text-[#3E2723] leading-relaxed bg-[#F4EFE6] border border-[#C28B46] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C28B46]/30"
+                    />
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-[11px] font-mono text-[#8D6E63]">
+                        {editedPostDraft.length} / 3,000 characters
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setIsEditingPost(false)}
+                          className="px-3 py-1.5 rounded-lg text-xs text-[#5D4037] hover:bg-[#E9DCC9]"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={handleSaveEditedPost}
+                          className="px-4 py-1.5 bg-[#C28B46] text-white font-semibold text-xs rounded-lg shadow-xs hover:bg-[#A87739]"
+                        >
+                          Save Changes
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-xs sm:text-sm text-[#3E2723] whitespace-pre-line leading-relaxed font-sans">
-                  {postContent}
-                </div>
-              )}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={postContent} // This key forces the stagger animation whenever AI generates new content
+                    variants={staggerContainer}
+                    initial="initial"
+                    animate="animate"
+                    className="text-xs sm:text-sm text-[#3E2723] whitespace-pre-line leading-relaxed font-sans"
+                  >
+                    {postContent.split('\n\n').map((paragraph, i) => (
+                      <motion.p key={i} variants={staggerItem} className="mb-4 last:mb-0">
+                        {paragraph}
+                      </motion.p>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Photo Gallery Grid (styled like LinkedIn multi-image attachment) */}
               {uploadedPhotos.length > 0 && (
@@ -1080,64 +1156,74 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
       </div>
 
       {/* Post Success Celebration Modal (Section 33) */}
-      {showSuccessModal && (
-        <div 
-          className="fixed inset-0 z-50 bg-[#3E2723]/40 backdrop-blur-xs flex items-center justify-center p-4"
-          onClick={() => setShowSuccessModal(false)}
-        >
-          <div 
-            className="bg-[#FCFBF8] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#D4C4A8] text-center animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div 
+            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(4px)' }}
+            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-[#3E2723]/40 flex items-center justify-center p-4"
+            onClick={() => setShowSuccessModal(false)}
           >
-            <div className="w-14 h-14 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mx-auto mb-3 border border-[#E6D3A8]">
-              <span className="material-symbols-outlined text-[32px] text-[#C28B46]">task_alt</span>
-            </div>
-
-            <h3
-              className="text-xl font-semibold text-[#3E2723]"
-              style={{ fontFamily: 'Playfair Display, serif' }}
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.98, opacity: 0, y: -10 }}
+              transition={springs.deliberate}
+              className="bg-[#FCFBF8] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#D4C4A8] text-center"
+              onClick={(e) => e.stopPropagation()}
             >
-              Your post is ready to share!
-            </h3>
-            <p className="text-xs text-[#5D4037] mt-1 max-w-xs mx-auto">
-              Your formatted text and tags have been copied to your clipboard. Simply paste (Ctrl+V or Cmd+V) into LinkedIn.
-            </p>
+              <div className="w-14 h-14 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mx-auto mb-3 border border-[#E6D3A8]">
+                <span className="material-symbols-outlined text-[32px] text-[#C28B46]">task_alt</span>
+              </div>
 
-            <div className="my-5 p-4 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl text-left space-y-2 text-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-[#5D4037]">Photos attached:</span>
-                <span className="font-semibold text-[#3E2723]">{uploadedPhotos.length}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[#5D4037]">Takeaways synthesized:</span>
-                <span className="font-semibold text-[#8B4513]">Yes (Verified)</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[#5D4037]">Tone applied:</span>
-                <span className="font-semibold text-[#3E2723] capitalize">{selectedTone}</span>
-              </div>
-            </div>
+              <h3
+                className="text-xl font-semibold text-[#3E2723]"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                Your post is ready to share!
+              </h3>
+              <p className="text-xs text-[#5D4037] mt-1 max-w-xs mx-auto">
+                Your formatted text and tags have been copied to your clipboard. Simply paste (Ctrl+V or Cmd+V) into LinkedIn.
+              </p>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => {
-                  handleCopyPost();
-                  setShowSuccessModal(false);
-                }}
-                className="flex-1 py-2.5 px-4 bg-[#E9DCC9] hover:bg-[#D4C4A8] text-[#3E2723] rounded-xl text-xs font-semibold transition-colors"
-              >
-                Copy Again
-              </button>
-              <button
-                onClick={() => setShowSuccessModal(false)}
-                className="flex-1 py-2.5 px-4 bg-[#C28B46] hover:bg-[#A87739] text-white rounded-xl text-xs font-semibold transition-colors shadow-xs"
-              >
-                Done
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+              <div className="my-5 p-4 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl text-left space-y-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-[#5D4037]">Photos attached:</span>
+                  <span className="font-semibold text-[#3E2723]">{uploadedPhotos.length}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#5D4037]">Takeaways synthesized:</span>
+                  <span className="font-semibold text-[#8B4513]">Yes (Verified)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#5D4037]">Tone applied:</span>
+                  <span className="font-semibold text-[#3E2723] capitalize">{selectedTone}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => {
+                    handleCopyPost();
+                    setShowSuccessModal(false);
+                  }}
+                  className="flex-1 py-2.5 px-4 bg-[#E9DCC9] hover:bg-[#D4C4A8] text-[#3E2723] rounded-xl text-xs font-semibold transition-colors"
+                >
+                  Copy Again
+                </button>
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="flex-1 py-2.5 px-4 bg-[#C28B46] hover:bg-[#A87739] text-white rounded-xl text-xs font-semibold transition-colors shadow-xs"
+                >
+                  Done
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

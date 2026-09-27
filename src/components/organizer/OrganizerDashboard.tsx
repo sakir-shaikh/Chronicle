@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { EventItem, FeedPost } from '../../types';
+import { motion, AnimatePresence } from 'motion/react';
+import { springs, staggerContainer, staggerItem, fadeReveal, easings } from '../../utils/motion';
 
 interface OrganizerDashboardProps {
   events: EventItem[];
@@ -103,8 +105,13 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
       </section>
 
       {/* Seamless Pulse Strip */}
-      <section className="flex flex-col md:flex-row items-start md:items-center gap-12 border-y border-[#D4C4A8] py-8">
-        <div className="flex flex-col gap-1">
+      <motion.section 
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="flex flex-col md:flex-row items-start md:items-center gap-12 border-y border-[#D4C4A8] py-8"
+      >
+        <motion.div variants={staggerItem} className="flex flex-col gap-1">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Active Experiences</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -112,10 +119,10 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
             </span>
             <span className="text-xs text-[#C28B46] font-medium mb-1">Live Now</span>
           </div>
-        </div>
+        </motion.div>
         <div className="hidden md:block w-px h-10 bg-[#D4C4A8]"></div>
         
-        <div className="flex flex-col gap-1">
+        <motion.div variants={staggerItem} className="flex flex-col gap-1">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Total Attendees</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -125,18 +132,18 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
               <span className="material-symbols-outlined text-[14px]">north_east</span> 14%
             </span>
           </div>
-        </div>
+        </motion.div>
         <div className="hidden md:block w-px h-10 bg-[#D4C4A8]"></div>
 
-        <div className="flex flex-col gap-1">
+        <motion.div variants={staggerItem} className="flex flex-col gap-1">
           <span className="text-[11px] font-medium text-[#5D4037] uppercase tracking-wider">Avg. Conversion</span>
           <div className="flex items-end gap-3">
             <span className="text-3xl font-light text-[#3E2723] tabular-nums" style={{ fontFamily: 'Playfair Display, serif' }}>
               69.8%
             </span>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Search & Filter Controls */}
       <section className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -204,84 +211,97 @@ export const OrganizerDashboard: React.FC<OrganizerDashboardProps> = ({
             </button>
           </div>
         ) : (
-          <div className="flex flex-col">
-            {filteredEvents.map((event) => {
-              const isDraft = event.status === 'draft';
-              const isLive = event.status === 'live';
-              
-              return (
-                <div key={event.id} className="group flex flex-col md:flex-row md:items-center justify-between gap-6 py-6 border-b border-[#D4C4A8] hover:bg-[#F4EFE6] transition-colors -mx-4 px-4 rounded-2xl">
-                  <div className="flex items-center gap-5 flex-1 min-w-0">
-                    <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-[#E9DCC9] relative">
-                      <img src={event.coverImage} alt={event.title} className={`w-full h-full object-cover ${isDraft ? 'opacity-50 grayscale' : ''}`} />
-                      {isLive && <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#C28B46] animate-pulse"></div>}
-                    </div>
-                    <div className="flex flex-col min-w-0 gap-1.5">
-                      <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-[#5D4037]">
-                        {isLive ? (
-                          <span className="text-[#8B4513] bg-[#F0E6D2] px-2 py-0.5 rounded-sm">Live</span>
-                        ) : (
-                          <span>{event.status}</span>
-                        )}
-                        <span>·</span>
-                        <span>{event.date}</span>
+          <motion.div 
+            layout 
+            className="flex flex-col"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredEvents.map((event) => {
+                const isDraft = event.status === 'draft';
+                const isLive = event.status === 'live';
+                
+                return (
+                  <motion.div 
+                    layout
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.15 } }}
+                    transition={springs.fluid}
+                    key={event.id} 
+                    className="group flex flex-col md:flex-row md:items-center justify-between gap-6 py-6 border-b border-[#D4C4A8] hover:bg-[#F4EFE6] transition-colors -mx-4 px-4 rounded-2xl"
+                  >
+                    <div className="flex items-center gap-5 flex-1 min-w-0">
+                      <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-[#E9DCC9] relative">
+                        <img src={event.coverImage} alt={event.title} className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isDraft ? 'opacity-50 grayscale' : ''}`} />
+                        {isLive && <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#C28B46] animate-pulse"></div>}
                       </div>
-                      <h2 
-                        onClick={() => onSelectEvent(event)}
-                        className="text-lg font-medium text-[#3E2723] hover:text-[#8B4513] truncate cursor-pointer"
-                        style={{ fontFamily: 'Playfair Display, serif' }}
-                      >
-                        {event.title}
-                      </h2>
-                      <div className="flex items-center gap-3 text-sm text-[#5D4037]">
-                        <span className="truncate">{event.location}</span>
-                        {event.stats?.attendees > 0 && (
-                          <>
-                            <span className="text-[#D4C4A8]">•</span>
-                            <span>{event.stats.attendees} attendees</span>
-                          </>
-                        )}
+                      <div className="flex flex-col min-w-0 gap-1.5">
+                        <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-[#5D4037]">
+                          {isLive ? (
+                            <span className="text-[#8B4513] bg-[#F0E6D2] px-2 py-0.5 rounded-sm">Live</span>
+                          ) : (
+                            <span>{event.status}</span>
+                          )}
+                          <span>·</span>
+                          <span>{event.date}</span>
+                        </div>
+                        <h2 
+                          onClick={() => onSelectEvent(event)}
+                          className="text-lg font-medium text-[#3E2723] hover:text-[#8B4513] truncate cursor-pointer transition-colors"
+                          style={{ fontFamily: 'Playfair Display, serif' }}
+                        >
+                          {event.title}
+                        </h2>
+                        <div className="flex items-center gap-3 text-sm text-[#5D4037]">
+                          <span className="truncate">{event.location}</span>
+                          {event.stats?.attendees > 0 && (
+                            <>
+                              <span className="text-[#D4C4A8]">•</span>
+                              <span>{event.stats.attendees} attendees</span>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
-                    {!isDraft ? (
-                      <>
-                        <button
-                          onClick={() => onCopyLink(`chronicle.app/e/${event.slug}`)}
-                          className="w-9 h-9 rounded-full flex items-center justify-center text-[#5D4037] hover:bg-[#FCFBF8] hover:text-[#3E2723] border border-transparent hover:border-[#D4C4A8] transition-all"
-                          title="Copy Link"
-                        >
-                          <span className="material-symbols-outlined text-[18px]">link</span>
-                        </button>
-                        <button
-                          onClick={() => onOpenAttendeePortal(event)}
-                          className="w-9 h-9 rounded-full flex items-center justify-center text-[#5D4037] hover:bg-[#FCFBF8] hover:text-[#3E2723] border border-transparent hover:border-[#D4C4A8] transition-all"
-                          title="View Portal"
-                        >
-                          <span className="material-symbols-outlined text-[18px]">open_in_new</span>
-                        </button>
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      {!isDraft ? (
+                        <>
+                          <button
+                            onClick={() => onCopyLink(`chronicle.app/e/${event.slug}`)}
+                            className="w-9 h-9 rounded-full flex items-center justify-center text-[#5D4037] hover:bg-[#E9DCC9] hover:text-[#3E2723] border border-transparent transition-colors"
+                            title="Copy Link"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">link</span>
+                          </button>
+                          <button
+                            onClick={() => onOpenAttendeePortal(event)}
+                            className="w-9 h-9 rounded-full flex items-center justify-center text-[#5D4037] hover:bg-[#E9DCC9] hover:text-[#3E2723] border border-transparent transition-colors"
+                            title="View Portal"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+                          </button>
+                          <button
+                            onClick={() => onSelectEvent(event)}
+                            className="px-4 py-2 rounded-full bg-[#FCFBF8] border border-[#D4C4A8] text-sm font-medium text-[#3E2723] hover:bg-[#E9DCC9] hover:border-[#C28B46] transition-all transform active:scale-95"
+                          >
+                            Manage
+                          </button>
+                        </>
+                      ) : (
                         <button
                           onClick={() => onSelectEvent(event)}
-                          className="px-4 py-2 rounded-full bg-[#FCFBF8] border border-[#D4C4A8] text-sm font-medium text-[#3E2723] hover:bg-[#E9DCC9] transition-all"
+                          className="px-4 py-2 rounded-full bg-[#D4C4A8] text-sm font-medium text-[#3E2723] hover:bg-[#E6D3A8] transition-all transform active:scale-95"
                         >
-                          Manage
+                          Resume Setup
                         </button>
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => onSelectEvent(event)}
-                        className="px-4 py-2 rounded-full bg-[#D4C4A8] text-sm font-medium text-[#3E2723] hover:bg-[#E6D3A8] transition-all"
-                      >
-                        Resume Setup
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
         )}
       </section>
 

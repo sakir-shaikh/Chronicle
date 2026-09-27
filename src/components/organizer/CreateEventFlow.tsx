@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { EventItem } from '../../types';
 import { SAMPLE_ATTENDEE_PHOTOS } from '../../data/mockData';
+import { motion, AnimatePresence } from 'motion/react';
+import { springs, fadeReveal } from '../../utils/motion';
 
 interface CreateEventFlowProps {
   onCancel: () => void;
@@ -233,8 +235,16 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
       )}
 
       {/* Step 5: Publish Success Screen */}
-      {step === 5 && publishedEvent && (
-        <div className="bg-[#FCFBF8] rounded-2xl border border-[#D4C4A8] p-8 sm:p-12 shadow-sm max-w-2xl mx-auto text-center animate-in fade-in zoom-in-95 duration-200">
+      <AnimatePresence mode="wait">
+        {step === 5 && publishedEvent && (
+          <motion.div 
+            key="success"
+            variants={fadeReveal}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="bg-[#FCFBF8] rounded-2xl border border-[#D4C4A8] p-8 sm:p-12 shadow-sm max-w-2xl mx-auto text-center"
+          >
           <div className="w-16 h-16 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mx-auto mb-4 border border-[#E6D3A8]">
             <span className="material-symbols-outlined text-[36px] text-[#C28B46]">celebration</span>
           </div>
@@ -289,17 +299,31 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               Back to Dashboard
             </button>
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
 
       {/* Main Interactive Split Layout (Steps 1 to 4) */}
       {step !== 5 && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={springs.fluid}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+        >
           {/* Left Column: Form Steps (7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col gap-6">
+            <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col gap-6 relative overflow-hidden">
               {/* Context Header */}
-              <div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`header-${step}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
                 <div className="flex items-center gap-2 mb-2">
                   <span className="px-2.5 py-0.5 bg-[#E6D3A8] text-[#8B4513] rounded-full text-xs font-semibold">
                     {step === 1 && 'Step 1 of 4: Core Metadata'}
@@ -328,11 +352,20 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   {step === 4 &&
                     'Ensure all broadcast hashtags, social channels, and media are verified before opening the attendee portal.'}
                 </p>
-              </div>
+              </motion.div>
+            </AnimatePresence>
 
+            <AnimatePresence mode="wait">
               {/* STEP 1: EVENT DETAILS */}
               {step === 1 && (
-                <div className="flex flex-col gap-5 pt-2">
+                <motion.div 
+                  key="step1"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-5 pt-2"
+                >
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold text-[#3E2723] flex items-center justify-between">
                       <span>Event Title</span>
@@ -507,12 +540,19 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       These hashtags will be pre-populated automatically whenever attendees generate and publish LinkedIn posts.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 2: BRANDING & SOCIAL (Matches screenshot Image 9!) */}
               {step === 2 && (
-                <div className="flex flex-col gap-6 pt-2">
+                <motion.div 
+                  key="step2"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-6 pt-2"
+                >
                   {/* Cover Media */}
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
@@ -655,12 +695,19 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 3: ATTENDEE EXPERIENCE SETTINGS */}
               {step === 3 && (
-                <div className="flex flex-col gap-6 pt-2">
+                <motion.div 
+                  key="step3"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-6 pt-2"
+                >
                   <div className="space-y-3">
                     <label className="text-xs font-semibold text-[#3E2723]">Allowed Attendee Inputs</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -774,12 +821,19 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 4: REVIEW & PUBLISH */}
               {step === 4 && (
-                <div className="flex flex-col gap-6 pt-2">
+                <motion.div 
+                  key="step4"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-6 pt-2"
+                >
                   <div className="bg-[#F4EFE6] border border-[#D4C4A8] rounded-2xl p-5 space-y-4">
                     <h3 className="text-sm font-semibold text-[#3E2723]">Event Readiness Audit</h3>
 
@@ -823,11 +877,12 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       Copy Link
                     </button>
                   </div>
-                </div>
+                </motion.div>
               )}
+            </AnimatePresence>
 
-              {/* Bottom Step Actions */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-2 border-t border-[#D4C4A8]">
+            {/* Bottom Step Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-2 border-t border-[#D4C4A8]">
                 <button
                   type="button"
                   onClick={() => {
@@ -1042,7 +1097,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

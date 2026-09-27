@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChronicleLogo } from './ChronicleLogo';
+import { motion, AnimatePresence } from 'motion/react';
+import { springs, easings } from '../utils/motion';
 
 interface HeaderProps {
   currentView: 'organizer' | 'attendee';
@@ -92,72 +94,66 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 ml-3 text-sm font-medium">
-            <button
-              onClick={() => onNavigate('overview')}
-              className={`transition-colors py-1 ${
-                activeNav === 'overview'
-                  ? 'text-[#3E2723] font-semibold border-b-[2px] border-[#3E2723]'
-                  : 'text-[#5D4037] hover:text-[#3E2723]'
-              }`}
-            >
-              Overview
-            </button>
-            <button
-              onClick={() => onNavigate('events')}
-              className={`transition-colors py-1 ${
-                activeNav === 'events'
-                  ? 'text-[#3E2723] font-semibold border-b-[2px] border-[#3E2723]'
-                  : 'text-[#5D4037] hover:text-[#3E2723]'
-              }`}
-            >
-              Events
-            </button>
-            <button
-              onClick={() => onNavigate('attendees')}
-              className={`transition-colors py-1 ${
-                activeNav === 'attendees'
-                  ? 'text-[#3E2723] font-semibold border-b-[2px] border-[#3E2723]'
-                  : 'text-[#5D4037] hover:text-[#3E2723]'
-              }`}
-            >
-              Attendees
-            </button>
-            <button
-              onClick={() => onNavigate('analytics')}
-              className={`transition-colors py-1 ${
-                activeNav === 'analytics'
-                  ? 'text-[#3E2723] font-semibold border-b-[2px] border-[#3E2723]'
-                  : 'text-[#5D4037] hover:text-[#3E2723]'
-              }`}
-            >
-              Analytics
-            </button>
+          <nav className="hidden lg:flex items-center gap-2 ml-3 text-sm font-medium relative">
+            {['overview', 'events', 'attendees', 'analytics'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => onNavigate(tab as any)}
+                className={`relative px-4 py-1.5 transition-colors rounded-lg z-10 ${
+                  activeNav === tab
+                    ? 'text-[#3E2723] font-semibold'
+                    : 'text-[#5D4037] hover:text-[#3E2723]'
+                }`}
+              >
+                {activeNav === tab && (
+                  <motion.div
+                    layoutId="header-active-nav"
+                    className="absolute inset-0 bg-[#E9DCC9]/60 rounded-lg -z-10 border border-[#D4C4A8]/40 shadow-inner"
+                    transition={springs.fluid}
+                  />
+                )}
+                <span className="capitalize">{tab}</span>
+              </button>
+            ))}
           </nav>
         </div>
 
         {/* Center: Role Switcher (Organizer vs Attendee View) */}
-        <div className="flex items-center p-0.5 bg-[#E9DCC9]/60 rounded-lg border border-[#D4C4A8]/50 shadow-inner">
+        <div className="flex items-center p-0.5 bg-[#E9DCC9]/60 rounded-lg border border-[#D4C4A8]/50 shadow-inner relative">
           <button
             type="button"
             onClick={() => onSwitchView('organizer')}
-            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-all duration-200 ${
+            className={`relative z-10 px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-colors duration-200 ${
               currentView === 'organizer'
-                ? 'bg-[#FCFBF8] text-[#3E2723] font-semibold shadow-sm ring-1 ring-black/[0.04]'
-                : 'text-[#5D4037] font-medium hover:text-[#3E2723] hover:bg-black/[0.02]'
+                ? 'text-[#3E2723] font-semibold'
+                : 'text-[#5D4037] font-medium hover:text-[#3E2723]'
             }`}
           >
+            {currentView === 'organizer' && (
+              <motion.div
+                layoutId="role-switcher-active"
+                className="absolute inset-0 bg-[#FCFBF8] rounded-md shadow-sm ring-1 ring-black/[0.04] -z-10"
+                transition={springs.tactile}
+              />
+            )}
             Organizer
           </button>
           <button
             type="button"
             onClick={() => onSwitchView('attendee')}
-            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-all duration-200 ${
+            className={`relative z-10 px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-colors duration-200 ${
               currentView === 'attendee'
-                ? 'bg-[#FCFBF8] text-[#3E2723] font-semibold shadow-sm ring-1 ring-black/[0.04]'
-                : 'text-[#5D4037] font-medium hover:text-[#3E2723] hover:bg-black/[0.02]'
+                ? 'text-[#3E2723] font-semibold'
+                : 'text-[#5D4037] font-medium hover:text-[#3E2723]'
             }`}
           >
+            {currentView === 'attendee' && (
+              <motion.div
+                layoutId="role-switcher-active"
+                className="absolute inset-0 bg-[#FCFBF8] rounded-md shadow-sm ring-1 ring-black/[0.04] -z-10"
+                transition={springs.tactile}
+              />
+            )}
             Attendee View
           </button>
         </div>
@@ -188,36 +184,44 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
-            {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#FCFBF8]/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-4 z-50 animate-slide-down">
-                <div className="flex items-center justify-between pb-3 border-b border-[#D4C4A8]">
-                  <span className="font-semibold text-sm text-[#3E2723]">Notifications</span>
-                  <span className="text-xs bg-[#F0E6D2] text-[#8B4513] px-2 py-0.5 rounded-full font-medium">
-                    {actualUnreadCount} unread
-                  </span>
-                </div>
-                <div className="divide-y divide-[#D4C4A8] max-h-72 overflow-y-auto">
-                  {notifications.map((n) => (
-                    <div key={n.id} className="py-2.5 flex items-start gap-3 hover:bg-[#F4EFE6] px-1 rounded-lg">
-                      <span className="w-2 h-2 rounded-full bg-[#C28B46] mt-1.5 shrink-0"></span>
-                      <div className="flex flex-col text-left">
-                        <span className="text-xs font-semibold text-[#3E2723]">{n.title}</span>
-                        <span className="text-xs text-[#5D4037] leading-relaxed">{n.desc}</span>
-                        <span className="text-[11px] text-[#8D6E63] mt-1 font-mono">{n.time}</span>
+            <AnimatePresence>
+              {showNotifications && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                  transition={springs.tactile}
+                  className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#FCFBF8]/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-4 z-50 origin-top-right"
+                >
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C4A8]">
+                    <span className="font-semibold text-sm text-[#3E2723]">Notifications</span>
+                    <span className="text-xs bg-[#F0E6D2] text-[#8B4513] px-2 py-0.5 rounded-full font-medium">
+                      {actualUnreadCount} unread
+                    </span>
+                  </div>
+                  <div className="divide-y divide-[#D4C4A8] max-h-72 overflow-y-auto">
+                    {notifications.map((n) => (
+                      <div key={n.id} className="py-2.5 flex items-start gap-3 hover:bg-[#F4EFE6] px-1 rounded-lg">
+                        <span className="w-2 h-2 rounded-full bg-[#C28B46] mt-1.5 shrink-0"></span>
+                        <div className="flex flex-col text-left">
+                          <span className="text-xs font-semibold text-[#3E2723]">{n.title}</span>
+                          <span className="text-xs text-[#5D4037] leading-relaxed">{n.desc}</span>
+                          <span className="text-[11px] text-[#8D6E63] mt-1 font-mono">{n.time}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="pt-2 border-t border-[#D4C4A8] text-center">
-                  <button
-                    onClick={() => setShowNotifications(false)}
-                    className="text-xs text-[#8B4513] font-medium hover:underline"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            )}
+                    ))}
+                  </div>
+                  <div className="pt-2 border-t border-[#D4C4A8] text-center">
+                    <button
+                      onClick={() => setShowNotifications(false)}
+                      className="text-xs text-[#8B4513] font-medium hover:underline"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="h-6 w-px bg-[#D4C4A8] hidden sm:block"></div>
@@ -242,51 +246,59 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
             </button>
 
-            {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-56 bg-[#FCFBF8]/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-2 z-50 text-left animate-slide-down">
-                <div className="px-3 py-2 border-b border-[#D4C4A8] mb-1">
-                  <div className="font-semibold text-xs text-[#3E2723]">
-                    {currentView === 'attendee' ? 'Alex Morgan' : 'Arjun Mehta'}
+            <AnimatePresence>
+              {showUserMenu && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                  transition={springs.tactile}
+                  className="absolute right-0 mt-2 w-56 bg-[#FCFBF8]/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-2 z-50 text-left origin-top-right"
+                >
+                  <div className="px-3 py-2 border-b border-[#D4C4A8] mb-1">
+                    <div className="font-semibold text-xs text-[#3E2723]">
+                      {currentView === 'attendee' ? 'Alex Morgan' : 'Arjun Mehta'}
+                    </div>
+                    <div className="text-[11px] text-[#5D4037] truncate">
+                      {currentView === 'attendee'
+                        ? 'alex.morgan@finscale.com'
+                        : 'arjun@chronicle.app'}
+                    </div>
                   </div>
-                  <div className="text-[11px] text-[#5D4037] truncate">
-                    {currentView === 'attendee'
-                      ? 'alex.morgan@finscale.com'
-                      : 'arjun@chronicle.app'}
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    setShowUserMenu(false);
-                    onOpenSettings?.();
-                  }}
-                  className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#3E2723] hover:bg-[#E9DCC9] flex items-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-[16px] text-[#5D4037]">tune</span>
-                  Workspace Settings
-                </button>
-                <button
-                  onClick={() => {
-                    setShowUserMenu(false);
-                    onOpenHelp();
-                  }}
-                  className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#3E2723] hover:bg-[#E9DCC9] flex items-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-[16px] text-[#5D4037]">menu_book</span>
-                  Platform Guide
-                </button>
-                <div className="border-t border-[#D4C4A8] my-1"></div>
-                <button
-                  onClick={() => {
-                    setShowUserMenu(false);
-                    onSwitchView(currentView === 'organizer' ? 'attendee' : 'organizer');
-                  }}
-                  className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#8B4513] font-medium hover:bg-[#F0E6D2] flex items-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-[16px]">sync_alt</span>
-                  Switch to {currentView === 'organizer' ? 'Attendee View' : 'Organizer Workspace'}
-                </button>
-              </div>
-            )}
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      onOpenSettings?.();
+                    }}
+                    className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#3E2723] hover:bg-[#E9DCC9] flex items-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-[16px] text-[#5D4037]">tune</span>
+                    Workspace Settings
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      onOpenHelp();
+                    }}
+                    className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#3E2723] hover:bg-[#E9DCC9] flex items-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-[16px] text-[#5D4037]">menu_book</span>
+                    Platform Guide
+                  </button>
+                  <div className="border-t border-[#D4C4A8] my-1"></div>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      onSwitchView(currentView === 'organizer' ? 'attendee' : 'organizer');
+                    }}
+                    className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-[#8B4513] font-medium hover:bg-[#F0E6D2] flex items-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">sync_alt</span>
+                    Switch to {currentView === 'organizer' ? 'Attendee View' : 'Organizer Workspace'}
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Button */}
@@ -302,56 +314,41 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Mobile Nav Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FCFBF8] border-b border-[#D4C4A8] px-4 py-3 space-y-2 shadow-lg animate-in slide-in-from-top duration-150">
-          <nav className="flex flex-col gap-1">
-            <button
-              onClick={() => {
-                onNavigate('overview');
-                setMobileMenuOpen(false);
-              }}
-              className={`text-left px-3 py-2 rounded-lg text-sm ${
-                activeNav === 'overview' ? 'bg-[#F0E6D2] text-[#8B4513] font-semibold' : 'text-[#5D4037]'
-              }`}
-            >
-              Overview
-            </button>
-            <button
-              onClick={() => {
-                onNavigate('events');
-                setMobileMenuOpen(false);
-              }}
-              className={`text-left px-3 py-2 rounded-lg text-sm ${
-                activeNav === 'events' ? 'bg-[#F0E6D2] text-[#8B4513] font-semibold' : 'text-[#5D4037]'
-              }`}
-            >
-              Events
-            </button>
-            <button
-              onClick={() => {
-                onNavigate('attendees');
-                setMobileMenuOpen(false);
-              }}
-              className={`text-left px-3 py-2 rounded-lg text-sm ${
-                activeNav === 'attendees' ? 'bg-[#F0E6D2] text-[#8B4513] font-semibold' : 'text-[#5D4037]'
-              }`}
-            >
-              Attendees
-            </button>
-            <button
-              onClick={() => {
-                onNavigate('analytics');
-                setMobileMenuOpen(false);
-              }}
-              className={`text-left px-3 py-2 rounded-lg text-sm ${
-                activeNav === 'analytics' ? 'bg-[#F0E6D2] text-[#8B4513] font-semibold' : 'text-[#5D4037]'
-              }`}
-            >
-              Analytics
-            </button>
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: easings.smooth }}
+            className="lg:hidden bg-[#FCFBF8] border-b border-[#D4C4A8] shadow-lg overflow-hidden"
+          >
+            <nav className="flex flex-col gap-1 px-4 py-3">
+              {['overview', 'events', 'attendees', 'analytics'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => {
+                    onNavigate(tab as any);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-left px-3 py-2 rounded-lg text-sm relative z-10 capitalize ${
+                    activeNav === tab ? 'text-[#8B4513] font-semibold' : 'text-[#5D4037]'
+                  }`}
+                >
+                  {activeNav === tab && (
+                    <motion.div
+                      layoutId="mobile-nav-active"
+                      className="absolute inset-0 bg-[#F0E6D2] rounded-lg -z-10"
+                      transition={springs.fluid}
+                    />
+                  )}
+                  {tab}
+                </button>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

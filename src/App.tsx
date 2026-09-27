@@ -12,6 +12,8 @@ import { HelpTourModal } from './components/modals/HelpTourModal';
 import { ViewPostModal } from './components/modals/ViewPostModal';
 import { SettingsModal } from './components/modals/SettingsModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { AnimatePresence } from 'motion/react';
+import { MotionPage } from './components/motion/MotionPage';
 
 const LOCAL_STORAGE_KEY = 'chronicle_events_data_v1';
 
@@ -180,12 +182,12 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 w-full pt-24 pb-16 px-4 sm:px-6 lg:px-8 animate-fade-in">
-        <div className="max-w-[1200px] mx-auto">
-          {/* ORGANIZER VIEW */}
-          {currentView === 'organizer' && (
-            <>
-              {organizerSubView === 'dashboard' && (
+      <main className="flex-1 w-full pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1200px] mx-auto relative">
+          <AnimatePresence mode="wait">
+            {/* ORGANIZER VIEW */}
+            {currentView === 'organizer' && organizerSubView === 'dashboard' && (
+              <MotionPage id="organizer-dashboard">
                 <OrganizerDashboard
                   events={events}
                   onSelectEvent={handleSelectEvent}
@@ -195,18 +197,22 @@ export default function App() {
                   onOpenSettings={() => setShowSettings(true)}
                   onViewFeedPost={(post) => setInspectedFeedPost(post)}
                 />
-              )}
+              </MotionPage>
+            )}
 
-              {organizerSubView === 'create' && (
+            {currentView === 'organizer' && organizerSubView === 'create' && (
+              <MotionPage id="organizer-create">
                 <CreateEventFlow
                   initialEvent={editingEvent}
                   onCancel={() => setOrganizerSubView('dashboard')}
                   onPublishSuccess={handlePublishSuccess}
                   onOpenAttendeePortal={handleOpenAttendeePortal}
                 />
-              )}
+              </MotionPage>
+            )}
 
-              {organizerSubView === 'overview' && (
+            {currentView === 'organizer' && organizerSubView === 'overview' && (
+              <MotionPage id="organizer-overview">
                 <EventOverviewAnalytics
                   event={selectedEvent}
                   onBackToEvents={() => setOrganizerSubView('dashboard')}
@@ -214,21 +220,23 @@ export default function App() {
                   onOpenAttendeePortal={handleOpenAttendeePortal}
                   onCopyLink={handleCopyLink}
                 />
-              )}
-            </>
-          )}
+              </MotionPage>
+            )}
 
-          {/* ATTENDEE VIEW */}
-          {currentView === 'attendee' && (
-            <AttendeePortal
-              event={selectedEvent}
-              onBackToDashboard={() => {
-                setCurrentView('organizer');
-                setOrganizerSubView('dashboard');
-              }}
-              onCopyText={(msg) => showToastNotification('Success', msg)}
-            />
-          )}
+            {/* ATTENDEE VIEW */}
+            {currentView === 'attendee' && (
+              <MotionPage id="attendee-portal">
+                <AttendeePortal
+                  event={selectedEvent}
+                  onBackToDashboard={() => {
+                    setCurrentView('organizer');
+                    setOrganizerSubView('dashboard');
+                  }}
+                  onCopyText={(msg) => showToastNotification('Success', msg)}
+                />
+              </MotionPage>
+            )}
+          </AnimatePresence>
         </div>
       </main>
 
