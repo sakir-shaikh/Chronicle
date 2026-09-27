@@ -7,21 +7,24 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="w-full bg-white border-t border-[#E3E9E4] mt-auto">
-      <div className="max-w-[1360px] mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#68766F]">
+    <footer className="w-full bg-transparent mt-auto pb-8 pt-4">
+      <div className="max-w-[1360px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-text-muted">
         <div className="flex items-center gap-2">
-          <span>© {new Date().getFullYear()} Chronicle Intelligence &amp; Storytelling Platform. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Chronicle Intelligence &amp; Storytelling Platform</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 font-medium">
           <a
             href="#system-status"
             onClick={(e) => {
               e.preventDefault();
               alert('Chronicle Operational Systems: 99.98% Uptime. NLP Story Engine: Healthy.');
             }}
-            className="hover:text-[#20302A] transition-colors flex items-center gap-1.5"
+            className="hover:text-text-primary transition-colors flex items-center gap-2 group"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#7BAE8A]"></span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-sage opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-sage"></span>
+            </span>
             System Status
           </a>
           <a
@@ -30,7 +33,7 @@ export const Footer: React.FC<FooterProps> = () => {
               e.preventDefault();
               alert('Chronicle GraphQL & REST API v2 Docs: Webhook feeds & Event badge sync available.');
             }}
-            className="hover:text-[#20302A] transition-colors"
+            className="hover:text-text-primary transition-colors"
           >
             API Docs
           </a>
@@ -40,7 +43,7 @@ export const Footer: React.FC<FooterProps> = () => {
               e.preventDefault();
               alert('Chronicle Privacy Policy: Enterprise GDPR & SOC2 Type II compliant attendee credentials.');
             }}
-            className="hover:text-[#20302A] transition-colors"
+            className="hover:text-text-primary transition-colors"
           >
             Privacy Policy
           </a>

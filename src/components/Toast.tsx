@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export interface ToastProps {
   show: boolean;
@@ -8,23 +8,34 @@ export interface ToastProps {
 }
 
 export const Toast: React.FC<ToastProps> = ({ show, title, message, onClose }) => {
-  if (!show) return null;
+  const [render, setRender] = useState(show);
+
+  useEffect(() => {
+    if (show) setRender(true);
+  }, [show]);
+
+  const handleAnimationEnd = () => {
+    if (!show) setRender(false);
+  };
+
+  if (!render) return null;
 
   return (
     <div 
-      className="fixed bottom-6 right-6 z-50 transition-all duration-300 transform translate-y-0 opacity-100 max-w-sm w-full"
+      className={`fixed bottom-6 right-6 z-50 max-w-sm w-full ${show ? 'animate-toast-enter' : 'animate-toast-exit'}`}
       role="alert"
       aria-live="assertive"
+      onAnimationEnd={handleAnimationEnd}
     >
-      <div className="bg-[#20302A] text-white px-4 py-3.5 rounded-xl shadow-xl flex items-center justify-between gap-3 border border-[#315C49]/60 backdrop-blur-md">
+      <div className="bg-white/90 text-text-primary px-4 py-3.5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between gap-3 border border-border-subtle/80 backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#315C49]/80 flex items-center justify-center text-[#7BAE8A] shrink-0 border border-[#7BAE8A]/30">
-            <span className="material-symbols-outlined text-[20px]">check_circle</span>
+          <div className="w-8 h-8 rounded-full bg-brand-light-mint flex items-center justify-center text-brand-dark shrink-0">
+            <span className="material-symbols-outlined text-[18px]">check_circle</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-sm text-white">{title}</span>
+            <span className="font-semibold text-sm font-display tracking-tight text-text-primary">{title}</span>
             {message && (
-              <span className="text-xs text-[#DCEFE4]/90 font-mono truncate max-w-[220px]">
+              <span className="text-[13px] text-text-secondary truncate max-w-[220px]">
                 {message}
               </span>
             )}
@@ -32,7 +43,7 @@ export const Toast: React.FC<ToastProps> = ({ show, title, message, onClose }) =
         </div>
         <button
           onClick={onClose}
-          className="text-[#9AA69F] hover:text-white p-1 rounded-md transition-colors"
+          className="text-text-muted hover:text-text-primary p-1.5 rounded-lg hover:bg-black/[0.04] transition-colors"
           type="button"
           aria-label="Close notification"
         >

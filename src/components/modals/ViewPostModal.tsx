@@ -24,10 +24,10 @@ export const ViewPostModal: React.FC<ViewPostModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-md flex items-center justify-center p-4 transition-all"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-[#E3E9E4] relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+      <div className="bg-white rounded-3xl max-w-xl w-full p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] ring-1 ring-black/5 relative animate-in fade-in zoom-in-95 duration-300 max-h-[90vh] flex flex-col">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-3 border-b border-[#E3E9E4]">
           <div className="flex items-center gap-2">

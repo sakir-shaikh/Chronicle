@@ -235,14 +235,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
   return (
     <div className="w-full flex flex-col gap-8 pb-16 font-sans">
       {/* Top Event Hero Banner */}
-      <div className="relative w-full rounded-2xl overflow-hidden shadow-sm bg-[#1E2522] border border-[#E3E9E4]">
+      <div className="relative w-full rounded-[32px] overflow-hidden shadow-lg bg-[#1E2522] border border-[#E3E9E4] mb-4">
         <div
-          className="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-40 scale-105 transition-transform duration-700 hover:scale-100"
+          className="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-40 scale-105 transition-transform duration-1000 hover:scale-100"
           style={{ backgroundImage: `url(${event.coverImage})` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#17201C] via-[#17201C]/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#17201C] via-[#17201C]/60 to-transparent"></div>
 
-        <div className="relative z-10 px-6 sm:px-8 py-8 sm:py-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="relative z-10 px-8 sm:px-12 py-12 sm:py-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-3 max-w-2xl text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DCEFE4] text-[#315C49] border border-[#BBEAD1] shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#315C49] animate-pulse"></span>
@@ -361,7 +361,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
         {/* LEFT COLUMN: Inputs & Personalization (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6 text-left">
           {/* Photos Upload Section */}
-          <div className="bg-white border border-[#E3E9E4] p-6 rounded-2xl shadow-xs space-y-4">
+          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[20px] text-[#315C49]">photo_library</span>
@@ -403,7 +403,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               {uploadedPhotos.length < 6 && (
                 <button
                   onClick={() => setShowPhotoPicker(true)}
-                  className="h-24 rounded-xl bg-[#FAFBF8] border-2 border-dashed border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] flex flex-col items-center justify-center gap-1 text-[#68766F] hover:text-[#315C49] transition-all cursor-pointer"
+                  className="h-24 rounded-2xl bg-white shadow-sm border-2 border-dashed border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] flex flex-col items-center justify-center gap-1 text-[#68766F] hover:text-[#315C49] transition-all cursor-pointer"
                   type="button"
                 >
                   <span className="material-symbols-outlined text-[22px] text-[#7BAE8A]">add_a_photo</span>
@@ -440,7 +440,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           </div>
 
           {/* Key Takeaways Section */}
-          <div className="bg-white border border-[#E3E9E4] p-6 rounded-2xl shadow-xs space-y-3">
+          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="takeaways"
@@ -459,12 +459,12 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
             <div className="relative">
               <textarea
                 id="takeaways"
-                rows={4}
+                rows={5}
                 value={takeaways}
                 onChange={(e) => setTakeaways(e.target.value)}
                 maxLength={500}
                 placeholder="Share an idea, insight, quote, lesson, or moment that stayed with you..."
-                className="w-full p-3.5 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl text-[#20302A] text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#7BAE8A]/40 transition-all resize-none leading-relaxed"
+                className="w-full p-5 bg-[#FAFBF8] border-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-2xl text-[#20302A] text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7BAE8A]/50 transition-all resize-none leading-relaxed placeholder:text-[#9AA69F]"
               />
               <div className="text-right text-[10px] text-[#9AA69F] mt-0.5 font-mono">
                 {takeaways.length} / 500 chars
@@ -524,7 +524,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           </div>
 
           {/* Tone & Perspective Selector */}
-          <div className="bg-white border border-[#E3E9E4] p-6 rounded-2xl shadow-xs space-y-3">
+          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <label
               className="text-base font-semibold text-[#20302A] flex items-center gap-2"
               style={{ fontFamily: 'Geist, sans-serif' }}
@@ -538,10 +538,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedTone('professional')}
-                className={`p-3.5 rounded-xl border text-left flex items-start justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'professional'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-xs'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8]'
+                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
@@ -559,10 +559,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedTone('grateful')}
-                className={`p-3.5 rounded-xl border text-left flex items-start justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'grateful'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-xs'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8]'
+                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
@@ -580,10 +580,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedTone('takeaways')}
-                className={`p-3.5 rounded-xl border text-left flex items-start justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'takeaways'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-xs'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8]'
+                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
@@ -601,10 +601,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedTone('thought-leader')}
-                className={`p-3.5 rounded-xl border text-left flex items-start justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'thought-leader'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-xs'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8]'
+                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
@@ -621,7 +621,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           </div>
 
           {/* Advanced Personalization (Collapsible) */}
-          <div className="bg-white border border-[#E3E9E4] rounded-2xl shadow-xs overflow-hidden">
+          <div className="bg-white border border-[#E3E9E4] rounded-[32px] shadow-sm overflow-hidden hover:shadow-md transition-shadow">
             <button
               type="button"
               onClick={() => setShowAdvanced(!showAdvanced)}
@@ -718,16 +718,16 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               className="w-full py-3.5 px-6 rounded-2xl bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-base font-semibold shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 transition-all transform active:scale-98 disabled:opacity-80 cursor-pointer"
             >
               {isGenerating ? (
-                <>
-                  <span className="material-symbols-outlined text-[20px] animate-spin text-[#DCEFE4]">
+                <div className="flex items-center gap-3 animate-pulse">
+                  <span className="material-symbols-outlined text-[24px] text-[#DCEFE4] animate-spin">
                     progress_activity
                   </span>
-                  <span>{generationStepText}</span>
-                </>
+                  <span className="text-white font-medium tracking-wide">{generationStepText}</span>
+                </div>
               ) : (
                 <>
                   <span className="material-symbols-outlined text-[22px] text-[#DCEFE4]">auto_awesome</span>
-                  <span>✦ Generate LinkedIn Post</span>
+                  <span>Generate LinkedIn Post</span>
                 </>
               )}
             </button>
@@ -740,7 +740,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
         {/* RIGHT COLUMN: Live LinkedIn Post Preview (7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-5 sticky top-20 text-left">
           {/* Post Preview Card */}
-          <div className="bg-white border border-[#E3E9E4] rounded-2xl shadow-xs overflow-hidden transition-all duration-300">
+          <div className="bg-white border border-[#E3E9E4] rounded-[32px] shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
             {/* Header Status Strip */}
             <div className="px-6 py-3 bg-[#FAFBF8] border-b border-[#E3E9E4] flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -988,7 +988,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           )}
 
           {/* Action Bar below Card */}
-          <div className="bg-white border border-[#E3E9E4] p-4 rounded-2xl shadow-xs space-y-3">
+          <div className="bg-white border border-[#E3E9E4] p-6 rounded-[32px] shadow-sm space-y-4 hover:shadow-md transition-shadow">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <button

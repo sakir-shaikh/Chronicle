@@ -185,115 +185,37 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
   };
 
   return (
-    <div className="w-full pb-16">
-      {/* Stepper Top Bar */}
-      <div className="w-full bg-white border border-[#E3E9E4] rounded-2xl shadow-xs px-6 py-4 mb-8">
-        <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-4 sm:gap-6">
-          {/* Step 1 */}
-          <button
-            onClick={() => setStep(1)}
-            className="flex items-center gap-3 cursor-pointer group flex-shrink-0 text-left"
-            type="button"
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-xs ${
-                step > 1
-                  ? 'bg-[#315C49] text-white'
-                  : step === 1
-                  ? 'bg-[#7BAE8A] text-white ring-4 ring-[#DCEFE4]'
-                  : 'bg-[#F3F4F1] text-[#9AA69F]'
-              }`}
-            >
-              {step > 1 ? <span className="material-symbols-outlined text-[16px]">check</span> : '01'}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider text-[#9AA69F] font-semibold">Step 01</span>
-              <span className={`text-xs font-semibold ${step >= 1 ? 'text-[#20302A]' : 'text-[#68766F]'}`}>
-                Event Details
-              </span>
-            </div>
-          </button>
-
-          <div className="h-0.5 w-8 sm:w-12 bg-[#E3E9E4] flex-shrink-0"></div>
-
-          {/* Step 2 */}
-          <button
-            onClick={() => setStep(2)}
-            className="flex items-center gap-3 cursor-pointer group flex-shrink-0 text-left"
-            type="button"
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-xs ${
-                step > 2
-                  ? 'bg-[#315C49] text-white'
-                  : step === 2
-                  ? 'bg-[#7BAE8A] text-white ring-4 ring-[#DCEFE4]'
-                  : 'bg-[#F3F4F1] text-[#9AA69F]'
-              }`}
-            >
-              {step > 2 ? <span className="material-symbols-outlined text-[16px]">check</span> : '02'}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider text-[#9AA69F] font-semibold">Step 02</span>
-              <span className={`text-xs font-semibold ${step >= 2 ? 'text-[#20302A]' : 'text-[#68766F]'}`}>
-                Branding &amp; Social
-              </span>
-            </div>
-          </button>
-
-          <div className="h-0.5 w-8 sm:w-12 bg-[#E3E9E4] flex-shrink-0"></div>
-
-          {/* Step 3 */}
-          <button
-            onClick={() => setStep(3)}
-            className="flex items-center gap-3 cursor-pointer group flex-shrink-0 text-left"
-            type="button"
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-xs ${
-                step > 3
-                  ? 'bg-[#315C49] text-white'
-                  : step === 3
-                  ? 'bg-[#7BAE8A] text-white ring-4 ring-[#DCEFE4]'
-                  : 'bg-[#F3F4F1] text-[#9AA69F]'
-              }`}
-            >
-              {step > 3 ? <span className="material-symbols-outlined text-[16px]">check</span> : '03'}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider text-[#9AA69F] font-semibold">Step 03</span>
-              <span className={`text-xs font-semibold ${step >= 3 ? 'text-[#20302A]' : 'text-[#68766F]'}`}>
-                Attendee Experience
-              </span>
-            </div>
-          </button>
-
-          <div className="h-0.5 w-8 sm:w-12 bg-[#E3E9E4] flex-shrink-0"></div>
-
-          {/* Step 4 */}
-          <button
-            onClick={() => setStep(4)}
-            className="flex items-center gap-3 cursor-pointer group flex-shrink-0 text-left"
-            type="button"
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-xs ${
-                step >= 4
-                  ? 'bg-[#7BAE8A] text-white ring-4 ring-[#DCEFE4]'
-                  : 'bg-[#F3F4F1] text-[#9AA69F]'
-              }`}
-            >
-              04
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider text-[#9AA69F] font-semibold">Step 04</span>
-              <span className={`text-xs font-semibold ${step >= 4 ? 'text-[#20302A]' : 'text-[#68766F]'}`}>
-                Review &amp; Publish
-              </span>
-            </div>
-          </button>
+    <div className="w-full max-w-4xl mx-auto pb-24 pt-6">
+      {/* Minimal Stepper */}
+      {step !== 5 && (
+        <div className="w-full flex justify-center mb-10">
+          <div className="flex items-center gap-2 sm:gap-4">
+            {[1, 2, 3, 4].map((s) => (
+              <React.Fragment key={s}>
+                <div
+                  onClick={() => setStep(s as any)}
+                  className={`cursor-pointer flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+                    step === s
+                      ? 'bg-[#20302A] text-white ring-4 ring-[#F3F4F1]'
+                      : step > s
+                      ? 'bg-[#7BAE8A] text-white'
+                      : 'bg-[#F3F4F1] text-[#9AA69F] hover:bg-[#E3E9E4]'
+                  }`}
+                >
+                  {step > s ? <span className="material-symbols-outlined text-[16px]">check</span> : s}
+                </div>
+                {s < 4 && (
+                  <div
+                    className={`w-8 sm:w-16 h-px transition-colors ${
+                      step > s ? 'bg-[#7BAE8A]' : 'bg-[#E3E9E4]'
+                    }`}
+                  ></div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Step 5: Publish Success Screen */}
       {step === 5 && publishedEvent && (

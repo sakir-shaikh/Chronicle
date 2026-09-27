@@ -60,10 +60,10 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col gap-8 pb-12">
+    <div className="w-full flex flex-col gap-10 pb-12">
       {/* Top Breadcrumb & Indicator */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <nav className="flex items-center gap-2 text-xs text-[#68766F]">
+        <nav className="flex items-center gap-2 text-sm text-[#68766F]">
           <button
             onClick={onBackToEvents}
             className="hover:text-[#20302A] transition-colors font-medium"
@@ -74,220 +74,154 @@ export const EventOverviewAnalytics: React.FC<EventOverviewAnalyticsProps> = ({
           <span className="text-[#20302A] font-semibold">{event.title}</span>
         </nav>
 
-        <div className="flex items-center gap-2 self-start md:self-auto">
-          <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#F3F4F1] text-[#68766F] font-medium border border-[#E3E9E4]">
-            EVENT-ID: {event.id}
-          </span>
-          <span className="text-[11px] text-[#68766F] flex items-center gap-1.5 bg-[#F3F4F1] border border-[#E3E9E4] px-2.5 py-1 rounded">
-            <span className="w-2 h-2 rounded-full bg-[#7BAE8A] animate-pulse"></span> System Synchronized
+        <div className="flex items-center gap-3 self-start md:self-auto">
+          <span className="text-[11px] font-mono text-[#9AA69F]">ID: {event.id}</span>
+          <div className="w-1 h-1 rounded-full bg-[#E3E9E4]"></div>
+          <span className="text-[11px] text-[#68766F] flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#7BAE8A] animate-pulse"></span> Syncing
           </span>
         </div>
       </div>
 
-      {/* Event Header Section with Dynamic Actions */}
-      <section className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-[#E3E9E4] flex flex-col xl:flex-row xl:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="flex flex-col gap-3 relative z-10">
-          <div className="flex flex-wrap items-center gap-3">
-            <h1
-              className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight"
-              style={{ fontFamily: 'Geist, sans-serif' }}
-            >
-              {event.title}
-            </h1>
-            <div className="flex items-center text-[#7BAE8A]" title="Verified Chronicle Organizer">
-              <span className="material-symbols-outlined text-[22px]">verified</span>
-            </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DCEFE4] text-[#315C49] text-xs font-semibold">
-              <span className="relative flex h-2 w-2">
+      {/* Event Header Section - Editorial Style */}
+      <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-[#E3E9E4] pb-8">
+        <div className="flex flex-col gap-4 max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#EEF7F1] text-[#315C49] text-[11px] font-medium tracking-wide uppercase">
+              <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#315C49] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#315C49]"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#315C49]"></span>
               </span>
-              Live
+              Live Event
             </span>
+            <div className="flex items-center text-[#7BAE8A]" title="Verified Chronicle Organizer">
+              <span className="material-symbols-outlined text-[18px]">verified</span>
+            </div>
           </div>
+          
+          <h1
+            className="text-4xl sm:text-5xl font-medium text-[#20302A] tracking-tight leading-tight"
+            style={{ fontFamily: 'Geist, sans-serif' }}
+          >
+            {event.title}
+          </h1>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-[#68766F]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#68766F] mt-2">
             <span className="flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-[16px] text-[#9AA69F]">calendar_today</span>
+              <span className="material-symbols-outlined text-[18px]">calendar_today</span>
               {event.date}
             </span>
-            <span className="text-[#9AA69F]">·</span>
             <span className="flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-[16px] text-[#9AA69F]">location_on</span>
+              <span className="material-symbols-outlined text-[18px]">location_on</span>
               {event.cityCountry}
             </span>
-            <span className="text-[#9AA69F]">·</span>
             <span className="flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-[16px] text-[#9AA69F]">corporate_fare</span>
-              Hosted by {event.organizer}
+              <span className="material-symbols-outlined text-[18px]">corporate_fare</span>
+              {event.organizer}
             </span>
           </div>
         </div>
 
-        {/* Action Buttons Bar */}
-        <div className="flex flex-wrap items-center gap-2.5 relative z-10">
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => onOpenAttendeePortal(event)}
             type="button"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white border border-[#E3E9E4] text-[#315C49] hover:bg-[#EEF7F1] transition-all text-xs font-semibold shadow-xs"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#FAFBF8] border border-[#E3E9E4] text-[#20302A] hover:bg-[#F3F4F1] transition-all"
+            title="Open Attendee View"
           >
-            <span>Open Attendee View</span>
-            <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+            <span className="material-symbols-outlined text-[18px]">open_in_new</span>
           </button>
-
           <button
             onClick={handleCopy}
             type="button"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white border border-[#E3E9E4] text-[#315C49] hover:bg-[#EEF7F1] transition-all text-xs font-semibold shadow-xs"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#FAFBF8] border border-[#E3E9E4] text-[#20302A] hover:bg-[#F3F4F1] transition-all"
+            title="Copy Link"
           >
-            <span className="material-symbols-outlined text-[16px] text-[#7BAE8A]">
-              {copiedLink ? 'check' : 'content_copy'}
-            </span>
-            <span>{copiedLink ? 'Link Copied!' : 'Copy Link'}</span>
-            <span className="font-mono text-[#9AA69F] text-[11px] hidden sm:inline max-w-[120px] truncate">
-              {event.slug}
+            <span className="material-symbols-outlined text-[18px]">
+              {copiedLink ? 'check' : 'link'}
             </span>
           </button>
-
           <button
             onClick={() => onEditEvent(event)}
             type="button"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white border border-[#E3E9E4] text-[#315C49] hover:bg-[#EEF7F1] transition-all text-xs font-semibold shadow-xs"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#FAFBF8] border border-[#E3E9E4] text-[#20302A] hover:bg-[#F3F4F1] transition-all"
+            title="Edit Event"
           >
-            <span className="material-symbols-outlined text-[16px] text-[#68766F]">edit</span>
-            <span>Edit Event</span>
+            <span className="material-symbols-outlined text-[18px]">edit</span>
           </button>
-
           <button
             onClick={() => setShowQR(true)}
             type="button"
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#7BAE8A] text-white hover:bg-[#6da07c] transition-all text-xs font-semibold shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#20302A] text-white hover:bg-[#315C49] transition-all text-sm font-medium ml-2"
           >
-            <span className="material-symbols-outlined text-[16px]">qr_code_2</span>
-            <span>Share QR Code</span>
+            <span className="material-symbols-outlined text-[18px]">qr_code_2</span>
+            Share QR
           </button>
         </div>
       </section>
 
-      {/* Metric Analytics Strip (5 Cards) */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        {/* Card 1: Total Attendees */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E3E9E4] shadow-xs flex flex-col justify-between gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#68766F]">Total Attendees</span>
-            <div className="w-8 h-8 rounded-xl bg-[#DCEFE4] flex items-center justify-center text-[#315C49]">
-              <span className="material-symbols-outlined text-[18px]">group</span>
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight tabular-nums"
-              style={{ fontFamily: 'Geist, sans-serif' }}
-            >
+      {/* Metric Analytics - Elegant Borderless Layout */}
+      <section className="grid grid-cols-2 md:grid-cols-5 gap-8 py-4">
+        {/* Metric 1 */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Total Attendees</span>
+          <div className="flex items-end gap-3">
+            <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
               {event.stats.attendees}
-            </div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className="inline-flex items-center text-[10px] text-[#315C49] font-bold bg-[#EEF7F1] px-1.5 py-0.5 rounded">
-                <span className="material-symbols-outlined text-[12px]">arrow_upward</span> +18 today
-              </span>
-              <span className="text-[11px] text-[#9AA69F]">vs yesterday</span>
-            </div>
+            </span>
+            <span className="text-xs text-[#7BAE8A] font-medium mb-1 flex items-center">
+              <span className="material-symbols-outlined text-[14px]">north_east</span> 18
+            </span>
           </div>
         </div>
 
-        {/* Card 2: Posts Generated */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E3E9E4] shadow-xs flex flex-col justify-between gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#68766F]">Posts Generated</span>
-            <div className="w-8 h-8 rounded-xl bg-[#DCEFE4] flex items-center justify-center text-[#315C49]">
-              <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight tabular-nums"
-              style={{ fontFamily: 'Geist, sans-serif' }}
-            >
+        {/* Metric 2 */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Posts Generated</span>
+          <div className="flex items-end gap-3">
+            <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
               {event.stats.postsGenerated}
-            </div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className="inline-flex items-center text-[10px] text-[#315C49] font-bold bg-[#EEF7F1] px-1.5 py-0.5 rounded">
-                <span className="material-symbols-outlined text-[12px]">arrow_upward</span> +34 today
-              </span>
-              <span className="text-[11px] text-[#9AA69F]">87% ready</span>
-            </div>
+            </span>
+            <span className="text-xs text-[#7BAE8A] font-medium mb-1 flex items-center">
+              <span className="material-symbols-outlined text-[14px]">north_east</span> 34
+            </span>
           </div>
         </div>
 
-        {/* Card 3: Photos Uploaded */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E3E9E4] shadow-xs flex flex-col justify-between gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#68766F]">Photos Uploaded</span>
-            <div className="w-8 h-8 rounded-xl bg-[#DCEFE4] flex items-center justify-center text-[#315C49]">
-              <span className="material-symbols-outlined text-[18px]">photo_camera</span>
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight tabular-nums"
-              style={{ fontFamily: 'Geist, sans-serif' }}
-            >
+        {/* Metric 3 */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Photos</span>
+          <div className="flex items-end gap-3">
+            <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
               {event.stats.photosUploaded}
-            </div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className="text-xs text-[#68766F] font-semibold">Avg 2.4</span>
-              <span className="text-[11px] text-[#9AA69F]">per attendee</span>
-            </div>
+            </span>
+            <span className="text-xs text-[#9AA69F] mb-1">~2.4/user</span>
           </div>
         </div>
 
-        {/* Card 4: LinkedIn Opens */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E3E9E4] shadow-xs flex flex-col justify-between gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#68766F]">LinkedIn Opens</span>
-            <div className="w-8 h-8 rounded-xl bg-[#DCEFE4] flex items-center justify-center text-[#315C49] font-bold text-xs">
-              in
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight tabular-nums"
-              style={{ fontFamily: 'Geist, sans-serif' }}
-            >
+        {/* Metric 4 */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">LinkedIn Opens</span>
+          <div className="flex items-end gap-3">
+            <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
               {event.stats.linkedinOpens}
-            </div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className="text-[10px] text-[#315C49] font-semibold bg-[#EEF7F1] px-1.5 py-0.5 rounded">
-                74.5% conversion
-              </span>
-              <span className="text-[11px] text-[#9AA69F]">from drafts</span>
-            </div>
+            </span>
           </div>
         </div>
 
-        {/* Card 5: Generation Rate */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E3E9E4] shadow-xs flex flex-col justify-between gap-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#68766F]">Generation Rate</span>
-            <div className="w-8 h-8 rounded-xl bg-[#DCEFE4] flex items-center justify-center text-[#315C49]">
-              <span className="material-symbols-outlined text-[18px]">query_stats</span>
-            </div>
-          </div>
-          <div>
+        {/* Metric 5 */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[11px] font-medium text-[#68766F] uppercase tracking-wider">Generation Rate</span>
+          <div className="flex flex-col gap-2 mt-1">
             <div className="flex items-baseline justify-between">
-              <span
-                className="text-2xl sm:text-3xl font-bold text-[#20302A] tracking-tight tabular-nums"
-                style={{ fontFamily: 'Geist, sans-serif' }}
-              >
+              <span className="text-3xl font-light text-[#20302A] tracking-tight tabular-nums" style={{ fontFamily: 'Geist, sans-serif' }}>
                 {event.stats.conversionRate}%
               </span>
-              <span className="text-[10px] font-mono text-[#315C49] font-bold bg-[#EEF7F1] px-1.5 py-0.5 rounded">
-                TOP 5%
-              </span>
             </div>
-            <div className="w-full bg-[#F3F4F1] h-2 rounded-full mt-2.5 overflow-hidden">
+            <div className="w-full bg-[#E3E9E4] h-1 rounded-full overflow-hidden">
               <div
-                className="bg-[#7BAE8A] h-full rounded-full"
+                className="bg-[#315C49] h-full rounded-full"
                 style={{ width: `${event.stats.conversionRate}%` }}
               ></div>
             </div>

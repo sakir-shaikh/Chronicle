@@ -162,7 +162,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col bg-[#FAFBF8] text-[#20302A] selection:bg-[#DCEFE4] selection:text-[#315C49]">
+      <div className="min-h-screen flex flex-col bg-warm-bg text-text-primary selection:bg-brand-mint selection:text-brand-dark">
       {/* Global Header */}
       <Header
         currentView={currentView}
@@ -180,8 +180,8 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 w-full pt-20 px-4 sm:px-6">
-        <div className="max-w-[1360px] mx-auto py-6">
+      <main className="flex-1 w-full pt-24 pb-16 px-4 sm:px-6 lg:px-8 animate-fade-in">
+        <div className="max-w-[1200px] mx-auto">
           {/* ORGANIZER VIEW */}
           {currentView === 'organizer' && (
             <>

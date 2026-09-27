@@ -63,10 +63,10 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-md flex items-center justify-center p-4 transition-all"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] relative animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-3xl max-w-lg w-full p-8 sm:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] ring-1 ring-black/5 relative animate-in fade-in zoom-in-95 duration-300">
         <button
           onClick={onClose}
           className="absolute top-5 right-5 text-[#9AA69F] hover:text-[#20302A] p-1 rounded-lg"

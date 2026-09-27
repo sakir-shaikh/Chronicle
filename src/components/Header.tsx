@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
   const actualUnreadCount = notifications.filter(n => n.unread).length;
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-[#E3E9E4] z-40 transition-all">
+    <header className="fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-[#E3E9E4]/60 z-40 transition-all">
       <div className="max-w-[1360px] h-full mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
         {/* Left: Brand + Navigation */}
         <div className="flex items-center gap-6">
@@ -97,7 +97,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('overview')}
               className={`transition-colors py-1 ${
                 activeNav === 'overview'
-                  ? 'text-[#315C49] font-semibold border-b-2 border-[#7BAE8A]'
+                  ? 'text-[#20302A] font-semibold border-b-[2px] border-[#20302A]'
                   : 'text-[#68766F] hover:text-[#20302A]'
               }`}
             >
@@ -107,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('events')}
               className={`transition-colors py-1 ${
                 activeNav === 'events'
-                  ? 'text-[#315C49] font-semibold border-b-2 border-[#7BAE8A]'
+                  ? 'text-[#20302A] font-semibold border-b-[2px] border-[#20302A]'
                   : 'text-[#68766F] hover:text-[#20302A]'
               }`}
             >
@@ -117,7 +117,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('attendees')}
               className={`transition-colors py-1 ${
                 activeNav === 'attendees'
-                  ? 'text-[#315C49] font-semibold border-b-2 border-[#7BAE8A]'
+                  ? 'text-[#20302A] font-semibold border-b-[2px] border-[#20302A]'
                   : 'text-[#68766F] hover:text-[#20302A]'
               }`}
             >
@@ -127,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('analytics')}
               className={`transition-colors py-1 ${
                 activeNav === 'analytics'
-                  ? 'text-[#315C49] font-semibold border-b-2 border-[#7BAE8A]'
+                  ? 'text-[#20302A] font-semibold border-b-[2px] border-[#20302A]'
                   : 'text-[#68766F] hover:text-[#20302A]'
               }`}
             >
@@ -137,14 +137,14 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Center: Role Switcher (Organizer vs Attendee View) */}
-        <div className="flex items-center p-1 bg-[#F3F4F1] rounded-lg border border-[#E3E9E4]">
+        <div className="flex items-center p-0.5 bg-[#F3F4F1]/60 rounded-lg border border-[#E3E9E4]/50 shadow-inner">
           <button
             type="button"
             onClick={() => onSwitchView('organizer')}
-            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-all duration-200 ${
               currentView === 'organizer'
-                ? 'bg-[#DCEFE4] text-[#315C49] font-semibold shadow-xs'
-                : 'text-[#68766F] hover:text-[#20302A]'
+                ? 'bg-white text-[#20302A] font-semibold shadow-sm ring-1 ring-black/[0.04]'
+                : 'text-[#68766F] font-medium hover:text-[#20302A] hover:bg-black/[0.02]'
             }`}
           >
             Organizer
@@ -152,10 +152,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={() => onSwitchView('attendee')}
-            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-md text-xs sm:text-sm transition-all duration-200 ${
               currentView === 'attendee'
-                ? 'bg-[#DCEFE4] text-[#315C49] font-semibold shadow-xs'
-                : 'text-[#68766F] hover:text-[#20302A]'
+                ? 'bg-white text-[#20302A] font-semibold shadow-sm ring-1 ring-black/[0.04]'
+                : 'text-[#68766F] font-medium hover:text-[#20302A] hover:bg-black/[0.02]'
             }`}
           >
             Attendee View
@@ -189,7 +189,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-xl shadow-xl border border-[#E3E9E4] p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-4 z-50 animate-slide-down">
                 <div className="flex items-center justify-between pb-3 border-b border-[#E3E9E4]">
                   <span className="font-semibold text-sm text-[#20302A]">Notifications</span>
                   <span className="text-xs bg-[#EEF7F1] text-[#315C49] px-2 py-0.5 rounded-full font-medium">
@@ -243,7 +243,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-[#E3E9E4] p-2 z-50 text-left">
+              <div className="absolute right-0 mt-2 w-56 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border-subtle/60 p-2 z-50 text-left animate-slide-down">
                 <div className="px-3 py-2 border-b border-[#E3E9E4] mb-1">
                   <div className="font-semibold text-xs text-[#20302A]">
                     {currentView === 'attendee' ? 'Alex Morgan' : 'Arjun Mehta'}
