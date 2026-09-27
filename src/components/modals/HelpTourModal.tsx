@@ -63,13 +63,13 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-md flex items-center justify-center p-4 transition-all"
+      className="fixed inset-0 z-50 bg-[#3E2723]/40 backdrop-blur-md flex items-center justify-center p-4 transition-all"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="bg-white rounded-3xl max-w-lg w-full p-8 sm:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] ring-1 ring-black/5 relative animate-in fade-in zoom-in-95 duration-300">
+      <div className="bg-[#FCFBF8] rounded-3xl max-w-lg w-full p-8 sm:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] ring-1 ring-black/5 relative animate-in fade-in zoom-in-95 duration-300">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-[#9AA69F] hover:text-[#20302A] p-1 rounded-lg"
+          className="absolute top-5 right-5 text-[#8D6E63] hover:text-[#3E2723] p-1 rounded-lg"
           type="button"
         >
           <span className="material-symbols-outlined text-[20px]">close</span>
@@ -81,32 +81,32 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
             <div
               key={i}
               className={`h-1.5 rounded-full transition-all ${
-                i === slide ? 'w-8 bg-[#7BAE8A]' : 'w-2 bg-[#E3E9E4]'
+                i === slide ? 'w-8 bg-[#C28B46]' : 'w-2 bg-[#D4C4A8]'
               }`}
             />
           ))}
         </div>
 
-        <div className="w-12 h-12 rounded-xl bg-[#EEF7F1] text-[#315C49] flex items-center justify-center mb-4 border border-[#DCEFE4]">
-          <span className="material-symbols-outlined text-[24px] text-[#7BAE8A]">{current.icon}</span>
+        <div className="w-12 h-12 rounded-xl bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mb-4 border border-[#E6D3A8]">
+          <span className="material-symbols-outlined text-[24px] text-[#C28B46]">{current.icon}</span>
         </div>
 
-        <span className="text-[11px] uppercase tracking-wider text-[#315C49] font-semibold bg-[#DCEFE4] px-2.5 py-0.5 rounded-full">
+        <span className="text-[11px] uppercase tracking-wider text-[#8B4513] font-semibold bg-[#E6D3A8] px-2.5 py-0.5 rounded-full">
           {current.tagline}
         </span>
 
-        <h3 className="text-xl sm:text-2xl font-semibold text-[#20302A] mt-2 mb-2" style={{ fontFamily: 'Geist, sans-serif' }}>
+        <h3 className="text-xl sm:text-2xl font-semibold text-[#3E2723] mt-2 mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
           {current.title}
         </h3>
 
-        <p className="text-sm text-[#68766F] leading-relaxed mb-4">
+        <p className="text-sm text-[#5D4037] leading-relaxed mb-4">
           {current.desc}
         </p>
 
-        <div className="space-y-2 bg-[#FAFBF8] p-4 rounded-xl border border-[#E3E9E4] mb-6">
+        <div className="space-y-2 bg-[#F4EFE6] p-4 rounded-xl border border-[#D4C4A8] mb-6">
           {current.bullets.map((b, idx) => (
-            <div key={idx} className="flex items-start gap-2.5 text-xs text-[#20302A]">
-              <span className="material-symbols-outlined text-[16px] text-[#7BAE8A] shrink-0 mt-0.5">
+            <div key={idx} className="flex items-start gap-2.5 text-xs text-[#3E2723]">
+              <span className="material-symbols-outlined text-[16px] text-[#C28B46] shrink-0 mt-0.5">
                 check_circle
               </span>
               <span className="leading-snug">{b}</span>
@@ -114,18 +114,18 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-[#E3E9E4]">
+        <div className="flex items-center justify-between pt-2 border-t border-[#D4C4A8]">
           {slide > 0 ? (
             <button
               onClick={() => setSlide(slide - 1)}
-              className="px-4 py-2 text-xs font-medium text-[#68766F] hover:text-[#20302A]"
+              className="px-4 py-2 text-xs font-medium text-[#5D4037] hover:text-[#3E2723]"
             >
               Back
             </button>
           ) : (
             <button
               onClick={onClose}
-              className="px-4 py-2 text-xs font-medium text-[#9AA69F] hover:text-[#20302A]"
+              className="px-4 py-2 text-xs font-medium text-[#8D6E63] hover:text-[#3E2723]"
             >
               Skip Tour
             </button>
@@ -135,7 +135,7 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
             {slide < slides.length - 1 ? (
               <button
                 onClick={() => setSlide(slide + 1)}
-                className="px-5 py-2.5 bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
+                className="px-5 py-2.5 bg-[#C28B46] hover:bg-[#A87739] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
               >
                 Next
               </button>
@@ -146,7 +146,7 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
                     onClose();
                     onStartFlow('attendee');
                   }}
-                  className="px-4 py-2.5 bg-[#EEF7F1] text-[#315C49] hover:bg-[#DCEFE4] text-xs font-semibold rounded-xl transition-colors"
+                  className="px-4 py-2.5 bg-[#F0E6D2] text-[#8B4513] hover:bg-[#E6D3A8] text-xs font-semibold rounded-xl transition-colors"
                 >
                   Try Attendee Portal
                 </button>
@@ -155,7 +155,7 @@ export const HelpTourModal: React.FC<HelpTourModalProps> = ({
                     onClose();
                     onStartFlow('organizer');
                   }}
-                  className="px-4 py-2.5 bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
+                  className="px-4 py-2.5 bg-[#C28B46] hover:bg-[#A87739] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
                 >
                   Open Organizer
                 </button>

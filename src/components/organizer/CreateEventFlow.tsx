@@ -46,7 +46,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
   const [organizerLogoText, setOrganizerLogoText] = useState(
     initialEvent?.organizerLogoText || 'AI'
   );
-  const [brandAccent, setBrandAccent] = useState(initialEvent?.brandAccent || '#7BAE8A');
+  const [brandAccent, setBrandAccent] = useState(initialEvent?.brandAccent || '#C28B46');
 
   // Channels
   const [linkedinUrl, setLinkedinUrl] = useState(
@@ -211,10 +211,10 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   onClick={() => setStep(s as any)}
                   className={`cursor-pointer flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors ${
                     step === s
-                      ? 'bg-[#20302A] text-white ring-4 ring-[#F3F4F1]'
+                      ? 'bg-[#3E2723] text-white ring-4 ring-[#E9DCC9]'
                       : step > s
-                      ? 'bg-[#7BAE8A] text-white'
-                      : 'bg-[#F3F4F1] text-[#9AA69F] hover:bg-[#E3E9E4]'
+                      ? 'bg-[#C28B46] text-white'
+                      : 'bg-[#E9DCC9] text-[#8D6E63] hover:bg-[#D4C4A8]'
                   }`}
                 >
                   {step > s ? <span className="material-symbols-outlined text-[16px]">check</span> : s}
@@ -222,7 +222,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                 {s < 4 && (
                   <div
                     className={`w-8 sm:w-16 h-px transition-colors ${
-                      step > s ? 'bg-[#7BAE8A]' : 'bg-[#E3E9E4]'
+                      step > s ? 'bg-[#C28B46]' : 'bg-[#D4C4A8]'
                     }`}
                   ></div>
                 )}
@@ -234,37 +234,37 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
       {/* Step 5: Publish Success Screen */}
       {step === 5 && publishedEvent && (
-        <div className="bg-white rounded-2xl border border-[#E3E9E4] p-8 sm:p-12 shadow-sm max-w-2xl mx-auto text-center animate-in fade-in zoom-in-95 duration-200">
-          <div className="w-16 h-16 rounded-full bg-[#EEF7F1] text-[#315C49] flex items-center justify-center mx-auto mb-4 border border-[#DCEFE4]">
-            <span className="material-symbols-outlined text-[36px] text-[#7BAE8A]">celebration</span>
+        <div className="bg-[#FCFBF8] rounded-2xl border border-[#D4C4A8] p-8 sm:p-12 shadow-sm max-w-2xl mx-auto text-center animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-16 h-16 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mx-auto mb-4 border border-[#E6D3A8]">
+            <span className="material-symbols-outlined text-[36px] text-[#C28B46]">celebration</span>
           </div>
 
-          <span className="text-xs uppercase tracking-wider font-semibold text-[#315C49] bg-[#DCEFE4] px-3 py-1 rounded-full">
+          <span className="text-xs uppercase tracking-wider font-semibold text-[#8B4513] bg-[#E6D3A8] px-3 py-1 rounded-full">
             Live On Chronicle
           </span>
 
           <h2
-            className="text-2xl sm:text-3xl font-semibold text-[#20302A] mt-3 mb-2"
-            style={{ fontFamily: 'Geist, sans-serif' }}
+            className="text-2xl sm:text-3xl font-semibold text-[#3E2723] mt-3 mb-2"
+            style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Your event is live
           </h2>
 
-          <p className="text-sm text-[#68766F] max-w-md mx-auto mb-6 leading-relaxed">
+          <p className="text-sm text-[#5D4037] max-w-md mx-auto mb-6 leading-relaxed">
             Attendees can now turn their experience into a Chronicle-powered LinkedIn story. Share the public URL or display the QR code on stage.
           </p>
 
-          <div className="p-4 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl flex items-center justify-between gap-3 mb-8 max-w-md mx-auto">
+          <div className="p-4 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl flex items-center justify-between gap-3 mb-8 max-w-md mx-auto">
             <div className="flex items-center gap-2 min-w-0 text-left">
-              <span className="material-symbols-outlined text-[#7BAE8A] text-[18px]">link</span>
-              <span className="text-xs font-mono text-[#20302A] truncate">{attendeeUrl}</span>
+              <span className="material-symbols-outlined text-[#C28B46] text-[18px]">link</span>
+              <span className="text-xs font-mono text-[#3E2723] truncate">{attendeeUrl}</span>
             </div>
             <button
               onClick={() => {
                 navigator.clipboard?.writeText(attendeeUrl);
                 alert(`Copied: ${attendeeUrl}`);
               }}
-              className="px-3 py-1.5 bg-white border border-[#E3E9E4] hover:bg-[#F3F4F1] text-xs font-medium text-[#20302A] rounded-lg shrink-0"
+              className="px-3 py-1.5 bg-[#FCFBF8] border border-[#D4C4A8] hover:bg-[#E9DCC9] text-xs font-medium text-[#3E2723] rounded-lg shrink-0"
               type="button"
             >
               Copy
@@ -274,7 +274,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               onClick={() => onOpenAttendeePortal(publishedEvent)}
-              className="w-full sm:w-auto px-6 py-3 bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold rounded-xl transition-all shadow-xs flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 bg-[#C28B46] hover:bg-[#A87739] text-white text-xs font-semibold rounded-xl transition-all shadow-xs flex items-center justify-center gap-2"
               type="button"
             >
               <span>Open Attendee View</span>
@@ -283,7 +283,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
             <button
               onClick={() => onPublishSuccess(publishedEvent)}
-              className="w-full sm:w-auto px-6 py-3 bg-white border border-[#E3E9E4] hover:bg-[#F3F4F1] text-[#20302A] text-xs font-semibold rounded-xl transition-colors"
+              className="w-full sm:w-auto px-6 py-3 bg-[#FCFBF8] border border-[#D4C4A8] hover:bg-[#E9DCC9] text-[#3E2723] text-xs font-semibold rounded-xl transition-colors"
               type="button"
             >
               Back to Dashboard
@@ -297,28 +297,28 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Form Steps (7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="bg-white border border-[#E3E9E4] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col gap-6">
+            <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col gap-6">
               {/* Context Header */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 bg-[#DCEFE4] text-[#315C49] rounded-full text-xs font-semibold">
+                  <span className="px-2.5 py-0.5 bg-[#E6D3A8] text-[#8B4513] rounded-full text-xs font-semibold">
                     {step === 1 && 'Step 1 of 4: Core Metadata'}
                     {step === 2 && 'Step 2 of 4: Visuals & Branding'}
                     {step === 3 && 'Step 3 of 4: Attendee Prompts'}
                     {step === 4 && 'Step 4 of 4: Final Verification'}
                   </span>
-                  <span className="text-[#9AA69F] font-mono text-xs">ID: EVT-2026-9024</span>
+                  <span className="text-[#8D6E63] font-mono text-xs">ID: EVT-2026-9024</span>
                 </div>
                 <h2
-                  className="text-xl sm:text-2xl font-semibold text-[#20302A]"
-                  style={{ fontFamily: 'Geist, sans-serif' }}
+                  className="text-xl sm:text-2xl font-semibold text-[#3E2723]"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
                 >
                   {step === 1 && 'Event Essentials & Scope'}
                   {step === 2 && 'Make your event recognizable'}
                   {step === 3 && 'Configure Attendee Story Engine'}
                   {step === 4 && 'Review & Ready to Broadcast'}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#68766F] mt-1.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#5D4037] mt-1.5 leading-relaxed">
                   {step === 1 &&
                     'Specify core details so attendees and sponsors immediately understand the theme and schedule.'}
                   {step === 2 &&
@@ -334,42 +334,42 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               {step === 1 && (
                 <div className="flex flex-col gap-5 pt-2">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#20302A] flex items-center justify-between">
+                    <label className="text-xs font-semibold text-[#3E2723] flex items-center justify-between">
                       <span>Event Title</span>
-                      <span className="text-[11px] text-[#9AA69F] font-normal">Required</span>
+                      <span className="text-[11px] text-[#8D6E63] font-normal">Required</span>
                     </label>
                     <input
                       type="text"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       placeholder="e.g. NextGen Engineering Con 2026"
-                      className="w-full h-11 px-3.5 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] transition-all"
+                      className="w-full h-11 px-3.5 rounded-xl bg-[#F4EFE6] text-[#3E2723] text-xs sm:text-sm border border-[#D4C4A8] shadow-xs focus:outline-none focus:border-[#C28B46] focus:ring-2 focus:ring-[#E6D3A8] transition-all"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#20302A]">Organizer Entity / Brand</label>
+                      <label className="text-xs font-semibold text-[#3E2723]">Organizer Entity / Brand</label>
                       <input
                         type="text"
                         value={organizer}
                         onChange={(e) => setOrganizer(e.target.value)}
                         placeholder="e.g. Acme AI"
-                        className="w-full h-11 px-3.5 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] transition-all"
+                        className="w-full h-11 px-3.5 rounded-xl bg-[#F4EFE6] text-[#3E2723] text-xs sm:text-sm border border-[#D4C4A8] shadow-xs focus:outline-none focus:border-[#C28B46] focus:ring-2 focus:ring-[#E6D3A8] transition-all"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#20302A]">Date &amp; Schedule Slot</label>
+                      <label className="text-xs font-semibold text-[#3E2723]">Date &amp; Schedule Slot</label>
                       <div className="relative">
                         <input
                           type="text"
                           value={date}
                           onChange={(e) => setDate(e.target.value)}
                           placeholder="September 24, 2026 · 09:00 AM IST"
-                          className="w-full h-11 px-3.5 pr-10 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] transition-all"
+                          className="w-full h-11 px-3.5 pr-10 rounded-xl bg-[#F4EFE6] text-[#3E2723] text-xs sm:text-sm border border-[#D4C4A8] shadow-xs focus:outline-none focus:border-[#C28B46] focus:ring-2 focus:ring-[#E6D3A8] transition-all"
                         />
-                        <span className="material-symbols-outlined absolute right-3 top-3 text-[#9AA69F] text-[18px]">
+                        <span className="material-symbols-outlined absolute right-3 top-3 text-[#8D6E63] text-[18px]">
                           calendar_today
                         </span>
                       </div>
@@ -378,15 +378,15 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
                   {/* Format Selector */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-[#20302A]">Event Format</label>
+                    <label className="text-xs font-semibold text-[#3E2723]">Event Format</label>
                     <div className="grid grid-cols-3 gap-2.5">
                       <button
                         type="button"
                         onClick={() => setFormat('in-person')}
                         className={`h-10 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                           format === 'in-person'
-                            ? 'bg-[#DCEFE4] text-[#315C49] border border-[#7BAE8A]/50 shadow-xs font-semibold'
-                            : 'bg-[#FAFBF8] text-[#68766F] border border-[#E3E9E4] hover:bg-[#F3F4F1]'
+                            ? 'bg-[#E6D3A8] text-[#8B4513] border border-[#C28B46]/50 shadow-xs font-semibold'
+                            : 'bg-[#F4EFE6] text-[#5D4037] border border-[#D4C4A8] hover:bg-[#E9DCC9]'
                         }`}
                       >
                         <span className="material-symbols-outlined text-[17px]">location_on</span>
@@ -397,8 +397,8 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                         onClick={() => setFormat('hybrid')}
                         className={`h-10 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                           format === 'hybrid'
-                            ? 'bg-[#DCEFE4] text-[#315C49] border border-[#7BAE8A]/50 shadow-xs font-semibold'
-                            : 'bg-[#FAFBF8] text-[#68766F] border border-[#E3E9E4] hover:bg-[#F3F4F1]'
+                            ? 'bg-[#E6D3A8] text-[#8B4513] border border-[#C28B46]/50 shadow-xs font-semibold'
+                            : 'bg-[#F4EFE6] text-[#5D4037] border border-[#D4C4A8] hover:bg-[#E9DCC9]'
                         }`}
                       >
                         <span className="material-symbols-outlined text-[17px]">cell_merge</span>
@@ -409,8 +409,8 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                         onClick={() => setFormat('virtual')}
                         className={`h-10 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                           format === 'virtual'
-                            ? 'bg-[#DCEFE4] text-[#315C49] border border-[#7BAE8A]/50 shadow-xs font-semibold'
-                            : 'bg-[#FAFBF8] text-[#68766F] border border-[#E3E9E4] hover:bg-[#F3F4F1]'
+                            ? 'bg-[#E6D3A8] text-[#8B4513] border border-[#C28B46]/50 shadow-xs font-semibold'
+                            : 'bg-[#F4EFE6] text-[#5D4037] border border-[#D4C4A8] hover:bg-[#E9DCC9]'
                         }`}
                       >
                         <span className="material-symbols-outlined text-[17px]">videocam</span>
@@ -420,57 +420,57 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#20302A]">Venue Address / Convention Hall</label>
+                    <label className="text-xs font-semibold text-[#3E2723]">Venue Address / Convention Hall</label>
                     <div className="relative">
                       <input
                         type="text"
                         value={venue}
                         onChange={(e) => setVenue(e.target.value)}
                         placeholder="Grand Hyatt Convention Center, Mumbai, India"
-                        className="w-full h-11 pl-10 pr-3.5 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] transition-all"
+                        className="w-full h-11 pl-10 pr-3.5 rounded-xl bg-[#F4EFE6] text-[#3E2723] text-xs sm:text-sm border border-[#D4C4A8] shadow-xs focus:outline-none focus:border-[#C28B46] focus:ring-2 focus:ring-[#E6D3A8] transition-all"
                       />
-                      <span className="material-symbols-outlined absolute left-3 top-3 text-[#9AA69F] text-[18px]">
+                      <span className="material-symbols-outlined absolute left-3 top-3 text-[#8D6E63] text-[18px]">
                         apartment
                       </span>
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#20302A] flex items-center justify-between">
+                    <label className="text-xs font-semibold text-[#3E2723] flex items-center justify-between">
                       <span>Executive Summary &amp; Overview</span>
-                      <span className="text-[11px] font-mono text-[#9AA69F]">{summary.length} / 500 chars</span>
+                      <span className="text-[11px] font-mono text-[#8D6E63]">{summary.length} / 500 chars</span>
                     </label>
                     <textarea
                       value={summary}
                       onChange={(e) => setSummary(e.target.value)}
                       rows={3}
                       maxLength={500}
-                      className="w-full p-3.5 rounded-xl bg-[#FAFBF8] text-[#20302A] text-xs sm:text-sm border border-[#E3E9E4] shadow-xs focus:outline-none focus:border-[#7BAE8A] focus:ring-2 focus:ring-[#DCEFE4] resize-none transition-all"
+                      className="w-full p-3.5 rounded-xl bg-[#F4EFE6] text-[#3E2723] text-xs sm:text-sm border border-[#D4C4A8] shadow-xs focus:outline-none focus:border-[#C28B46] focus:ring-2 focus:ring-[#E6D3A8] resize-none transition-all"
                     />
                   </div>
 
                   {/* Broadcast Hashtags & Keyword Triggers */}
                   <div className="flex flex-col gap-2 pt-2">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-[#20302A]">
+                      <label className="text-xs font-semibold text-[#3E2723]">
                         Broadcast Hashtags &amp; Keyword Triggers
                       </label>
-                      <span className="text-[11px] text-[#315C49] font-medium flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7BAE8A]"></span>
+                      <span className="text-[11px] text-[#8B4513] font-medium flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C28B46]"></span>
                         LinkedIn Engine Optimized
                       </span>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-[#F3F4F1] border border-[#E3E9E4] min-h-12 flex flex-wrap items-center gap-2">
+                    <div className="p-2.5 rounded-xl bg-[#E9DCC9] border border-[#D4C4A8] min-h-12 flex flex-wrap items-center gap-2">
                       {hashtags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#DCEFE4] text-[#315C49] border border-[#E3E9E4] rounded-lg text-xs font-medium shadow-xs"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#E6D3A8] text-[#8B4513] border border-[#D4C4A8] rounded-lg text-xs font-medium shadow-xs"
                         >
                           {tag}
                           <button
                             onClick={() => handleRemoveTag(tag)}
-                            className="material-symbols-outlined text-[14px] text-[#68766F] hover:text-[#ba1a1a]"
+                            className="material-symbols-outlined text-[14px] text-[#5D4037] hover:text-[#ba1a1a]"
                             type="button"
                           >
                             close
@@ -490,20 +490,20 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                             }
                           }}
                           placeholder="+ Add tag..."
-                          className="bg-transparent text-xs text-[#20302A] focus:outline-none w-24 placeholder:text-[#9AA69F]"
+                          className="bg-transparent text-xs text-[#3E2723] focus:outline-none w-24 placeholder:text-[#8D6E63]"
                         />
                         {newTagInput && (
                           <button
                             onClick={handleAddTag}
                             type="button"
-                            className="text-[11px] font-semibold text-[#315C49] hover:underline"
+                            className="text-[11px] font-semibold text-[#8B4513] hover:underline"
                           >
                             Add
                           </button>
                         )}
                       </div>
                     </div>
-                    <p className="text-[11px] text-[#68766F]">
+                    <p className="text-[11px] text-[#5D4037]">
                       These hashtags will be pre-populated automatically whenever attendees generate and publish LinkedIn posts.
                     </p>
                   </div>
@@ -516,11 +516,11 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   {/* Cover Media */}
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-[#20302A]">Event Stage &amp; Cover Media</label>
-                      <span className="text-[11px] text-[#9AA69F]">16:9 • PNG or JPG up to 10MB</span>
+                      <label className="text-xs font-semibold text-[#3E2723]">Event Stage &amp; Cover Media</label>
+                      <span className="text-[11px] text-[#8D6E63]">16:9 • PNG or JPG up to 10MB</span>
                     </div>
 
-                    <div className="relative w-full rounded-2xl overflow-hidden group shadow-inner bg-[#F3F4F1] border border-[#E3E9E4] aspect-video">
+                    <div className="relative w-full rounded-2xl overflow-hidden group shadow-inner bg-[#E9DCC9] border border-[#D4C4A8] aspect-video">
                       <img
                         src={coverImage}
                         alt="Stage backdrop presentation"
@@ -546,10 +546,10 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                               available[(available.indexOf(coverImage) + 1) % available.length] || available[0];
                             setCoverImage(next);
                           }}
-                          className="px-3.5 py-2 bg-white text-[#20302A] rounded-xl text-xs font-semibold shadow-xs hover:bg-[#FAFBF8] transition-colors flex items-center gap-2 border border-[#E3E9E4]"
+                          className="px-3.5 py-2 bg-[#FCFBF8] text-[#3E2723] rounded-xl text-xs font-semibold shadow-xs hover:bg-[#F4EFE6] transition-colors flex items-center gap-2 border border-[#D4C4A8]"
                           type="button"
                         >
-                          <span className="material-symbols-outlined text-[17px] text-[#315C49]">photo_camera</span>
+                          <span className="material-symbols-outlined text-[17px] text-[#8B4513]">photo_camera</span>
                           <span>Change Image</span>
                         </button>
                       </div>
@@ -557,21 +557,21 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
                     {/* Logo & Brand Accent Micro Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-1">
-                      <div className="bg-[#FAFBF8] border border-[#E3E9E4] rounded-2xl p-4 flex items-center gap-4">
-                        <div className="w-13 h-13 rounded-xl bg-[#7BAE8A] text-white flex items-center justify-center flex-shrink-0 shadow-xs text-lg font-bold">
+                      <div className="bg-[#F4EFE6] border border-[#D4C4A8] rounded-2xl p-4 flex items-center gap-4">
+                        <div className="w-13 h-13 rounded-xl bg-[#C28B46] text-white flex items-center justify-center flex-shrink-0 shadow-xs text-lg font-bold">
                           {organizerLogoText}
                         </div>
                         <div className="flex flex-col min-w-0 text-left">
-                          <span className="text-xs font-semibold text-[#20302A] truncate">
+                          <span className="text-xs font-semibold text-[#3E2723] truncate">
                             {organizer} Insignia
                           </span>
-                          <span className="text-[11px] text-[#68766F]">SVG / 512×512 icon</span>
+                          <span className="text-[11px] text-[#5D4037]">SVG / 512×512 icon</span>
                           <button
                             onClick={() => {
                               const newSymbol = prompt('Enter monogram initials:', organizerLogoText);
                               if (newSymbol) setOrganizerLogoText(newSymbol.slice(0, 3).toUpperCase());
                             }}
-                            className="text-[11px] text-[#315C49] font-medium hover:underline mt-1 text-left"
+                            className="text-[11px] text-[#8B4513] font-medium hover:underline mt-1 text-left"
                             type="button"
                           >
                             Replace Logo
@@ -579,27 +579,27 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                         </div>
                       </div>
 
-                      <div className="bg-[#FAFBF8] border border-[#E3E9E4] rounded-2xl p-4 flex items-center justify-between">
+                      <div className="bg-[#F4EFE6] border border-[#D4C4A8] rounded-2xl p-4 flex items-center justify-between">
                         <div>
-                          <span className="text-xs font-semibold text-[#20302A] block">Brand Accent</span>
-                          <span className="text-[11px] font-mono text-[#68766F]">Pastel Sage Palette</span>
+                          <span className="text-xs font-semibold text-[#3E2723] block">Brand Accent</span>
+                          <span className="text-[11px] font-mono text-[#5D4037]">Pastel Sage Palette</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => setBrandAccent('#7BAE8A')}
-                            className="w-7 h-7 rounded-full bg-[#7BAE8A] shadow-xs ring-2 ring-white cursor-pointer"
+                            onClick={() => setBrandAccent('#C28B46')}
+                            className="w-7 h-7 rounded-full bg-[#C28B46] shadow-xs ring-2 ring-white cursor-pointer"
                             title="Sage Green"
                             type="button"
                           />
                           <button
-                            onClick={() => setBrandAccent('#315C49')}
-                            className="w-7 h-7 rounded-full bg-[#315C49] shadow-xs cursor-pointer"
+                            onClick={() => setBrandAccent('#8B4513')}
+                            className="w-7 h-7 rounded-full bg-[#8B4513] shadow-xs cursor-pointer"
                             title="Deep Evergreen"
                             type="button"
                           />
                           <button
-                            onClick={() => setBrandAccent('#DCEFE4')}
-                            className="w-7 h-7 rounded-full bg-[#DCEFE4] shadow-xs border border-[#E3E9E4] cursor-pointer"
+                            onClick={() => setBrandAccent('#E6D3A8')}
+                            className="w-7 h-7 rounded-full bg-[#E6D3A8] shadow-xs border border-[#D4C4A8] cursor-pointer"
                             title="Soft Mint"
                             type="button"
                           />
@@ -610,48 +610,48 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
 
                   {/* Verified Corporate Channels */}
                   <div className="flex flex-col gap-3 pt-2">
-                    <label className="text-xs font-semibold text-[#20302A]">Verified Corporate Channels</label>
+                    <label className="text-xs font-semibold text-[#3E2723]">Verified Corporate Channels</label>
                     <div className="space-y-2.5">
-                      <div className="flex items-center bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl p-2.5 gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#7BAE8A] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">
+                      <div className="flex items-center bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl p-2.5 gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#C28B46] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">
                           in
                         </div>
                         <input
                           type="text"
                           value={linkedinUrl}
                           onChange={(e) => setLinkedinUrl(e.target.value)}
-                          className="flex-1 bg-transparent text-xs text-[#20302A] focus:outline-none"
+                          className="flex-1 bg-transparent text-xs text-[#3E2723] focus:outline-none"
                           placeholder="https://linkedin.com/company/..."
                         />
-                        <span className="material-symbols-outlined text-[#7BAE8A] text-[18px]">check_circle</span>
+                        <span className="material-symbols-outlined text-[#C28B46] text-[18px]">check_circle</span>
                       </div>
 
-                      <div className="flex items-center bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl p-2.5 gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#315C49] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">
+                      <div className="flex items-center bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl p-2.5 gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#8B4513] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">
                           𝕏
                         </div>
                         <input
                           type="text"
                           value={twitterHandle}
                           onChange={(e) => setTwitterHandle(e.target.value)}
-                          className="flex-1 bg-transparent text-xs text-[#20302A] focus:outline-none"
+                          className="flex-1 bg-transparent text-xs text-[#3E2723] focus:outline-none"
                           placeholder="@Handle"
                         />
-                        <span className="material-symbols-outlined text-[#9AA69F] text-[18px]">link</span>
+                        <span className="material-symbols-outlined text-[#8D6E63] text-[18px]">link</span>
                       </div>
 
-                      <div className="flex items-center bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl p-2.5 gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#DCEFE4] text-[#315C49] flex items-center justify-center flex-shrink-0">
+                      <div className="flex items-center bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl p-2.5 gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#E6D3A8] text-[#8B4513] flex items-center justify-center flex-shrink-0">
                           <span className="material-symbols-outlined text-[17px]">language</span>
                         </div>
                         <input
                           type="text"
                           value={websiteUrl}
                           onChange={(e) => setWebsiteUrl(e.target.value)}
-                          className="flex-1 bg-transparent text-xs text-[#20302A] focus:outline-none"
+                          className="flex-1 bg-transparent text-xs text-[#3E2723] focus:outline-none"
                           placeholder="https://..."
                         />
-                        <span className="material-symbols-outlined text-[#9AA69F] text-[18px]">public</span>
+                        <span className="material-symbols-outlined text-[#8D6E63] text-[18px]">public</span>
                       </div>
                     </div>
                   </div>
@@ -662,57 +662,57 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               {step === 3 && (
                 <div className="flex flex-col gap-6 pt-2">
                   <div className="space-y-3">
-                    <label className="text-xs font-semibold text-[#20302A]">Allowed Attendee Inputs</label>
+                    <label className="text-xs font-semibold text-[#3E2723]">Allowed Attendee Inputs</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <label className="flex items-center justify-between p-3.5 bg-[#FAFBF8] rounded-xl border border-[#E3E9E4] cursor-pointer">
+                      <label className="flex items-center justify-between p-3.5 bg-[#F4EFE6] rounded-xl border border-[#D4C4A8] cursor-pointer">
                         <div className="flex items-center gap-2.5">
-                          <span className="material-symbols-outlined text-[#7BAE8A] text-[20px]">photo_camera</span>
-                          <span className="text-xs font-medium text-[#20302A]">Photo Uploads (up to 6)</span>
+                          <span className="material-symbols-outlined text-[#C28B46] text-[20px]">photo_camera</span>
+                          <span className="text-xs font-medium text-[#3E2723]">Photo Uploads (up to 6)</span>
                         </div>
                         <input
                           type="checkbox"
                           checked={allowPhotos}
                           onChange={(e) => setAllowPhotos(e.target.checked)}
-                          className="w-4 h-4 text-[#7BAE8A] rounded focus:ring-0"
+                          className="w-4 h-4 text-[#C28B46] rounded focus:ring-0"
                         />
                       </label>
 
-                      <label className="flex items-center justify-between p-3.5 bg-[#FAFBF8] rounded-xl border border-[#E3E9E4] cursor-pointer">
+                      <label className="flex items-center justify-between p-3.5 bg-[#F4EFE6] rounded-xl border border-[#D4C4A8] cursor-pointer">
                         <div className="flex items-center gap-2.5">
-                          <span className="material-symbols-outlined text-[#7BAE8A] text-[20px]">edit_note</span>
-                          <span className="text-xs font-medium text-[#20302A]">Key Takeaways Text</span>
+                          <span className="material-symbols-outlined text-[#C28B46] text-[20px]">edit_note</span>
+                          <span className="text-xs font-medium text-[#3E2723]">Key Takeaways Text</span>
                         </div>
                         <input
                           type="checkbox"
                           checked={allowTakeaways}
                           onChange={(e) => setAllowTakeaways(e.target.checked)}
-                          className="w-4 h-4 text-[#7BAE8A] rounded focus:ring-0"
+                          className="w-4 h-4 text-[#C28B46] rounded focus:ring-0"
                         />
                       </label>
 
-                      <label className="flex items-center justify-between p-3.5 bg-[#FAFBF8] rounded-xl border border-[#E3E9E4] cursor-pointer">
+                      <label className="flex items-center justify-between p-3.5 bg-[#F4EFE6] rounded-xl border border-[#D4C4A8] cursor-pointer">
                         <div className="flex items-center gap-2.5">
-                          <span className="material-symbols-outlined text-[#7BAE8A] text-[20px]">psychology</span>
-                          <span className="text-xs font-medium text-[#20302A]">Personal Reflections</span>
+                          <span className="material-symbols-outlined text-[#C28B46] text-[20px]">psychology</span>
+                          <span className="text-xs font-medium text-[#3E2723]">Personal Reflections</span>
                         </div>
                         <input
                           type="checkbox"
                           checked={allowReflection}
                           onChange={(e) => setAllowReflection(e.target.checked)}
-                          className="w-4 h-4 text-[#7BAE8A] rounded focus:ring-0"
+                          className="w-4 h-4 text-[#C28B46] rounded focus:ring-0"
                         />
                       </label>
 
-                      <label className="flex items-center justify-between p-3.5 bg-[#FAFBF8] rounded-xl border border-[#E3E9E4] cursor-pointer">
+                      <label className="flex items-center justify-between p-3.5 bg-[#F4EFE6] rounded-xl border border-[#D4C4A8] cursor-pointer">
                         <div className="flex items-center gap-2.5">
-                          <span className="material-symbols-outlined text-[#7BAE8A] text-[20px]">alternate_email</span>
-                          <span className="text-xs font-medium text-[#20302A]">Speaker &amp; VIP Mentions</span>
+                          <span className="material-symbols-outlined text-[#C28B46] text-[20px]">alternate_email</span>
+                          <span className="text-xs font-medium text-[#3E2723]">Speaker &amp; VIP Mentions</span>
                         </div>
                         <input
                           type="checkbox"
                           checked={allowSpeakerMentions}
                           onChange={(e) => setAllowSpeakerMentions(e.target.checked)}
-                          className="w-4 h-4 text-[#7BAE8A] rounded focus:ring-0"
+                          className="w-4 h-4 text-[#C28B46] rounded focus:ring-0"
                         />
                       </label>
                     </div>
@@ -721,27 +721,27 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   {/* Suggested Takeaway Prompts */}
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-[#20302A]">
+                      <label className="text-xs font-semibold text-[#3E2723]">
                         Suggested Takeaway Prompts for Attendees
                       </label>
-                      <span className="text-[11px] text-[#68766F] font-mono">{prompts.length} active</span>
+                      <span className="text-[11px] text-[#5D4037] font-mono">{prompts.length} active</span>
                     </div>
 
                     <div className="space-y-2">
                       {prompts.map((p, idx) => (
                         <div
                           key={idx}
-                          className="p-3 bg-[#FAFBF8] rounded-xl border border-[#E3E9E4] flex items-center justify-between gap-3"
+                          className="p-3 bg-[#F4EFE6] rounded-xl border border-[#D4C4A8] flex items-center justify-between gap-3"
                         >
                           <div className="flex items-center gap-2">
-                            <span className="w-5 h-5 rounded-full bg-[#EEF7F1] text-[#315C49] flex items-center justify-center text-[10px] font-bold">
+                            <span className="w-5 h-5 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center text-[10px] font-bold">
                               {idx + 1}
                             </span>
-                            <span className="text-xs text-[#20302A] font-medium">"{p}"</span>
+                            <span className="text-xs text-[#3E2723] font-medium">"{p}"</span>
                           </div>
                           <button
                             onClick={() => handleRemovePrompt(idx)}
-                            className="material-symbols-outlined text-[16px] text-[#9AA69F] hover:text-[#ba1a1a]"
+                            className="material-symbols-outlined text-[16px] text-[#8D6E63] hover:text-[#ba1a1a]"
                             type="button"
                           >
                             delete
@@ -763,12 +763,12 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                           }
                         }}
                         placeholder="Add another prompt (e.g. What question challenged your thinking?)"
-                        className="flex-1 h-10 px-3.5 rounded-xl bg-white border border-[#E3E9E4] text-xs text-[#20302A] focus:outline-none focus:border-[#7BAE8A]"
+                        className="flex-1 h-10 px-3.5 rounded-xl bg-[#FCFBF8] border border-[#D4C4A8] text-xs text-[#3E2723] focus:outline-none focus:border-[#C28B46]"
                       />
                       <button
                         onClick={handleAddPrompt}
                         type="button"
-                        className="px-4 h-10 bg-[#EEF7F1] text-[#315C49] hover:bg-[#DCEFE4] rounded-xl text-xs font-semibold transition-colors shrink-0"
+                        className="px-4 h-10 bg-[#F0E6D2] text-[#8B4513] hover:bg-[#E6D3A8] rounded-xl text-xs font-semibold transition-colors shrink-0"
                       >
                         + Add Prompt
                       </button>
@@ -780,44 +780,44 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               {/* STEP 4: REVIEW & PUBLISH */}
               {step === 4 && (
                 <div className="flex flex-col gap-6 pt-2">
-                  <div className="bg-[#FAFBF8] border border-[#E3E9E4] rounded-2xl p-5 space-y-4">
-                    <h3 className="text-sm font-semibold text-[#20302A]">Event Readiness Audit</h3>
+                  <div className="bg-[#F4EFE6] border border-[#D4C4A8] rounded-2xl p-5 space-y-4">
+                    <h3 className="text-sm font-semibold text-[#3E2723]">Event Readiness Audit</h3>
 
                     <div className="space-y-2 text-xs">
-                      <div className="flex items-center justify-between py-1 border-b border-[#E3E9E4]">
-                        <span className="text-[#68766F]">Event Title</span>
-                        <span className="font-semibold text-[#20302A]">{title}</span>
+                      <div className="flex items-center justify-between py-1 border-b border-[#D4C4A8]">
+                        <span className="text-[#5D4037]">Event Title</span>
+                        <span className="font-semibold text-[#3E2723]">{title}</span>
                       </div>
-                      <div className="flex items-center justify-between py-1 border-b border-[#E3E9E4]">
-                        <span className="text-[#68766F]">Hosting Organization</span>
-                        <span className="font-semibold text-[#20302A]">{organizer}</span>
+                      <div className="flex items-center justify-between py-1 border-b border-[#D4C4A8]">
+                        <span className="text-[#5D4037]">Hosting Organization</span>
+                        <span className="font-semibold text-[#3E2723]">{organizer}</span>
                       </div>
-                      <div className="flex items-center justify-between py-1 border-b border-[#E3E9E4]">
-                        <span className="text-[#68766F]">Date &amp; Venue</span>
-                        <span className="font-semibold text-[#20302A] truncate max-w-xs">{venue}</span>
+                      <div className="flex items-center justify-between py-1 border-b border-[#D4C4A8]">
+                        <span className="text-[#5D4037]">Date &amp; Venue</span>
+                        <span className="font-semibold text-[#3E2723] truncate max-w-xs">{venue}</span>
                       </div>
-                      <div className="flex items-center justify-between py-1 border-b border-[#E3E9E4]">
-                        <span className="text-[#68766F]">Format</span>
-                        <span className="font-semibold text-[#20302A] capitalize">{format}</span>
+                      <div className="flex items-center justify-between py-1 border-b border-[#D4C4A8]">
+                        <span className="text-[#5D4037]">Format</span>
+                        <span className="font-semibold text-[#3E2723] capitalize">{format}</span>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <span className="text-[#68766F]">Broadcast Hashtags</span>
-                        <span className="font-semibold text-[#315C49]">{hashtags.join(' ')}</span>
+                        <span className="text-[#5D4037]">Broadcast Hashtags</span>
+                        <span className="font-semibold text-[#8B4513]">{hashtags.join(' ')}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-4 bg-[#EEF7F1] border border-[#DCEFE4] rounded-2xl flex items-center justify-between">
+                  <div className="p-4 bg-[#F0E6D2] border border-[#E6D3A8] rounded-2xl flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-semibold text-[#315C49] block">Public Attendee Link</span>
-                      <span className="text-xs font-mono text-[#20302A]">{attendeeUrl}</span>
+                      <span className="text-xs font-semibold text-[#8B4513] block">Public Attendee Link</span>
+                      <span className="text-xs font-mono text-[#3E2723]">{attendeeUrl}</span>
                     </div>
                     <button
                       onClick={() => {
                         navigator.clipboard?.writeText(attendeeUrl);
                         alert(`Link copied: ${attendeeUrl}`);
                       }}
-                      className="px-3 py-1.5 bg-white border border-[#DCEFE4] text-xs font-semibold text-[#315C49] rounded-lg shadow-xs"
+                      className="px-3 py-1.5 bg-[#FCFBF8] border border-[#E6D3A8] text-xs font-semibold text-[#8B4513] rounded-lg shadow-xs"
                       type="button"
                     >
                       Copy Link
@@ -827,14 +827,14 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               )}
 
               {/* Bottom Step Actions */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-2 border-t border-[#E3E9E4]">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-2 border-t border-[#D4C4A8]">
                 <button
                   type="button"
                   onClick={() => {
                     if (step === 1) onCancel();
                     else setStep((step - 1) as any);
                   }}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white text-[#315C49] border border-[#E3E9E4] hover:bg-[#FAFBF8] transition-colors text-xs font-semibold flex items-center justify-center gap-2 shadow-xs"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#FCFBF8] text-[#8B4513] border border-[#D4C4A8] hover:bg-[#F4EFE6] transition-colors text-xs font-semibold flex items-center justify-center gap-2 shadow-xs"
                 >
                   <span className="material-symbols-outlined text-[17px]">arrow_back</span>
                   <span>{step === 1 ? 'Cancel' : 'Back'}</span>
@@ -844,7 +844,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   <button
                     type="button"
                     onClick={() => handleSaveOrPublish('draft')}
-                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-white text-[#315C49] border border-[#E3E9E4] text-xs font-semibold hover:bg-[#FAFBF8] transition-colors shadow-xs"
+                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#FCFBF8] text-[#8B4513] border border-[#D4C4A8] text-xs font-semibold hover:bg-[#F4EFE6] transition-colors shadow-xs"
                   >
                     Save Draft
                   </button>
@@ -853,7 +853,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                     <button
                       type="button"
                       onClick={() => setStep((step + 1) as any)}
-                      className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-[#7BAE8A] text-white text-xs font-semibold hover:bg-[#6da07c] transition-all shadow-xs flex items-center justify-center gap-2"
+                      className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-[#C28B46] text-white text-xs font-semibold hover:bg-[#A87739] transition-all shadow-xs flex items-center justify-center gap-2"
                     >
                       <span>Continue</span>
                       <span className="material-symbols-outlined text-[17px]">arrow_forward</span>
@@ -862,7 +862,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                     <button
                       type="button"
                       onClick={() => handleSaveOrPublish('live')}
-                      className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-[#315C49] text-white text-xs font-semibold hover:bg-[#264738] transition-all shadow-xs flex items-center justify-center gap-2"
+                      className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-[#8B4513] text-white text-xs font-semibold hover:bg-[#5C2E0B] transition-all shadow-xs flex items-center justify-center gap-2"
                     >
                       <span className="material-symbols-outlined text-[17px]">rocket_launch</span>
                       <span>Publish Event</span>
@@ -877,40 +877,40 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
           <div className="lg:col-span-5 flex flex-col gap-6 sticky top-20">
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#7BAE8A] animate-pulse"></span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68766F]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#C28B46] animate-pulse"></span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#5D4037]">
                   Live Attendee Link Preview
                 </span>
               </div>
-              <span className="text-xs font-mono text-[#315C49] font-medium flex items-center gap-1">
-                <span className="material-symbols-outlined text-[15px] text-[#7BAE8A]">visibility</span>
+              <span className="text-xs font-mono text-[#8B4513] font-medium flex items-center gap-1">
+                <span className="material-symbols-outlined text-[15px] text-[#C28B46]">visibility</span>
                 Public Preview
               </span>
             </div>
 
             {/* Live Attendee Card Preview Mockup */}
-            <div className="bg-white border border-[#E3E9E4] rounded-2xl shadow-md overflow-hidden flex flex-col">
+            <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl shadow-md overflow-hidden flex flex-col">
               {/* Preview Stage Banner */}
-              <div className="relative h-52 w-full overflow-hidden bg-[#20302A]">
+              <div className="relative h-52 w-full overflow-hidden bg-[#3E2723]">
                 <img src={coverImage} alt="Cover preview" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
 
                 <div className="absolute top-4 left-4 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[#315C49] text-[11px] font-semibold flex items-center gap-1.5 shadow-xs border border-white/50">
-                    <span className="material-symbols-outlined text-[#7BAE8A] text-[13px]">bolt</span>
+                  <span className="px-3 py-1 rounded-full bg-[#FCFBF8]/95 backdrop-blur text-[#8B4513] text-[11px] font-semibold flex items-center gap-1.5 shadow-xs border border-white/50">
+                    <span className="material-symbols-outlined text-[#C28B46] text-[13px]">bolt</span>
                     Live Registration Open
                   </span>
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#7BAE8A] text-white flex items-center justify-center text-lg font-bold shadow-xs">
+                    <div className="w-12 h-12 rounded-xl bg-[#C28B46] text-white flex items-center justify-center text-lg font-bold shadow-xs">
                       {organizerLogoText}
                     </div>
                     <div className="flex flex-col text-left">
                       <div className="flex items-center gap-1.5">
                         <span className="text-xs font-semibold text-white">{organizer || 'Event Host'}</span>
-                        <span className="material-symbols-outlined text-[#DCEFE4] text-[15px]">verified</span>
+                        <span className="material-symbols-outlined text-[#E6D3A8] text-[15px]">verified</span>
                       </div>
                       <span className="text-[11px] text-white/80">Verified Global Organizer</span>
                     </div>
@@ -926,19 +926,19 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
               <div className="p-6 flex flex-col gap-4 text-left">
                 <div>
                   <h3
-                    className="text-lg font-semibold text-[#20302A] leading-tight"
-                    style={{ fontFamily: 'Geist, sans-serif' }}
+                    className="text-lg font-semibold text-[#3E2723] leading-tight"
+                    style={{ fontFamily: 'Playfair Display, serif' }}
                   >
                     {title || 'Untitled Chronicle Event'}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-y-1 gap-x-2 mt-2 text-[#68766F] text-xs">
-                    <span className="flex items-center gap-1 text-[#315C49] font-medium">
-                      <span className="material-symbols-outlined text-[#7BAE8A] text-[15px]">schedule</span>
+                  <div className="flex flex-wrap items-center gap-y-1 gap-x-2 mt-2 text-[#5D4037] text-xs">
+                    <span className="flex items-center gap-1 text-[#8B4513] font-medium">
+                      <span className="material-symbols-outlined text-[#C28B46] text-[15px]">schedule</span>
                       {date || 'Date Pending'}
                     </span>
                     <span>•</span>
                     <span className="flex items-center gap-1 truncate max-w-[200px]">
-                      <span className="material-symbols-outlined text-[#9AA69F] text-[15px]">pin_drop</span>
+                      <span className="material-symbols-outlined text-[#8D6E63] text-[15px]">pin_drop</span>
                       <span className="truncate">{venue || 'Venue Pending'}</span>
                     </span>
                   </div>
@@ -949,39 +949,39 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                   {hashtags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-0.5 rounded-full bg-[#DCEFE4] text-[#315C49] text-[11px] font-mono font-medium border border-[#E3E9E4]"
+                      className="px-2.5 py-0.5 rounded-full bg-[#E6D3A8] text-[#8B4513] text-[11px] font-mono font-medium border border-[#D4C4A8]"
                     >
                       {tag}
                     </span>
                   ))}
                   {hashtags.length > 3 && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#F3F4F1] text-[#68766F] text-[11px] font-mono border border-[#E3E9E4]">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#E9DCC9] text-[#5D4037] text-[11px] font-mono border border-[#D4C4A8]">
                       +{hashtags.length - 3} more
                     </span>
                   )}
                 </div>
 
                 {/* Micro Engagement Teaser */}
-                <div className="p-3.5 rounded-xl bg-[#FAFBF8] border border-[#E3E9E4] flex flex-col gap-1.5">
+                <div className="p-3.5 rounded-xl bg-[#F4EFE6] border border-[#D4C4A8] flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-[#20302A] font-semibold flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[#7BAE8A] text-[17px]">auto_awesome</span>
+                    <span className="text-xs text-[#3E2723] font-semibold flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-[#C28B46] text-[17px]">auto_awesome</span>
                       Attendee Story Generator
                     </span>
-                    <span className="text-[10px] text-[#315C49] bg-[#DCEFE4] px-2 py-0.5 rounded-full font-semibold">
+                    <span className="text-[10px] text-[#8B4513] bg-[#E6D3A8] px-2 py-0.5 rounded-full font-semibold">
                       Enabled
                     </span>
                   </div>
-                  <p className="text-xs text-[#68766F]">
+                  <p className="text-xs text-[#5D4037]">
                     {prompts.length} bespoke LinkedIn prompt suggestions active. Attendees can publish one-click keynote takeaways instantly.
                   </p>
                 </div>
 
                 {/* Shareable Link Bar */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAFBF8] border border-[#E3E9E4]">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#F4EFE6] border border-[#D4C4A8]">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="material-symbols-outlined text-[#9AA69F] text-[17px]">link</span>
-                    <span className="text-xs font-mono text-[#20302A] truncate">{attendeeUrl}</span>
+                    <span className="material-symbols-outlined text-[#8D6E63] text-[17px]">link</span>
+                    <span className="text-xs font-mono text-[#3E2723] truncate">{attendeeUrl}</span>
                   </div>
                   <button
                     onClick={() => {
@@ -989,7 +989,7 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                       alert('Copied URL: ' + attendeeUrl);
                     }}
                     type="button"
-                    className="p-1 text-[#68766F] hover:text-[#315C49] transition-colors"
+                    className="p-1 text-[#5D4037] hover:text-[#8B4513] transition-colors"
                   >
                     <span className="material-symbols-outlined text-[17px]">content_copy</span>
                   </button>
@@ -999,44 +999,44 @@ export const CreateEventFlow: React.FC<CreateEventFlowProps> = ({
                 <div className="flex items-center gap-2.5 pt-1">
                   <button
                     type="button"
-                    className="flex-1 py-2.5 px-4 rounded-xl bg-[#7BAE8A] text-white text-xs font-semibold text-center shadow-xs"
+                    className="flex-1 py-2.5 px-4 rounded-xl bg-[#C28B46] text-white text-xs font-semibold text-center shadow-xs"
                   >
                     Register for Attendee Pass
                   </button>
                   <button
                     type="button"
-                    className="w-10 h-10 rounded-xl bg-[#FAFBF8] border border-[#E3E9E4] text-[#20302A] flex items-center justify-center"
+                    className="w-10 h-10 rounded-xl bg-[#F4EFE6] border border-[#D4C4A8] text-[#3E2723] flex items-center justify-center"
                   >
-                    <span className="material-symbols-outlined text-[18px] text-[#68766F]">share</span>
+                    <span className="material-symbols-outlined text-[18px] text-[#5D4037]">share</span>
                   </button>
                 </div>
               </div>
 
               {/* Footer Preview Metadata */}
-              <div className="px-6 py-2.5 bg-[#FAFBF8] border-t border-[#E3E9E4] flex items-center justify-between text-[#9AA69F] text-xs">
+              <div className="px-6 py-2.5 bg-[#F4EFE6] border-t border-[#D4C4A8] flex items-center justify-between text-[#8D6E63] text-xs">
                 <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[15px] text-[#7BAE8A]">security</span>
+                  <span className="material-symbols-outlined text-[15px] text-[#C28B46]">security</span>
                   <span>Enterprise Encrypted</span>
                 </div>
-                <span className="text-[#68766F] text-[11px] font-medium">Audience Reach: High</span>
+                <span className="text-[#5D4037] text-[11px] font-medium">Audience Reach: High</span>
               </div>
             </div>
 
             {/* Event Readiness Score Widget */}
-            <div className="bg-white border border-[#E3E9E4] rounded-2xl p-5 shadow-xs flex flex-col gap-2.5">
-              <h4 className="text-xs font-semibold text-[#20302A] flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#7BAE8A] text-[18px]">task_alt</span>
+            <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl p-5 shadow-xs flex flex-col gap-2.5">
+              <h4 className="text-xs font-semibold text-[#3E2723] flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#C28B46] text-[18px]">task_alt</span>
                 Event Readiness Score
               </h4>
-              <div className="w-full bg-[#F3F4F1] rounded-full h-2 overflow-hidden border border-[#E3E9E4]">
+              <div className="w-full bg-[#E9DCC9] rounded-full h-2 overflow-hidden border border-[#D4C4A8]">
                 <div
-                  className="bg-[#7BAE8A] h-full rounded-full transition-all duration-300"
+                  className="bg-[#C28B46] h-full rounded-full transition-all duration-300"
                   style={{ width: `${step === 1 ? 25 : step === 2 ? 60 : step === 3 ? 85 : 100}%` }}
                 ></div>
               </div>
-              <div className="flex items-center justify-between text-xs text-[#68766F]">
+              <div className="flex items-center justify-between text-xs text-[#5D4037]">
                 <span>{step === 1 ? '25%' : step === 2 ? '60%' : step === 3 ? '85%' : '100%'} setup completed</span>
-                <span className="text-[#315C49] font-semibold">
+                <span className="text-[#8B4513] font-semibold">
                   {step >= 3 ? 'Almost ready to publish' : 'In progress'}
                 </span>
               </div>

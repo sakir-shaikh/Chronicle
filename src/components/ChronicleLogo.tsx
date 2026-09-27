@@ -24,8 +24,8 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
     <div
       className={`relative ${iconSizes[size]} rounded-lg flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 ${
         isLight
-          ? 'bg-white/15 text-white border border-white/20'
-          : 'bg-[#20302A] text-[#7BAE8A] border border-[#315C49]/40 shadow-xs'
+          ? 'bg-[#FCFBF8]/15 text-white border border-white/20'
+          : 'bg-[#3E2723] text-[#C28B46] border border-[#8B4513]/40 shadow-xs'
       }`}
     >
       {/* Editorial Chronicle Mark: Timeline Portal Arch with Milestone Point */}
@@ -42,7 +42,7 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
           width="30"
           height="30"
           rx="5"
-          stroke={isLight ? 'rgba(255,255,255,0.25)' : '#315C49'}
+          stroke={isLight ? 'rgba(255,255,255,0.25)' : '#8B4513'}
           strokeWidth="1"
           strokeDasharray="2 2"
         />
@@ -52,14 +52,14 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
           y1="5"
           x2="16"
           y2="9"
-          stroke={isLight ? '#FFFFFF' : '#7BAE8A'}
+          stroke={isLight ? '#FFFFFF' : '#C28B46'}
           strokeWidth="2"
           strokeLinecap="round"
         />
         {/* Arch / Chronicle dome */}
         <path
           d="M8 24V16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16V24"
-          stroke={isLight ? '#FFFFFF' : '#EEF7F1'}
+          stroke={isLight ? '#FFFFFF' : '#F0E6D2'}
           strokeWidth="2.2"
           strokeLinecap="round"
         />
@@ -69,7 +69,7 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
           y1="19"
           x2="26"
           y2="19"
-          stroke={isLight ? '#DCEFE4' : '#7BAE8A'}
+          stroke={isLight ? '#E6D3A8' : '#C28B46'}
           strokeWidth="2"
           strokeLinecap="round"
         />
@@ -78,8 +78,8 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
           cx="16"
           cy="19"
           r="2.5"
-          fill={isLight ? '#FFFFFF' : '#DCEFE4'}
-          stroke={isLight ? '#315C49' : '#20302A'}
+          fill={isLight ? '#FFFFFF' : '#E6D3A8'}
+          stroke={isLight ? '#8B4513' : '#3E2723'}
           strokeWidth="1"
         />
       </svg>
@@ -97,16 +97,16 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
         <div className="flex items-center gap-1.5">
           <span
             className={`font-semibold tracking-tight ${
-              isLight ? 'text-white' : 'text-[#20302A]'
+              isLight ? 'text-white' : 'text-[#3E2723]'
             } ${
               size === 'lg' ? 'text-2xl' : size === 'sm' ? 'text-lg' : 'text-xl'
             }`}
-            style={{ fontFamily: 'Geist, sans-serif' }}
+            style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Chronicle
           </span>
           {size === 'lg' && (
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-[#EEF7F1] text-[#315C49] font-medium">
+            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-[#F0E6D2] text-[#8B4513] font-medium">
               Stories
             </span>
           )}
@@ -114,7 +114,7 @@ export const ChronicleLogo: React.FC<ChronicleLogoProps> = ({
         {variant !== 'compact' && (
           <span
             className={`text-[10.5px] tracking-wide mt-0.5 font-medium ${
-              isLight ? 'text-white/70' : 'text-[#68766F]'
+              isLight ? 'text-white/70' : 'text-[#5D4037]'
             }`}
           >
             Turn moments into stories

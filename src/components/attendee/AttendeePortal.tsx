@@ -235,7 +235,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
   return (
     <div className="w-full flex flex-col gap-8 pb-16 font-sans">
       {/* Top Event Hero Banner */}
-      <div className="relative w-full rounded-[32px] overflow-hidden shadow-lg bg-[#1E2522] border border-[#E3E9E4] mb-4">
+      <div className="relative w-full rounded-[32px] overflow-hidden shadow-lg bg-[#1E2522] border border-[#D4C4A8] mb-4">
         <div
           className="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-40 scale-105 transition-transform duration-1000 hover:scale-100"
           style={{ backgroundImage: `url(${event.coverImage})` }}
@@ -244,8 +244,8 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
         <div className="relative z-10 px-8 sm:px-12 py-12 sm:py-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-3 max-w-2xl text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DCEFE4] text-[#315C49] border border-[#BBEAD1] shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#315C49] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6D3A8] text-[#8B4513] border border-[#BBEAD1] shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#8B4513] animate-pulse"></span>
               <span className="text-[11px] uppercase tracking-wider font-semibold">
                 Official Attendee Portal
               </span>
@@ -253,23 +253,23 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
             <h1
               className="text-2xl sm:text-4xl text-white tracking-tight font-semibold"
-              style={{ fontFamily: 'Geist, sans-serif' }}
+              style={{ fontFamily: 'Playfair Display, serif' }}
             >
               {event.title}
             </h1>
 
             <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-[#C1C9C0] text-xs sm:text-sm">
-              <span className="flex items-center gap-1.5 text-[#EEF7F1]">
+              <span className="flex items-center gap-1.5 text-[#F0E6D2]">
                 <span className="material-symbols-outlined text-[17px] text-[#9ED3AC]">apartment</span>
                 Hosted by {event.organizer}
               </span>
               <span className="w-1 h-1 rounded-full bg-[#717971]"></span>
-              <span className="flex items-center gap-1.5 text-[#EEF7F1]">
+              <span className="flex items-center gap-1.5 text-[#F0E6D2]">
                 <span className="material-symbols-outlined text-[17px] text-[#9ED3AC]">calendar_today</span>
                 {event.date}
               </span>
               <span className="w-1 h-1 rounded-full bg-[#717971]"></span>
-              <span className="flex items-center gap-1.5 text-[#EEF7F1]">
+              <span className="flex items-center gap-1.5 text-[#F0E6D2]">
                 <span className="material-symbols-outlined text-[17px] text-[#9ED3AC]">pin_drop</span>
                 {event.cityCountry}
               </span>
@@ -279,7 +279,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               {event.hashtags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-0.5 rounded-md bg-white/10 text-[#DCEFE4] font-medium text-xs border border-white/10"
+                  className="px-2.5 py-0.5 rounded-md bg-[#FCFBF8]/10 text-[#E6D3A8] font-medium text-xs border border-white/10"
                 >
                   {tag}
                 </span>
@@ -292,17 +292,17 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-white hover:text-white text-xs font-semibold bg-white/15 hover:bg-white/20 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/20 shadow-xs transition-colors"
+              className="inline-flex items-center gap-1.5 text-white hover:text-white text-xs font-semibold bg-[#FCFBF8]/15 hover:bg-[#FCFBF8]/20 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/20 shadow-xs transition-colors"
             >
-              <span className="material-symbols-outlined text-[16px] text-[#DCEFE4]">share</span>
+              <span className="material-symbols-outlined text-[16px] text-[#E6D3A8]">share</span>
               <span>LinkedIn Page</span>
             </a>
             <button
               onClick={onBackToDashboard}
               type="button"
-              className="inline-flex items-center gap-1.5 text-white/90 hover:text-white text-xs font-semibold bg-white/10 hover:bg-white/20 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 transition-colors"
+              className="inline-flex items-center gap-1.5 text-white/90 hover:text-white text-xs font-semibold bg-[#FCFBF8]/10 hover:bg-[#FCFBF8]/20 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 transition-colors"
             >
-              <span className="material-symbols-outlined text-[16px] text-[#DCEFE4]">dashboard</span>
+              <span className="material-symbols-outlined text-[16px] text-[#E6D3A8]">dashboard</span>
               <span>Organizer</span>
             </button>
           </div>
@@ -310,48 +310,48 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
       </div>
 
       {/* Stepper */}
-      <div className="w-full bg-white border border-[#E3E9E4] rounded-2xl p-4 shadow-xs flex items-center justify-between overflow-x-auto no-scrollbar gap-4">
+      <div className="w-full bg-[#FCFBF8] border border-[#D4C4A8] rounded-2xl p-4 shadow-xs flex items-center justify-between overflow-x-auto no-scrollbar gap-4">
         <div className="flex items-center gap-3 min-w-max">
-          <div className="flex items-center gap-2 text-[#315C49]">
-            <span className="w-6 h-6 rounded-full bg-[#7BAE8A] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
+          <div className="flex items-center gap-2 text-[#8B4513]">
+            <span className="w-6 h-6 rounded-full bg-[#C28B46] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
               <span className="material-symbols-outlined text-[15px]">check</span>
             </span>
-            <span className="text-xs font-semibold text-[#20302A]">01 Photos</span>
+            <span className="text-xs font-semibold text-[#3E2723]">01 Photos</span>
           </div>
 
-          <span className="w-8 sm:w-12 h-px bg-[#E3E9E4]"></span>
+          <span className="w-8 sm:w-12 h-px bg-[#D4C4A8]"></span>
 
-          <div className="flex items-center gap-2 text-[#315C49]">
-            <span className="w-6 h-6 rounded-full bg-[#7BAE8A] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
+          <div className="flex items-center gap-2 text-[#8B4513]">
+            <span className="w-6 h-6 rounded-full bg-[#C28B46] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
               <span className="material-symbols-outlined text-[15px]">check</span>
             </span>
-            <span className="text-xs font-semibold text-[#20302A]">02 Takeaways</span>
+            <span className="text-xs font-semibold text-[#3E2723]">02 Takeaways</span>
           </div>
 
-          <span className="w-8 sm:w-12 h-px bg-[#E3E9E4]"></span>
+          <span className="w-8 sm:w-12 h-px bg-[#D4C4A8]"></span>
 
-          <div className="flex items-center gap-2 text-[#315C49]">
-            <span className="w-6 h-6 rounded-full bg-[#7BAE8A] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
+          <div className="flex items-center gap-2 text-[#8B4513]">
+            <span className="w-6 h-6 rounded-full bg-[#C28B46] text-white flex items-center justify-center text-xs font-semibold shadow-xs">
               <span className="material-symbols-outlined text-[15px]">check</span>
             </span>
-            <span className="text-xs font-semibold text-[#20302A]">03 Voice</span>
+            <span className="text-xs font-semibold text-[#3E2723]">03 Voice</span>
           </div>
 
-          <span className="w-8 sm:w-12 h-px bg-[#E3E9E4]"></span>
+          <span className="w-8 sm:w-12 h-px bg-[#D4C4A8]"></span>
 
-          <div className="flex items-center gap-2 text-[#315C49] font-semibold">
-            <span className="w-6 h-6 rounded-full bg-[#7BAE8A] ring-4 ring-[#DCEFE4] text-white flex items-center justify-center text-xs shadow-xs">
+          <div className="flex items-center gap-2 text-[#8B4513] font-semibold">
+            <span className="w-6 h-6 rounded-full bg-[#C28B46] ring-4 ring-[#E6D3A8] text-white flex items-center justify-center text-xs shadow-xs">
               04
             </span>
-            <span className="text-xs font-semibold text-[#20302A]">Generate</span>
-            <span className="ml-1 px-2 py-0.5 rounded-full bg-[#DCEFE4] text-[#315C49] text-[10px] font-bold">
+            <span className="text-xs font-semibold text-[#3E2723]">Generate</span>
+            <span className="ml-1 px-2 py-0.5 rounded-full bg-[#E6D3A8] text-[#8B4513] text-[10px] font-bold">
               Active
             </span>
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-1.5 text-[#68766F] text-xs font-medium">
-          <span className="material-symbols-outlined text-[18px] text-[#7BAE8A]">auto_awesome</span>
+        <div className="hidden sm:flex items-center gap-1.5 text-[#5D4037] text-xs font-medium">
+          <span className="material-symbols-outlined text-[18px] text-[#C28B46]">auto_awesome</span>
           <span>Chronicle Story Engine Active</span>
         </div>
       </div>
@@ -361,18 +361,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
         {/* LEFT COLUMN: Inputs & Personalization (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6 text-left">
           {/* Photos Upload Section */}
-          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[20px] text-[#315C49]">photo_library</span>
+                <span className="material-symbols-outlined text-[20px] text-[#8B4513]">photo_library</span>
                 <span
-                  className="text-base font-semibold text-[#20302A]"
-                  style={{ fontFamily: 'Geist, sans-serif' }}
+                  className="text-base font-semibold text-[#3E2723]"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
                 >
                   Uploaded Photos
                 </span>
               </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] text-[11px] text-[#68766F] font-mono">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#E9DCC9] border border-[#D4C4A8] text-[11px] text-[#5D4037] font-mono">
                 {uploadedPhotos.length} / 6 attached
               </span>
             </div>
@@ -382,14 +382,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               {uploadedPhotos.map((photoUrl, idx) => (
                 <div
                   key={idx}
-                  className="relative group rounded-xl overflow-hidden h-24 bg-[#F3F4F1] border border-[#E3E9E4] shadow-xs aspect-square"
+                  className="relative group rounded-xl overflow-hidden h-24 bg-[#E9DCC9] border border-[#D4C4A8] shadow-xs aspect-square"
                 >
                   <img src={photoUrl} alt="Attendee event moment" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between p-1.5">
                     <span className="material-symbols-outlined text-white text-[16px]">image</span>
                     <button
                       onClick={() => handleRemovePhoto(idx)}
-                      className="w-6 h-6 rounded-full bg-white/95 hover:bg-white text-[#20302A] flex items-center justify-center transition-colors shadow-xs"
+                      className="w-6 h-6 rounded-full bg-[#FCFBF8]/95 hover:bg-[#FCFBF8] text-[#3E2723] flex items-center justify-center transition-colors shadow-xs"
                       type="button"
                       title="Remove Photo"
                     >
@@ -403,10 +403,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               {uploadedPhotos.length < 6 && (
                 <button
                   onClick={() => setShowPhotoPicker(true)}
-                  className="h-24 rounded-2xl bg-white shadow-sm border-2 border-dashed border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] flex flex-col items-center justify-center gap-1 text-[#68766F] hover:text-[#315C49] transition-all cursor-pointer"
+                  className="h-24 rounded-2xl bg-[#FCFBF8] shadow-sm border-2 border-dashed border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] flex flex-col items-center justify-center gap-1 text-[#5D4037] hover:text-[#8B4513] transition-all cursor-pointer"
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-[22px] text-[#7BAE8A]">add_a_photo</span>
+                  <span className="material-symbols-outlined text-[22px] text-[#C28B46]">add_a_photo</span>
                   <span className="text-[11px] font-semibold">+ Add Photo</span>
                 </button>
               )}
@@ -414,12 +414,12 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
             {/* Quick Sample Photo Library Picker Dropdown */}
             {showPhotoPicker && (
-              <div className="p-3 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl space-y-2 animate-in fade-in duration-150">
+              <div className="p-3 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl space-y-2 animate-in fade-in duration-150">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#20302A]">Select from Event Moments Gallery:</span>
+                  <span className="text-xs font-semibold text-[#3E2723]">Select from Event Moments Gallery:</span>
                   <button
                     onClick={() => setShowPhotoPicker(false)}
-                    className="text-xs text-[#9AA69F] hover:text-[#20302A]"
+                    className="text-xs text-[#8D6E63] hover:text-[#3E2723]"
                   >
                     Cancel
                   </button>
@@ -429,7 +429,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                     <button
                       key={p.id}
                       onClick={() => handleAddSamplePhoto(p.url)}
-                      className="h-16 rounded-lg overflow-hidden border border-[#E3E9E4] hover:ring-2 hover:ring-[#7BAE8A] transition-all relative group"
+                      className="h-16 rounded-lg overflow-hidden border border-[#D4C4A8] hover:ring-2 hover:ring-[#C28B46] transition-all relative group"
                     >
                       <img src={p.url} alt={p.caption} className="w-full h-full object-cover" />
                     </button>
@@ -440,18 +440,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           </div>
 
           {/* Key Takeaways Section */}
-          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="takeaways"
-                className="text-base font-semibold text-[#20302A] flex items-center gap-2"
-                style={{ fontFamily: 'Geist, sans-serif' }}
+                className="text-base font-semibold text-[#3E2723] flex items-center gap-2"
+                style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                <span className="material-symbols-outlined text-[20px] text-[#315C49]">edit_note</span>
+                <span className="material-symbols-outlined text-[20px] text-[#8B4513]">edit_note</span>
                 <span>What stood out to you today?</span>
               </label>
-              <span className="text-[11px] text-[#9AA69F] flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7BAE8A]"></span>
+              <span className="text-[11px] text-[#8D6E63] flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C28B46]"></span>
                 Auto-saved
               </span>
             </div>
@@ -464,16 +464,16 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onChange={(e) => setTakeaways(e.target.value)}
                 maxLength={500}
                 placeholder="Share an idea, insight, quote, lesson, or moment that stayed with you..."
-                className="w-full p-5 bg-[#FAFBF8] border-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-2xl text-[#20302A] text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7BAE8A]/50 transition-all resize-none leading-relaxed placeholder:text-[#9AA69F]"
+                className="w-full p-5 bg-[#F4EFE6] border-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-2xl text-[#3E2723] text-sm focus:bg-[#FCFBF8] focus:outline-none focus:ring-1 focus:ring-[#C28B46]/50 transition-all resize-none leading-relaxed placeholder:text-[#8D6E63]"
               />
-              <div className="text-right text-[10px] text-[#9AA69F] mt-0.5 font-mono">
+              <div className="text-right text-[10px] text-[#8D6E63] mt-0.5 font-mono">
                 {takeaways.length} / 500 chars
               </div>
             </div>
 
             {/* Quick Prompt Pills */}
             <div className="space-y-1.5 pt-1">
-              <span className="text-[11px] text-[#9AA69F] uppercase font-semibold tracking-wider">
+              <span className="text-[11px] text-[#8D6E63] uppercase font-semibold tracking-wider">
                 Quick prompt inspirations:
               </span>
               <div className="flex flex-wrap gap-2">
@@ -485,7 +485,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       return newText.substring(0, 500);
                     })
                   }
-                  className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
+                  className="px-2.5 py-1 rounded-lg bg-[#F4EFE6] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] hover:text-[#8B4513] transition-colors text-xs text-[#3E2723]"
                 >
                   "The biggest thing I learned..."
                 </button>
@@ -497,7 +497,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       return newText.substring(0, 500);
                     })
                   }
-                  className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
+                  className="px-2.5 py-1 rounded-lg bg-[#F4EFE6] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] hover:text-[#8B4513] transition-colors text-xs text-[#3E2723]"
                 >
                   "One idea I'm taking back..."
                 </button>
@@ -509,7 +509,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       return newText.substring(0, 500);
                     })
                   }
-                  className="px-2.5 py-1 rounded-lg bg-[#FAFBF8] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:border-[#7BAE8A] hover:text-[#315C49] transition-colors text-xs text-[#20302A]"
+                  className="px-2.5 py-1 rounded-lg bg-[#F4EFE6] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:border-[#C28B46] hover:text-[#8B4513] transition-colors text-xs text-[#3E2723]"
                 >
                   "A speaker insight that stayed with me..."
                 </button>
@@ -518,12 +518,12 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           </div>
 
           {/* Tone & Perspective Selector */}
-          <div className="bg-white border border-[#E3E9E4] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] p-8 rounded-[32px] shadow-sm space-y-5 hover:shadow-md transition-shadow">
             <label
-              className="text-base font-semibold text-[#20302A] flex items-center gap-2"
-              style={{ fontFamily: 'Geist, sans-serif' }}
+              className="text-base font-semibold text-[#3E2723] flex items-center gap-2"
+              style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              <span className="material-symbols-outlined text-[20px] text-[#315C49]">tune</span>
+              <span className="material-symbols-outlined text-[20px] text-[#8B4513]">tune</span>
               <span>Tone &amp; Perspective</span>
             </label>
 
@@ -534,18 +534,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => setSelectedTone('professional')}
                 className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'professional'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
+                    ? 'bg-[#F0E6D2] border-[#C28B46] ring-1 ring-[#C28B46] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-[#FCFBF8] border-[#D4C4A8] hover:bg-[#F4EFE6] hover:border-[#8D6E63] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
-                  <span className="text-xs font-semibold text-[#20302A]">Professional</span>
-                  <p className="text-xs text-[#68766F]">Thoughtful, polished, and business-focused</p>
+                  <span className="text-xs font-semibold text-[#3E2723]">Professional</span>
+                  <p className="text-xs text-[#5D4037]">Thoughtful, polished, and business-focused</p>
                 </div>
                 {selectedTone === 'professional' ? (
-                  <span className="material-symbols-outlined text-[20px] text-[#315C49]">check_circle</span>
+                  <span className="material-symbols-outlined text-[20px] text-[#8B4513]">check_circle</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border border-[#E3E9E4] bg-[#F3F4F1]"></span>
+                  <span className="w-5 h-5 rounded-full border border-[#D4C4A8] bg-[#E9DCC9]"></span>
                 )}
               </button>
 
@@ -555,18 +555,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => setSelectedTone('grateful')}
                 className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'grateful'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
+                    ? 'bg-[#F0E6D2] border-[#C28B46] ring-1 ring-[#C28B46] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-[#FCFBF8] border-[#D4C4A8] hover:bg-[#F4EFE6] hover:border-[#8D6E63] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
-                  <span className="text-xs font-semibold text-[#20302A]">Grateful Attendee</span>
-                  <p className="text-xs text-[#68766F]">Personal, appreciative, and people-focused</p>
+                  <span className="text-xs font-semibold text-[#3E2723]">Grateful Attendee</span>
+                  <p className="text-xs text-[#5D4037]">Personal, appreciative, and people-focused</p>
                 </div>
                 {selectedTone === 'grateful' ? (
-                  <span className="material-symbols-outlined text-[20px] text-[#315C49]">check_circle</span>
+                  <span className="material-symbols-outlined text-[20px] text-[#8B4513]">check_circle</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border border-[#E3E9E4] bg-[#F3F4F1]"></span>
+                  <span className="w-5 h-5 rounded-full border border-[#D4C4A8] bg-[#E9DCC9]"></span>
                 )}
               </button>
 
@@ -576,18 +576,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => setSelectedTone('takeaways')}
                 className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'takeaways'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
+                    ? 'bg-[#F0E6D2] border-[#C28B46] ring-1 ring-[#C28B46] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-[#FCFBF8] border-[#D4C4A8] hover:bg-[#F4EFE6] hover:border-[#8D6E63] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
-                  <span className="text-xs font-semibold text-[#20302A]">Key Takeaways</span>
-                  <p className="text-xs text-[#68766F]">Insight-driven and focused on learnings</p>
+                  <span className="text-xs font-semibold text-[#3E2723]">Key Takeaways</span>
+                  <p className="text-xs text-[#5D4037]">Insight-driven and focused on learnings</p>
                 </div>
                 {selectedTone === 'takeaways' ? (
-                  <span className="material-symbols-outlined text-[20px] text-[#315C49]">check_circle</span>
+                  <span className="material-symbols-outlined text-[20px] text-[#8B4513]">check_circle</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border border-[#E3E9E4] bg-[#F3F4F1]"></span>
+                  <span className="w-5 h-5 rounded-full border border-[#D4C4A8] bg-[#E9DCC9]"></span>
                 )}
               </button>
 
@@ -597,36 +597,36 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => setSelectedTone('thought-leader')}
                 className={`p-4 rounded-2xl border text-left flex items-start justify-between cursor-pointer transition-all ${
                   selectedTone === 'thought-leader'
-                    ? 'bg-[#EEF7F1] border-[#7BAE8A] ring-1 ring-[#7BAE8A] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
-                    : 'bg-white border-[#E3E9E4] hover:bg-[#FAFBF8] hover:border-[#9AA69F] hover:shadow-sm'
+                    ? 'bg-[#F0E6D2] border-[#C28B46] ring-1 ring-[#C28B46] shadow-[0_4px_12px_rgba(123,174,138,0.2)]'
+                    : 'bg-[#FCFBF8] border-[#D4C4A8] hover:bg-[#F4EFE6] hover:border-[#8D6E63] hover:shadow-sm'
                 }`}
               >
                 <div className="space-y-0.5">
-                  <span className="text-xs font-semibold text-[#20302A]">Thought Leader / Forward-Looking</span>
-                  <p className="text-xs text-[#68766F]">Ecosystem shifts, trends, and macro predictions</p>
+                  <span className="text-xs font-semibold text-[#3E2723]">Thought Leader / Forward-Looking</span>
+                  <p className="text-xs text-[#5D4037]">Ecosystem shifts, trends, and macro predictions</p>
                 </div>
                 {selectedTone === 'thought-leader' ? (
-                  <span className="material-symbols-outlined text-[20px] text-[#315C49]">check_circle</span>
+                  <span className="material-symbols-outlined text-[20px] text-[#8B4513]">check_circle</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border border-[#E3E9E4] bg-[#F3F4F1]"></span>
+                  <span className="w-5 h-5 rounded-full border border-[#D4C4A8] bg-[#E9DCC9]"></span>
                 )}
               </button>
             </div>
           </div>
 
           {/* Advanced Personalization (Collapsible) */}
-          <div className="bg-white border border-[#E3E9E4] rounded-[32px] shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-[32px] shadow-sm overflow-hidden hover:shadow-md transition-shadow">
             <button
               type="button"
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="w-full p-4 flex items-center justify-between text-left text-xs font-semibold text-[#20302A] hover:bg-[#FAFBF8] transition-colors"
+              className="w-full p-4 flex items-center justify-between text-left text-xs font-semibold text-[#3E2723] hover:bg-[#F4EFE6] transition-colors"
             >
               <span className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[18px] text-[#315C49]">settings_suggest</span>
+                <span className="material-symbols-outlined text-[18px] text-[#8B4513]">settings_suggest</span>
                 <span>Advanced Personalization</span>
               </span>
               <span
-                className={`material-symbols-outlined text-[18px] text-[#9AA69F] transition-transform duration-200 ${
+                className={`material-symbols-outlined text-[18px] text-[#8D6E63] transition-transform duration-200 ${
                   showAdvanced ? 'rotate-180' : ''
                 }`}
               >
@@ -635,33 +635,33 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
             </button>
 
             {showAdvanced && (
-              <div className="p-6 pt-0 space-y-4 border-t border-[#E3E9E4]">
+              <div className="p-6 pt-0 space-y-4 border-t border-[#D4C4A8]">
                 <div className="space-y-1.5 pt-3">
-                  <label className="text-xs font-medium text-[#68766F]">Mention People &amp; Brands</label>
+                  <label className="text-xs font-medium text-[#5D4037]">Mention People &amp; Brands</label>
                   <input
                     type="text"
                     value={mentions}
                     onChange={(e) => setMentions(e.target.value)}
-                    className="w-full h-10 px-3 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl text-xs text-[#20302A] focus:outline-none focus:ring-2 focus:ring-[#7BAE8A]"
+                    className="w-full h-10 px-3 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl text-xs text-[#3E2723] focus:outline-none focus:ring-2 focus:ring-[#C28B46]"
                     placeholder="@SpeakerName, @Company"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-[#68766F]">Personal Reflection / Shoutout</label>
+                  <label className="text-xs font-medium text-[#5D4037]">Personal Reflection / Shoutout</label>
                   <input
                     type="text"
                     value={personalNote}
                     onChange={(e) => setPersonalNote(e.target.value)}
-                    className="w-full h-10 px-3 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl text-xs text-[#20302A] focus:outline-none focus:ring-2 focus:ring-[#7BAE8A]"
+                    className="w-full h-10 px-3 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl text-xs text-[#3E2723] focus:outline-none focus:ring-2 focus:ring-[#C28B46]"
                     placeholder="e.g. Loved reconnecting with the Mumbai developer community!"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-[#68766F]">Post Length</label>
-                    <div className="flex bg-[#F3F4F1] p-1 rounded-xl border border-[#E3E9E4]">
+                    <label className="text-xs font-medium text-[#5D4037]">Post Length</label>
+                    <div className="flex bg-[#E9DCC9] p-1 rounded-xl border border-[#D4C4A8]">
                       {(['concise', 'standard', 'detailed'] as PostLength[]).map((len) => (
                         <button
                           key={len}
@@ -669,8 +669,8 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                           onClick={() => setPostLength(len)}
                           className={`flex-1 py-1 rounded-lg text-center text-xs capitalize ${
                             postLength === len
-                              ? 'bg-white text-[#20302A] font-semibold shadow-xs'
-                              : 'text-[#68766F] hover:text-[#20302A]'
+                              ? 'bg-[#FCFBF8] text-[#3E2723] font-semibold shadow-xs'
+                              : 'text-[#5D4037] hover:text-[#3E2723]'
                           }`}
                         >
                           {len}
@@ -680,8 +680,8 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-[#68766F]">Emoji Style</label>
-                    <div className="flex bg-[#F3F4F1] p-1 rounded-xl border border-[#E3E9E4]">
+                    <label className="text-xs font-medium text-[#5D4037]">Emoji Style</label>
+                    <div className="flex bg-[#E9DCC9] p-1 rounded-xl border border-[#D4C4A8]">
                       {(['none', 'minimal', 'natural'] as EmojiStyle[]).map((em) => (
                         <button
                           key={em}
@@ -689,8 +689,8 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                           onClick={() => setEmojiStyle(em)}
                           className={`flex-1 py-1 rounded-lg text-center text-xs capitalize ${
                             emojiStyle === em
-                              ? 'bg-white text-[#20302A] font-semibold shadow-xs'
-                              : 'text-[#68766F] hover:text-[#20302A]'
+                              ? 'bg-[#FCFBF8] text-[#3E2723] font-semibold shadow-xs'
+                              : 'text-[#5D4037] hover:text-[#3E2723]'
                           }`}
                         >
                           {em}
@@ -709,23 +709,23 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               onClick={() => handleGeneratePost()}
               disabled={isGenerating}
               type="button"
-              className="w-full py-3.5 px-6 rounded-2xl bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-base font-semibold shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 transition-all transform active:scale-98 disabled:opacity-80 cursor-pointer"
+              className="w-full py-3.5 px-6 rounded-2xl bg-[#C28B46] hover:bg-[#A87739] text-white text-base font-semibold shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 transition-all transform active:scale-98 disabled:opacity-80 cursor-pointer"
             >
               {isGenerating ? (
                 <div className="flex items-center gap-3 animate-pulse">
-                  <span className="material-symbols-outlined text-[24px] text-[#DCEFE4] animate-spin">
+                  <span className="material-symbols-outlined text-[24px] text-[#E6D3A8] animate-spin">
                     progress_activity
                   </span>
                   <span className="text-white font-medium tracking-wide">{generationStepText}</span>
                 </div>
               ) : (
                 <>
-                  <span className="material-symbols-outlined text-[22px] text-[#DCEFE4]">auto_awesome</span>
+                  <span className="material-symbols-outlined text-[22px] text-[#E6D3A8]">auto_awesome</span>
                   <span>Generate LinkedIn Post</span>
                 </>
               )}
             </button>
-            <p className="text-xs text-[#9AA69F] text-center">
+            <p className="text-xs text-[#8D6E63] text-center">
               Chronicle AI will synthesize your highlights into a high-engagement post
             </p>
           </div>
@@ -734,22 +734,22 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
         {/* RIGHT COLUMN: Live LinkedIn Post Preview (7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-5 sticky top-20 text-left">
           {/* Post Preview Card */}
-          <div className="bg-white border border-[#E3E9E4] rounded-[32px] shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] rounded-[32px] shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
             {/* Header Status Strip */}
-            <div className="px-6 py-3 bg-[#FAFBF8] border-b border-[#E3E9E4] flex items-center justify-between">
+            <div className="px-6 py-3 bg-[#F4EFE6] border-b border-[#D4C4A8] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#7BAE8A]"></span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#68766F]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#C28B46]"></span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#5D4037]">
                   Live LinkedIn Feed Preview
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 {postVersions.length > 1 && (
-                  <div className="flex items-center gap-1 bg-[#EEF7F1] px-2 py-0.5 rounded-full text-[11px] text-[#315C49] font-medium border border-[#DCEFE4]">
+                  <div className="flex items-center gap-1 bg-[#F0E6D2] px-2 py-0.5 rounded-full text-[11px] text-[#8B4513] font-medium border border-[#E6D3A8]">
                     <span>Draft {currentVersionIndex + 1} of {postVersions.length}</span>
                   </div>
                 )}
-                <span className="text-[11px] text-[#9AA69F] hidden sm:inline">
+                <span className="text-[11px] text-[#8D6E63] hidden sm:inline">
                   Optimized for LinkedIn Desktop &amp; Mobile
                 </span>
               </div>
@@ -762,7 +762,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <div className="flex items-center gap-3">
                   <img
                     alt={authorName}
-                    className="w-12 h-12 rounded-full object-cover ring-1 ring-[#E3E9E4]"
+                    className="w-12 h-12 rounded-full object-cover ring-1 ring-[#D4C4A8]"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdO0Ztz8EMnhV_UCU8E9TMJGmC0h5mzaGWN8WcZjQniYu0kolQZwQ7cU9O-WFCM4WfQj_KJhkLaF49QsG9fbJUs8MuVC0lc77TtMB7dDErnVb8iC2d7d8-lCVj5lsr88fPA0_44Ob1z9WFRDqlg2s4S6NqIcg8t0dRkmf5mJFIGCIUxtJsQuN2SwGClZQJ0ywNGlpZRlaBiSAibTdSMF6ymyzpy7iewL-MRyoHKgJK2NiTTaWjpGFp"
                   />
                   <div className="flex flex-col">
@@ -772,18 +772,18 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                           type="text"
                           value={authorName}
                           onChange={(e) => setAuthorName(e.target.value)}
-                          className="font-semibold text-xs text-[#20302A] border-b border-[#7BAE8A] outline-none"
+                          className="font-semibold text-xs text-[#3E2723] border-b border-[#C28B46] outline-none"
                         />
                       ) : (
                         <span
                           onClick={() => setIsEditingAuthor(true)}
-                          className="font-semibold text-sm text-[#20302A] hover:text-[#315C49] transition-colors cursor-pointer"
+                          className="font-semibold text-sm text-[#3E2723] hover:text-[#8B4513] transition-colors cursor-pointer"
                           title="Click to edit name"
                         >
                           {authorName}
                         </span>
                       )}
-                      <span className="text-xs text-[#9AA69F]">· 1st</span>
+                      <span className="text-xs text-[#8D6E63]">· 1st</span>
                     </div>
 
                     {isEditingAuthor ? (
@@ -792,11 +792,11 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                           type="text"
                           value={authorRole}
                           onChange={(e) => setAuthorRole(e.target.value)}
-                          className="text-xs text-[#68766F] border-b border-[#7BAE8A] outline-none w-64"
+                          className="text-xs text-[#5D4037] border-b border-[#C28B46] outline-none w-64"
                         />
                         <button
                           onClick={() => setIsEditingAuthor(false)}
-                          className="text-[10px] text-[#315C49] font-bold"
+                          className="text-[10px] text-[#8B4513] font-bold"
                         >
                           Done
                         </button>
@@ -804,14 +804,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                     ) : (
                       <span
                         onClick={() => setIsEditingAuthor(true)}
-                        className="text-xs text-[#68766F] line-clamp-1 cursor-pointer hover:underline"
+                        className="text-xs text-[#5D4037] line-clamp-1 cursor-pointer hover:underline"
                         title="Click to edit headline"
                       >
                         {authorRole}
                       </span>
                     )}
 
-                    <span className="text-[11px] text-[#9AA69F] flex items-center gap-1 mt-0.5">
+                    <span className="text-[11px] text-[#8D6E63] flex items-center gap-1 mt-0.5">
                       Just now · <span className="material-symbols-outlined text-[13px]">public</span>
                     </span>
                   </div>
@@ -823,7 +823,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       setEditedPostDraft(postContent);
                       setIsEditingPost(!isEditingPost);
                     }}
-                    className="text-xs text-[#68766F] hover:text-[#20302A] p-1.5 rounded-lg hover:bg-[#F3F4F1] transition-colors flex items-center gap-1"
+                    className="text-xs text-[#5D4037] hover:text-[#3E2723] p-1.5 rounded-lg hover:bg-[#E9DCC9] transition-colors flex items-center gap-1"
                     title="Edit Post Text"
                   >
                     <span className="material-symbols-outlined text-[18px]">
@@ -841,22 +841,22 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                     rows={8}
                     value={editedPostDraft}
                     onChange={(e) => setEditedPostDraft(e.target.value)}
-                    className="w-full p-4 text-xs sm:text-sm font-sans text-[#20302A] leading-relaxed bg-[#FAFBF8] border border-[#7BAE8A] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7BAE8A]/30"
+                    className="w-full p-4 text-xs sm:text-sm font-sans text-[#3E2723] leading-relaxed bg-[#F4EFE6] border border-[#C28B46] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C28B46]/30"
                   />
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[11px] font-mono text-[#9AA69F]">
+                    <span className="text-[11px] font-mono text-[#8D6E63]">
                       {editedPostDraft.length} / 3,000 characters
                     </span>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setIsEditingPost(false)}
-                        className="px-3 py-1.5 rounded-lg text-xs text-[#68766F] hover:bg-[#F3F4F1]"
+                        className="px-3 py-1.5 rounded-lg text-xs text-[#5D4037] hover:bg-[#E9DCC9]"
                       >
                         Cancel
                       </button>
                       <button
                         onClick={handleSaveEditedPost}
-                        className="px-4 py-1.5 bg-[#7BAE8A] text-white font-semibold text-xs rounded-lg shadow-xs hover:bg-[#6da07c]"
+                        className="px-4 py-1.5 bg-[#C28B46] text-white font-semibold text-xs rounded-lg shadow-xs hover:bg-[#A87739]"
                       >
                         Save Changes
                       </button>
@@ -864,7 +864,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                   </div>
                 </div>
               ) : (
-                <div className="text-xs sm:text-sm text-[#20302A] whitespace-pre-line leading-relaxed font-sans">
+                <div className="text-xs sm:text-sm text-[#3E2723] whitespace-pre-line leading-relaxed font-sans">
                   {postContent}
                 </div>
               )}
@@ -878,10 +878,10 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                       : uploadedPhotos.length === 2
                       ? 'grid-cols-2'
                       : 'grid-cols-2'
-                  } gap-1.5 rounded-xl overflow-hidden mt-3 max-h-80 border border-[#E3E9E4]`}
+                  } gap-1.5 rounded-xl overflow-hidden mt-3 max-h-80 border border-[#D4C4A8]`}
                 >
                   {uploadedPhotos.slice(0, 4).map((pUrl, i) => (
-                    <div key={i} className="relative h-48 sm:h-56 bg-[#F3F4F1] overflow-hidden group">
+                    <div key={i} className="relative h-48 sm:h-56 bg-[#E9DCC9] overflow-hidden group">
                       <img
                         src={pUrl}
                         alt="Conference photo"
@@ -899,13 +899,13 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               )}
 
               {/* LinkedIn Reactions Row */}
-              <div className="flex items-center justify-between pt-2 text-[#68766F] text-xs">
+              <div className="flex items-center justify-between pt-2 text-[#5D4037] text-xs">
                 <div className="flex items-center gap-1.5">
                   <span className="flex -space-x-1">
-                    <span className="w-4 h-4 rounded-full bg-[#7BAE8A] text-white flex items-center justify-center text-[9px]">
+                    <span className="w-4 h-4 rounded-full bg-[#C28B46] text-white flex items-center justify-center text-[9px]">
                       👍
                     </span>
-                    <span className="w-4 h-4 rounded-full bg-[#315C49] text-white flex items-center justify-center text-[9px]">
+                    <span className="w-4 h-4 rounded-full bg-[#8B4513] text-white flex items-center justify-center text-[9px]">
                       💡
                     </span>
                     <span className="w-4 h-4 rounded-full bg-[#BA1A1A] text-white flex items-center justify-center text-[9px]">
@@ -914,7 +914,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                   </span>
                   <span className="font-semibold">{likeCount} reactions</span>
                 </div>
-                <div className="flex items-center gap-3 text-[#9AA69F]">
+                <div className="flex items-center gap-3 text-[#8D6E63]">
                   <span>9 comments</span>
                   <span>·</span>
                   <span>3 reposts</span>
@@ -922,7 +922,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
               </div>
 
               {/* LinkedIn Interactive Row */}
-              <div className="grid grid-cols-4 gap-1 pt-2 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl p-1 text-[#68766F] text-xs font-semibold">
+              <div className="grid grid-cols-4 gap-1 pt-2 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl p-1 text-[#5D4037] text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => {
@@ -930,7 +930,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                     setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
                   }}
                   className={`py-2 flex items-center justify-center gap-1.5 rounded-lg transition-colors ${
-                    isLiked ? 'text-[#0a66c2] bg-blue-50 font-bold' : 'hover:bg-[#EEF7F1] hover:text-[#315C49]'
+                    isLiked ? 'text-[#0a66c2] bg-blue-50 font-bold' : 'hover:bg-[#F0E6D2] hover:text-[#8B4513]'
                   }`}
                 >
                   <span className="material-symbols-outlined text-[17px]">thumb_up</span>
@@ -939,7 +939,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={() => alert('LinkedIn Comment thread enabled upon publish.')}
-                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#EEF7F1] hover:text-[#315C49] rounded-lg transition-colors"
+                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#F0E6D2] hover:text-[#8B4513] rounded-lg transition-colors"
                 >
                   <span className="material-symbols-outlined text-[17px]">comment</span>
                   <span>Comment</span>
@@ -947,7 +947,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={() => alert('LinkedIn Repost action simulated.')}
-                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#EEF7F1] hover:text-[#315C49] rounded-lg transition-colors"
+                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#F0E6D2] hover:text-[#8B4513] rounded-lg transition-colors"
                 >
                   <span className="material-symbols-outlined text-[17px]">repeat</span>
                   <span>Repost</span>
@@ -955,7 +955,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   type="button"
                   onClick={handleCopyPost}
-                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#EEF7F1] hover:text-[#315C49] rounded-lg transition-colors"
+                  className="py-2 flex items-center justify-center gap-1.5 hover:bg-[#F0E6D2] hover:text-[#8B4513] rounded-lg transition-colors"
                 >
                   <span className="material-symbols-outlined text-[17px]">send</span>
                   <span>Send</span>
@@ -966,14 +966,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
           {/* Success Alert Banner (Appears on copy) */}
           {showCopyAlert && (
-            <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#DCEFE4] border border-[#BBEAD1] text-[#002111] shadow-xs animate-in fade-in duration-200">
+            <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#E6D3A8] border border-[#BBEAD1] text-[#002111] shadow-xs animate-in fade-in duration-200">
               <div className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-[20px] text-[#315C49]">check_circle</span>
+                <span className="material-symbols-outlined text-[20px] text-[#8B4513]">check_circle</span>
                 <span className="text-xs font-semibold">Post copied! Ready to paste directly into LinkedIn.</span>
               </div>
               <button
                 onClick={() => setShowCopyAlert(false)}
-                className="text-[#315C49] hover:opacity-75"
+                className="text-[#8B4513] hover:opacity-75"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[16px]">close</span>
@@ -982,13 +982,13 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
           )}
 
           {/* Action Bar below Card */}
-          <div className="bg-white border border-[#E3E9E4] p-6 rounded-[32px] shadow-sm space-y-4 hover:shadow-md transition-shadow">
+          <div className="bg-[#FCFBF8] border border-[#D4C4A8] p-6 rounded-[32px] shadow-sm space-y-4 hover:shadow-md transition-shadow">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <button
                   onClick={handleCopyPost}
                   type="button"
-                  className="px-5 py-2.5 rounded-xl bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-[#C28B46] hover:bg-[#A87739] text-white text-xs font-semibold shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[18px]">content_copy</span>
                   <span>Copy Post</span>
@@ -997,7 +997,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 <button
                   onClick={handleOpenLinkedIn}
                   type="button"
-                  className="px-4 py-2.5 rounded-xl bg-white border border-[#E3E9E4] hover:bg-[#FAFBF8] text-[#315C49] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-[#FCFBF8] border border-[#D4C4A8] hover:bg-[#F4EFE6] text-[#8B4513] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Open in LinkedIn</span>
                   <span className="material-symbols-outlined text-[16px]">north_east</span>
@@ -1006,7 +1006,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
 
               {/* Version History Selector */}
               {postVersions.length > 1 && (
-                <div className="flex items-center gap-1.5 text-xs text-[#68766F]">
+                <div className="flex items-center gap-1.5 text-xs text-[#5D4037]">
                   <span className="text-[11px] font-medium">Versions:</span>
                   <div className="flex items-center gap-1">
                     {postVersions.map((v, i) => (
@@ -1019,8 +1019,8 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                         }}
                         className={`w-6 h-6 rounded-md text-[11px] font-mono font-semibold transition-all ${
                           i === currentVersionIndex
-                            ? 'bg-[#315C49] text-white shadow-xs'
-                            : 'bg-[#F3F4F1] text-[#68766F] hover:bg-[#E3E9E4]'
+                            ? 'bg-[#8B4513] text-white shadow-xs'
+                            : 'bg-[#E9DCC9] text-[#5D4037] hover:bg-[#D4C4A8]'
                         }`}
                       >
                         {i + 1}
@@ -1032,14 +1032,14 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
             </div>
 
             {/* AI Refinement Chips */}
-            <div className="pt-2 border-t border-[#E3E9E4] flex flex-wrap items-center gap-2">
-              <span className="text-[11px] text-[#68766F] font-semibold">Refine with AI:</span>
+            <div className="pt-2 border-t border-[#D4C4A8] flex flex-wrap items-center gap-2">
+              <span className="text-[11px] text-[#5D4037] font-semibold">Refine with AI:</span>
 
               <button
                 onClick={() => handleGeneratePost('professional')}
                 disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 rounded-full bg-[#E9DCC9] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:text-[#8B4513] transition-colors text-xs text-[#5D4037] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">refresh</span>
                 <span>Regenerate (Different Tone)</span>
@@ -1049,7 +1049,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => handleGeneratePost(undefined, 'concise')}
                 disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 rounded-full bg-[#E9DCC9] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:text-[#8B4513] transition-colors text-xs text-[#5D4037] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">compress</span>
                 <span>Make Shorter</span>
@@ -1059,7 +1059,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => handleGeneratePost('grateful')}
                 disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 rounded-full bg-[#E9DCC9] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:text-[#8B4513] transition-colors text-xs text-[#5D4037] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">favorite</span>
                 <span>Make More Personal</span>
@@ -1069,7 +1069,7 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                 onClick={() => handleGeneratePost('takeaways')}
                 disabled={isGenerating}
                 type="button"
-                className="px-3 py-1 rounded-full bg-[#F3F4F1] border border-[#E3E9E4] hover:bg-[#EEF7F1] hover:text-[#315C49] transition-colors text-xs text-[#68766F] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 rounded-full bg-[#E9DCC9] border border-[#D4C4A8] hover:bg-[#F0E6D2] hover:text-[#8B4513] transition-colors text-xs text-[#5D4037] flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="material-symbols-outlined text-[14px]">format_list_numbered</span>
                 <span>Focus on Takeaways</span>
@@ -1082,39 +1082,39 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
       {/* Post Success Celebration Modal (Section 33) */}
       {showSuccessModal && (
         <div 
-          className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-[#3E2723]/40 backdrop-blur-xs flex items-center justify-center p-4"
           onClick={() => setShowSuccessModal(false)}
         >
           <div 
-            className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] text-center animate-in fade-in zoom-in-95 duration-200"
+            className="bg-[#FCFBF8] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#D4C4A8] text-center animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-14 h-14 rounded-full bg-[#EEF7F1] text-[#315C49] flex items-center justify-center mx-auto mb-3 border border-[#DCEFE4]">
-              <span className="material-symbols-outlined text-[32px] text-[#7BAE8A]">task_alt</span>
+            <div className="w-14 h-14 rounded-full bg-[#F0E6D2] text-[#8B4513] flex items-center justify-center mx-auto mb-3 border border-[#E6D3A8]">
+              <span className="material-symbols-outlined text-[32px] text-[#C28B46]">task_alt</span>
             </div>
 
             <h3
-              className="text-xl font-semibold text-[#20302A]"
-              style={{ fontFamily: 'Geist, sans-serif' }}
+              className="text-xl font-semibold text-[#3E2723]"
+              style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Your post is ready to share!
             </h3>
-            <p className="text-xs text-[#68766F] mt-1 max-w-xs mx-auto">
+            <p className="text-xs text-[#5D4037] mt-1 max-w-xs mx-auto">
               Your formatted text and tags have been copied to your clipboard. Simply paste (Ctrl+V or Cmd+V) into LinkedIn.
             </p>
 
-            <div className="my-5 p-4 bg-[#FAFBF8] border border-[#E3E9E4] rounded-xl text-left space-y-2 text-xs">
+            <div className="my-5 p-4 bg-[#F4EFE6] border border-[#D4C4A8] rounded-xl text-left space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-[#68766F]">Photos attached:</span>
-                <span className="font-semibold text-[#20302A]">{uploadedPhotos.length}</span>
+                <span className="text-[#5D4037]">Photos attached:</span>
+                <span className="font-semibold text-[#3E2723]">{uploadedPhotos.length}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#68766F]">Takeaways synthesized:</span>
-                <span className="font-semibold text-[#315C49]">Yes (Verified)</span>
+                <span className="text-[#5D4037]">Takeaways synthesized:</span>
+                <span className="font-semibold text-[#8B4513]">Yes (Verified)</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#68766F]">Tone applied:</span>
-                <span className="font-semibold text-[#20302A] capitalize">{selectedTone}</span>
+                <span className="text-[#5D4037]">Tone applied:</span>
+                <span className="font-semibold text-[#3E2723] capitalize">{selectedTone}</span>
               </div>
             </div>
 
@@ -1124,13 +1124,13 @@ export const AttendeePortal: React.FC<AttendeePortalProps> = ({
                   handleCopyPost();
                   setShowSuccessModal(false);
                 }}
-                className="flex-1 py-2.5 px-4 bg-[#F3F4F1] hover:bg-[#E3E9E4] text-[#20302A] rounded-xl text-xs font-semibold transition-colors"
+                className="flex-1 py-2.5 px-4 bg-[#E9DCC9] hover:bg-[#D4C4A8] text-[#3E2723] rounded-xl text-xs font-semibold transition-colors"
               >
                 Copy Again
               </button>
               <button
                 onClick={() => setShowSuccessModal(false)}
-                className="flex-1 py-2.5 px-4 bg-[#7BAE8A] hover:bg-[#6da07c] text-white rounded-xl text-xs font-semibold transition-colors shadow-xs"
+                className="flex-1 py-2.5 px-4 bg-[#C28B46] hover:bg-[#A87739] text-white rounded-xl text-xs font-semibold transition-colors shadow-xs"
               >
                 Done
               </button>

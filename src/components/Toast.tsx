@@ -27,7 +27,7 @@ export const Toast: React.FC<ToastProps> = ({ show, title, message, onClose }) =
       aria-live="assertive"
       onAnimationEnd={handleAnimationEnd}
     >
-      <div className="bg-white/90 text-text-primary px-4 py-3.5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between gap-3 border border-border-subtle/80 backdrop-blur-xl">
+      <div className="bg-[#FCFBF8]/90 text-text-primary px-4 py-3.5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between gap-3 border border-border-subtle/80 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-brand-light-mint flex items-center justify-center text-brand-dark shrink-0">
             <span className="material-symbols-outlined text-[18px]">check_circle</span>

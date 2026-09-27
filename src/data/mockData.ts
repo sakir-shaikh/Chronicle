@@ -86,7 +86,7 @@ export const INITIAL_EVENTS: EventItem[] = [
     description: 'Join global pioneers, researchers, and enterprise AI leaders exploring the frontiers of generative technology, autonomous agents, and institutional ethics.',
     coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlPxClRDCUvtnoP2faPZtOzAjF99oNEU8BOFeqY_gilxCfoCmbsw6lOjxmUfbrBq5g9Ss4Vu3SE5nDx9klvyJufbHWitNH_sOPqZU1tVBAbihyDs6jeL3mHwpKKVLYhhDOh3UxrfZeMLxr_uy4jE6ap9Ya-xm05xkQM1z-JAaZ_LQr6-p5wZhn81ab6kEmMZlOoNf8CsU2li6YfniP1sizZPHQXjmD5kw8qFAVLSuIfFLdf3BweZuE',
     organizerLogoText: 'AI',
-    brandAccent: '#7BAE8A',
+    brandAccent: '#C28B46',
     hashtags: ['#FutureOfAI', '#AISummit', '#AcmeAI', '#Innovation'],
     socialChannels: {
       linkedin: 'https://linkedin.com/company/acme-ai',
@@ -142,7 +142,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         sentimentLabel: '88% positive',
         mentions: 42,
         progressPercent: 84,
-        colorClass: 'bg-[#7BAE8A]',
+        colorClass: 'bg-[#C28B46]',
       },
       {
         id: 'theme-2',
@@ -151,7 +151,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         sentimentLabel: '92% positive',
         mentions: 31,
         progressPercent: 62,
-        colorClass: 'bg-[#315C49]',
+        colorClass: 'bg-[#8B4513]',
       },
       {
         id: 'theme-3',
@@ -266,7 +266,7 @@ export const INITIAL_EVENTS: EventItem[] = [
     description: 'An intimate gathering of CPOs, VPs of Product, and design leaders diving deep into outcome-driven execution, AI roadmaps, and org transformation.',
     coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA4fz8s100n106uGMWUjAnDOV0ccvSa5tqH1lKLDUz5XbiRkgyaXO5LOsHXgb9Mi3Iwat4ogGYuaud9u7mhE-utToY5HH39aebUaU6UQg5lrkl_FRtuKk8t39ZEtL1J_tQPOBM-VHLeaDP5dvwuDpEKjpisPD9Cft6rb-mt97bs7Axw4zl4EGZ3C7tIPnT_UJrXNFWN5LCxz1EgS1_kbEUHkZf7noFh_nQ9719E1bBc0VMSbmCMW6xB',
     organizerLogoText: 'PG',
-    brandAccent: '#315C49',
+    brandAccent: '#8B4513',
     hashtags: ['#ProductManagement', '#Leadership', '#ChronicleStories', '#SFTech'],
     socialChannels: {
       linkedin: 'https://linkedin.com/company/product-guild',
@@ -314,7 +314,7 @@ export const INITIAL_EVENTS: EventItem[] = [
     description: 'Bringing together top fintech founders, venture investors, and financial regulators shaping the future of cross-border payments, tokenization, and embedded credit.',
     coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD66eNBdS1xTjLgXAfwQO56mgi32-02Sg4X7-dfJORK_1c9QyPIMi-_ShN0Lg-Z-2sa_VTGXB0tRf3yvKnO56hwThesl8VeoGIAhXUrKCsWyx0WaD0EzuC-IBgyqQFjJh1Va2ly1vr6IEUPwlSz2Z_6R_BtyIc1Gq5xOAfqUdWiskzlS8rw2i1JwkZPfKcraS3MM3ACYZqJytscfMScKiev5BcYwuSnnTc4GZEiQ0Q0UuFRJKI2s1pK',
     organizerLogoText: 'FN',
-    brandAccent: '#7BAE8A',
+    brandAccent: '#C28B46',
     hashtags: ['#Fintech', '#VentureCapital', '#Payments', '#Singapore'],
     socialChannels: {
       linkedin: 'https://linkedin.com/company/fintech-nexus',
