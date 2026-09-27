@@ -1,0 +1,6 @@
+{
+  "name": "Chronicle",
+  "description": "AI-powered event storytelling platform that turns conference moments and attendee takeaways into high-impact LinkedIn posts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

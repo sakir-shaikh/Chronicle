@@ -1,0 +1,158 @@
+import React, { useState } from 'react';
+
+interface HelpTourModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onStartFlow: (view: 'organizer' | 'attendee') => void;
+}
+
+export const HelpTourModal: React.FC<HelpTourModalProps> = ({
+  isOpen,
+  onClose,
+  onStartFlow,
+}) => {
+  const [slide, setSlide] = useState(0);
+
+  if (!isOpen) return null;
+
+  const slides = [
+    {
+      title: 'Welcome to Chronicle',
+      tagline: 'Turn Moments into Stories',
+      icon: 'auto_awesome',
+      desc: 'Chronicle solves the event post problem: Attendees love taking photos and jotting notes, but writing a polished LinkedIn post while walking between halls is friction-heavy. Chronicle makes it instant.',
+      bullets: [
+        'Organizers setup verified branding, official hashtags, and speaker prompt templates.',
+        'Attendees snap conference photos, write raw takeaways in 30 seconds.',
+        'Chronicle AI turns reflections into high-reach, verified LinkedIn narratives.',
+      ],
+    },
+    {
+      title: 'For Organizers: Real-Time Social Velocity',
+      tagline: 'Amplify Your Event Beyond the Hall',
+      icon: 'insights',
+      desc: 'Track live content synthesis as it happens on stage. Monitor keynote resonance, attendee post generation rates, and real-time sentiment without waiting for post-event surveys.',
+      bullets: [
+        'Live pulse KPIs: Track attendee checks-ins and LinkedIn conversion rates.',
+        'Real-time NLP theme extraction: Discover what attendees are actually talking about.',
+        'Exportable sponsor ROI reports: Prove organic attendee social reach with data.',
+      ],
+    },
+    {
+      title: 'For Attendees: The 60-Second Storyteller',
+      tagline: 'No Writer’s Block. Just Pure Signal.',
+      icon: 'edit_note',
+      desc: 'Choose your tone—Professional, Grateful, or Takeaways—and watch your personal notes transform into a compelling post ready to paste into LinkedIn.',
+      bullets: [
+        'Drag & drop up to 6 conference photos with auto-collage preview.',
+        'Quick prompt suggestions inspired by the day’s keynote speakers.',
+        'One-click clipboard copy with pre-formatted hashtags and verified organizer tags.',
+      ],
+    },
+  ];
+
+  const current = slides[slide];
+
+  return (
+    <div className="fixed inset-0 z-50 bg-[#20302A]/40 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E3E9E4] relative animate-in fade-in zoom-in-95 duration-200">
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 text-[#9AA69F] hover:text-[#20302A] p-1 rounded-lg"
+          type="button"
+        >
+          <span className="material-symbols-outlined text-[20px]">close</span>
+        </button>
+
+        {/* Step Indicator */}
+        <div className="flex items-center gap-1.5 mb-5">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 rounded-full transition-all ${
+                i === slide ? 'w-8 bg-[#7BAE8A]' : 'w-2 bg-[#E3E9E4]'
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="w-12 h-12 rounded-xl bg-[#EEF7F1] text-[#315C49] flex items-center justify-center mb-4 border border-[#DCEFE4]">
+          <span className="material-symbols-outlined text-[24px] text-[#7BAE8A]">{current.icon}</span>
+        </div>
+
+        <span className="text-[11px] uppercase tracking-wider text-[#315C49] font-semibold bg-[#DCEFE4] px-2.5 py-0.5 rounded-full">
+          {current.tagline}
+        </span>
+
+        <h3 className="text-xl sm:text-2xl font-semibold text-[#20302A] mt-2 mb-2" style={{ fontFamily: 'Geist, sans-serif' }}>
+          {current.title}
+        </h3>
+
+        <p className="text-sm text-[#68766F] leading-relaxed mb-4">
+          {current.desc}
+        </p>
+
+        <div className="space-y-2 bg-[#FAFBF8] p-4 rounded-xl border border-[#E3E9E4] mb-6">
+          {current.bullets.map((b, idx) => (
+            <div key={idx} className="flex items-start gap-2.5 text-xs text-[#20302A]">
+              <span className="material-symbols-outlined text-[16px] text-[#7BAE8A] shrink-0 mt-0.5">
+                check_circle
+              </span>
+              <span className="leading-snug">{b}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between pt-2 border-t border-[#E3E9E4]">
+          {slide > 0 ? (
+            <button
+              onClick={() => setSlide(slide - 1)}
+              className="px-4 py-2 text-xs font-medium text-[#68766F] hover:text-[#20302A]"
+            >
+              Back
+            </button>
+          ) : (
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-xs font-medium text-[#9AA69F] hover:text-[#20302A]"
+            >
+              Skip Tour
+            </button>
+          )}
+
+          <div className="flex items-center gap-2">
+            {slide < slides.length - 1 ? (
+              <button
+                onClick={() => setSlide(slide + 1)}
+                className="px-5 py-2.5 bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
+              >
+                Next
+              </button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    onClose();
+                    onStartFlow('attendee');
+                  }}
+                  className="px-4 py-2.5 bg-[#EEF7F1] text-[#315C49] hover:bg-[#DCEFE4] text-xs font-semibold rounded-xl transition-colors"
+                >
+                  Try Attendee Portal
+                </button>
+                <button
+                  onClick={() => {
+                    onClose();
+                    onStartFlow('organizer');
+                  }}
+                  className="px-4 py-2.5 bg-[#7BAE8A] hover:bg-[#6da07c] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
+                >
+                  Open Organizer
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
