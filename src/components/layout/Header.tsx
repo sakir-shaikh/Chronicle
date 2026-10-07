@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ChronicleLogo } from './ChronicleLogo';
+import { ChronicleLogo } from '../ChronicleLogo';
 import { motion, AnimatePresence } from 'motion/react';
-import { springs, easings } from '../utils/motion';
+import { springs, easings } from '../../utils/motion';
 
 interface HeaderProps {
   currentView: 'organizer' | 'attendee';

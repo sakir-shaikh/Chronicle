@@ -1,0 +1,38 @@
+        <div className="lg:col-span-5 flex flex-col gap-6 text-left">
+          <PhotoStep
+            uploadedPhotos={uploadedPhotos}
+            onRemovePhoto={handleRemovePhoto}
+            onAddSamplePhoto={handleAddSamplePhoto}
+            showPhotoPicker={showPhotoPicker}
+            setShowPhotoPicker={setShowPhotoPicker}
+          />
+
+          <TakeawayStep
+            takeaways={takeaways}
+            setTakeaways={setTakeaways}
+          />
+
+          <ToneStep
+            selectedTone={selectedTone}
+            setSelectedTone={setSelectedTone}
+          />
+
+          <PersonalizationStep
+            showAdvanced={showAdvanced}
+            setShowAdvanced={setShowAdvanced}
+            mentions={mentions}
+            setMentions={setMentions}
+            personalNote={personalNote}
+            setPersonalNote={setPersonalNote}
+            postLength={postLength}
+            setPostLength={setPostLength}
+            emojiStyle={emojiStyle}
+            setEmojiStyle={setEmojiStyle}
+          />
+
+          <GenerateButton
+            isGenerating={isGenerating}
+            generationStepText={generationStepText}
+            onGenerate={() => handleGeneratePost()}
+          />
+        </div>

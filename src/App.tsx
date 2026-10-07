@@ -1,36 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { EventItem, FeedPost } from './types';
 import { INITIAL_EVENTS } from './data/mockData';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Toast } from './components/Toast';
+import { AppShell } from './components/layout/AppShell';
 import { OrganizerDashboard } from './components/organizer/OrganizerDashboard';
 import { CreateEventFlow } from './components/organizer/CreateEventFlow';
 import { EventOverviewAnalytics } from './components/organizer/EventOverviewAnalytics';
 import { AttendeePortal } from './components/attendee/AttendeePortal';
 import { HelpTourModal } from './components/modals/HelpTourModal';
+import { ToastProvider, useToast } from './hooks/shared/useToast';
 import { ViewPostModal } from './components/modals/ViewPostModal';
 import { SettingsModal } from './components/modals/SettingsModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AnimatePresence } from 'motion/react';
 import { MotionPage } from './components/motion/MotionPage';
 
-const LOCAL_STORAGE_KEY = 'chronicle_events_data_v1';
+import { useEvents } from './application/events/useEvents';
 
 export default function App() {
-  // Load events from LocalStorage or fall back to INITIAL_EVENTS
-  const [events, setEvents] = useState<EventItem[]>(() => {
-    try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) return parsed;
-      }
-    } catch (e) {
-      console.warn('Could not read saved events from localStorage', e);
-    }
-    return INITIAL_EVENTS;
-  });
+  const { events, addEvent, updateEvent } = useEvents();
+  const { showToast } = useToast();
 
   // Current view: 'organizer' or 'attendee'
   const [currentView, setCurrentView] = useState<'organizer' | 'attendee'>('organizer');
@@ -42,7 +30,13 @@ export default function App() {
   const [activeNav, setActiveNav] = useState<'overview' | 'events' | 'attendees' | 'analytics'>('events');
 
   // Currently selected event (defaults to the first live event)
-  const [selectedEvent, setSelectedEvent] = useState<EventItem>(() => events[0] || INITIAL_EVENTS[0]);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+
+  useEffect(() => {
+    if (!selectedEvent && events.length > 0) {
+      setSelectedEvent(events[0] as unknown as EventItem);
+    }
+  }, [events, selectedEvent]);
 
   // Event being edited (if editing an existing draft or live event)
   const [editingEvent, setEditingEvent] = useState<EventItem | null>(null);
@@ -51,14 +45,6 @@ export default function App() {
   const [showHelpTour, setShowHelpTour] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [inspectedFeedPost, setInspectedFeedPost] = useState<FeedPost | null>(null);
-
-  // Toast feedback state
-  const [toast, setToast] = useState<{ show: boolean; title: string; message?: string }>({
-    show: false,
-    title: '',
-    message: '',
-  });
-  const toastTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Workspace settings state
   const [workspaceSettings, setWorkspaceSettings] = useState(() => {
@@ -79,34 +65,9 @@ export default function App() {
     localStorage.setItem('chronicle_workspace_settings', JSON.stringify(workspaceSettings));
   }, [workspaceSettings]);
 
-  useEffect(() => {
-    return () => {
-      if (toastTimeoutRef.current) {
-        clearTimeout(toastTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  // Save events to LocalStorage on update
-  useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(events));
-    } catch (e) {
-      console.warn('Could not save events to localStorage', e);
-    }
-  }, [events]);
-
-  const showToastNotification = (title: string, message?: string) => {
-    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
-    setToast({ show: true, title, message });
-    toastTimeoutRef.current = setTimeout(() => {
-      setToast((prev) => ({ ...prev, show: false }));
-    }, 3800);
-  };
-
   const handleCopyLink = (url: string) => {
     navigator.clipboard?.writeText(url);
-    showToastNotification('Link Copied!', url);
+    showToast('Link Copied!', url);
   };
 
   const handleCreateNewEvent = () => {
@@ -124,19 +85,16 @@ export default function App() {
     setOrganizerSubView('create');
   };
 
-  const handlePublishSuccess = (newEvent: EventItem) => {
-    setEvents((prev) => {
-      const idx = prev.findIndex((e) => e.id === newEvent.id);
-      if (idx >= 0) {
-        const updated = [...prev];
-        updated[idx] = newEvent;
-        return updated;
-      }
-      return [newEvent, ...prev];
-    });
+  const handlePublishSuccess = async (newEvent: EventItem) => {
+    const isExisting = events.some((e) => e.id === newEvent.id);
+    if (isExisting) {
+      await updateEvent(newEvent.id, newEvent as any);
+    } else {
+      await addEvent(newEvent as any);
+    }
     setSelectedEvent(newEvent);
     setOrganizerSubView('overview');
-    showToastNotification('Event Saved!', `"${newEvent.title}" is ready`);
+    showToast('Event Saved!', `"${newEvent.title}" is ready`);
   };
 
   const handleOpenAttendeePortal = (event: EventItem) => {
@@ -164,9 +122,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col bg-warm-bg text-text-primary selection:bg-brand-mint selection:text-brand-dark">
-      {/* Global Header */}
-      <Header
+      <AppShell
         currentView={currentView}
         onSwitchView={(view) => {
           setCurrentView(view);
@@ -179,106 +135,90 @@ export default function App() {
         onNavigate={handleNavClick}
         onOpenHelp={() => setShowHelpTour(true)}
         onOpenSettings={() => setShowSettings(true)}
-      />
+      >
+        <AnimatePresence mode="wait">
+          {/* ORGANIZER VIEW */}
+          {currentView === 'organizer' && organizerSubView === 'dashboard' && (
+            <MotionPage id="organizer-dashboard">
+              <OrganizerDashboard
+                events={events}
+                onSelectEvent={handleSelectEvent}
+                onCreateEvent={handleCreateNewEvent}
+                onOpenAttendeePortal={handleOpenAttendeePortal}
+                onCopyLink={handleCopyLink}
+                onOpenSettings={() => setShowSettings(true)}
+                onViewFeedPost={(post) => setInspectedFeedPost(post)}
+              />
+            </MotionPage>
+          )}
 
-      {/* Main Container */}
-      <main className="flex-1 w-full pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1200px] mx-auto relative">
-          <AnimatePresence mode="wait">
-            {/* ORGANIZER VIEW */}
-            {currentView === 'organizer' && organizerSubView === 'dashboard' && (
-              <MotionPage id="organizer-dashboard">
-                <OrganizerDashboard
-                  events={events}
-                  onSelectEvent={handleSelectEvent}
-                  onCreateEvent={handleCreateNewEvent}
-                  onOpenAttendeePortal={handleOpenAttendeePortal}
-                  onCopyLink={handleCopyLink}
-                  onOpenSettings={() => setShowSettings(true)}
-                  onViewFeedPost={(post) => setInspectedFeedPost(post)}
-                />
-              </MotionPage>
-            )}
+          {currentView === 'organizer' && organizerSubView === 'create' && (
+            <MotionPage id="organizer-create">
+              <CreateEventFlow
+                initialEvent={editingEvent}
+                onCancel={() => setOrganizerSubView('dashboard')}
+                onPublishSuccess={handlePublishSuccess}
+                onOpenAttendeePortal={handleOpenAttendeePortal}
+              />
+            </MotionPage>
+          )}
 
-            {currentView === 'organizer' && organizerSubView === 'create' && (
-              <MotionPage id="organizer-create">
-                <CreateEventFlow
-                  initialEvent={editingEvent}
-                  onCancel={() => setOrganizerSubView('dashboard')}
-                  onPublishSuccess={handlePublishSuccess}
-                  onOpenAttendeePortal={handleOpenAttendeePortal}
-                />
-              </MotionPage>
-            )}
+          {currentView === 'organizer' && organizerSubView === 'overview' && (
+            <MotionPage id="organizer-overview">
+              <EventOverviewAnalytics
+                event={selectedEvent}
+                onBackToEvents={() => setOrganizerSubView('dashboard')}
+                onEditEvent={handleEditEvent}
+                onOpenAttendeePortal={handleOpenAttendeePortal}
+                onCopyLink={handleCopyLink}
+              />
+            </MotionPage>
+          )}
 
-            {currentView === 'organizer' && organizerSubView === 'overview' && (
-              <MotionPage id="organizer-overview">
-                <EventOverviewAnalytics
-                  event={selectedEvent}
-                  onBackToEvents={() => setOrganizerSubView('dashboard')}
-                  onEditEvent={handleEditEvent}
-                  onOpenAttendeePortal={handleOpenAttendeePortal}
-                  onCopyLink={handleCopyLink}
-                />
-              </MotionPage>
-            )}
+          {/* ATTENDEE VIEW */}
+          {currentView === 'attendee' && (
+            <MotionPage id="attendee-portal">
+              <AttendeePortal
+                event={selectedEvent}
+                onBackToDashboard={() => {
+                  setCurrentView('organizer');
+                  setOrganizerSubView('dashboard');
+                }}
+                onCopyText={(msg) => showToastNotification('Success', msg)}
+              />
+            </MotionPage>
+          )}
+        </AnimatePresence>
 
-            {/* ATTENDEE VIEW */}
-            {currentView === 'attendee' && (
-              <MotionPage id="attendee-portal">
-                <AttendeePortal
-                  event={selectedEvent}
-                  onBackToDashboard={() => {
-                    setCurrentView('organizer');
-                    setOrganizerSubView('dashboard');
-                  }}
-                  onCopyText={(msg) => showToastNotification('Success', msg)}
-                />
-              </MotionPage>
-            )}
-          </AnimatePresence>
-        </div>
-      </main>
+        {/* Modals & Overlays */}
+        <HelpTourModal
+          isOpen={showHelpTour}
+          onClose={() => setShowHelpTour(false)}
+          onStartFlow={(flow) => {
+            setCurrentView(flow);
+            if (flow === 'organizer') setOrganizerSubView('dashboard');
+          }}
+        />
 
-      {/* Global Footer */}
-      <Footer />
+        <ViewPostModal
+          post={inspectedFeedPost}
+          onClose={() => setInspectedFeedPost(null)}
+          onCopyPost={(content) => {
+            navigator.clipboard?.writeText(content);
+            showToastNotification('Post Text Copied!');
+          }}
+        />
 
-      {/* Modals & Overlays */}
-      <HelpTourModal
-        isOpen={showHelpTour}
-        onClose={() => setShowHelpTour(false)}
-        onStartFlow={(flow) => {
-          setCurrentView(flow);
-          if (flow === 'organizer') setOrganizerSubView('dashboard');
-        }}
-      />
+        <SettingsModal
+          isOpen={showSettings}
+          onClose={() => setShowSettings(false)}
+          onSave={(newSettings) => {
+            setWorkspaceSettings(newSettings);
+            showToastNotification('Settings Saved', `Organizer updated to ${newSettings.defaultOrganizer}`);
+          }}
+        />
 
-      <ViewPostModal
-        post={inspectedFeedPost}
-        onClose={() => setInspectedFeedPost(null)}
-        onCopyPost={(content) => {
-          navigator.clipboard?.writeText(content);
-          showToastNotification('Post Text Copied!');
-        }}
-      />
-
-      <SettingsModal
-        isOpen={showSettings}
-        onClose={() => setShowSettings(false)}
-        onSave={(newSettings) => {
-          setWorkspaceSettings(newSettings);
-          showToastNotification('Settings Saved', `Organizer updated to ${newSettings.defaultOrganizer}`);
-        }}
-      />
-
-      {/* Toast Notification */}
-      <Toast
-        show={toast.show}
-        title={toast.title}
-        message={toast.message}
-        onClose={() => setToast((prev) => ({ ...prev, show: false }))}
-      />
-    </div>
+      </AppShell>
     </ErrorBoundary>
   );
 }
